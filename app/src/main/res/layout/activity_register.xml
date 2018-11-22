@@ -1,0 +1,269 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/gray01"
+    tools:context="com.intelligent.marking.activity.RegisterActivity">
+   <!--title-->
+   <include layout="@layout/include_title"/>
+   <!--省 市 区-->
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginLeft="@dimen/layout_20"
+       android:layout_marginRight="@dimen/layout_20"
+       android:layout_marginTop="@dimen/layout_12"
+       android:orientation="horizontal">
+
+      <TextView
+          android:id="@+id/login_tv_position"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:padding="@dimen/layout_12"
+          android:text="请选择省-市-区" />
+
+      <View
+          android:layout_width="0.5dp"
+          android:layout_height="@dimen/layout_30"
+          android:layout_gravity="center"
+          android:background="@color/gray"
+          android:gravity="center" />
+
+
+      <ImageView
+          android:layout_width="24dp"
+          android:layout_height="20dp"
+          android:layout_gravity="center"
+          android:layout_marginLeft="@dimen/layout_12"
+          android:layout_marginRight="@dimen/layout_12"
+          android:gravity="center"
+          android:src="@mipmap/weizhi01" />
+   </LinearLayout>
+   <View style="@style/View1"/>
+   <!--医院-->
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginLeft="@dimen/layout_20"
+       android:layout_marginRight="@dimen/layout_20"
+       android:layout_marginTop="@dimen/layout_12"
+       android:orientation="horizontal">
+
+      <TextView
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:padding="@dimen/layout_12"
+          android:text="@string/login_et02" />
+
+      <ImageView
+          android:layout_width="20dp"
+          android:layout_height="10dp"
+          android:layout_gravity="center"
+          android:layout_marginLeft="@dimen/layout_12"
+          android:layout_marginRight="@dimen/layout_12"
+          android:gravity="center"
+          android:src="@mipmap/xuanze01" />
+   </LinearLayout>
+   <View style="@style/View1"/>
+   <!--大区-->
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginLeft="@dimen/layout_20"
+       android:layout_marginRight="@dimen/layout_20"
+       android:layout_marginTop="@dimen/layout_12"
+       android:focusable="true"
+       android:focusableInTouchMode="true"
+       android:orientation="horizontal">
+
+      <EditText
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:padding="@dimen/layout_12"
+          android:lines="1"
+          android:maxLines="1"
+          android:singleLine="true"
+          android:background="@null"
+          android:hint="@string/register_et03" />
+
+
+   </LinearLayout>
+   <View style="@style/View1"/>
+   <!--科室-->
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginLeft="@dimen/layout_20"
+       android:layout_marginRight="@dimen/layout_20"
+       android:layout_marginTop="@dimen/layout_12"
+       android:focusable="true"
+       android:focusableInTouchMode="true"
+       android:orientation="horizontal">
+
+      <EditText
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:padding="@dimen/layout_12"
+          android:lines="1"
+          android:maxLines="1"
+          android:singleLine="true"
+          android:background="@null"
+          android:hint="@string/register_et04" />
+
+   </LinearLayout>
+   <View style="@style/View1"/>
+   <!--分区-->
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginLeft="@dimen/layout_20"
+       android:layout_marginRight="@dimen/layout_20"
+       android:layout_marginTop="@dimen/layout_12"
+       android:focusable="true"
+       android:focusableInTouchMode="true"
+       android:orientation="horizontal">
+
+      <EditText
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:padding="@dimen/layout_12"
+          android:lines="1"
+          android:maxLines="1"
+          android:singleLine="true"
+          android:background="@null"
+          android:hint="@string/register_et05" />
+
+   </LinearLayout>
+   <View style="@style/View1"/>
+   <!--床位-->
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginLeft="@dimen/layout_20"
+       android:layout_marginRight="@dimen/layout_20"
+       android:layout_marginTop="@dimen/layout_12"
+       android:focusable="true"
+       android:focusableInTouchMode="true"
+       android:orientation="horizontal">
+
+      <EditText
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:lines="1"
+          android:maxLines="1"
+          android:singleLine="true"
+          android:background="@null"
+          android:padding="@dimen/layout_12"
+          android:hint="@string/register_et06" />
+
+   </LinearLayout>
+   <View style="@style/View1"
+       android:background="@color/gray"
+       android:layout_height="@dimen/layout_5"/>
+
+   <!--密码-->
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginLeft="@dimen/layout_20"
+       android:layout_marginRight="@dimen/layout_20"
+       android:layout_marginTop="@dimen/layout_12"
+       android:focusable="true"
+       android:focusableInTouchMode="true"
+       android:orientation="horizontal">
+
+
+      <EditText
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:background="@null"
+          android:hint="@string/register_et07"
+          android:inputType="textPassword"
+          android:lines="1"
+          android:maxLines="1"
+          android:singleLine="true"
+          android:padding="@dimen/layout_12" />
+
+      <ImageView
+          android:layout_width="20dp"
+          android:layout_height="14dp"
+          android:layout_gravity="center"
+          android:layout_marginLeft="@dimen/layout_12"
+          android:layout_marginRight="@dimen/layout_12"
+          android:gravity="center"
+          android:src="@mipmap/mima01" />
+   </LinearLayout>
+   <View style="@style/View1" />
+   <!--再次密码-->
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginLeft="@dimen/layout_20"
+       android:layout_marginRight="@dimen/layout_20"
+       android:layout_marginTop="@dimen/layout_12"
+       android:focusable="true"
+       android:focusableInTouchMode="true"
+       android:orientation="horizontal">
+
+      <EditText
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:background="@null"
+          android:hint="@string/register_et08"
+          android:inputType="textPassword"
+          android:lines="1"
+          android:maxLines="1"
+          android:singleLine="true"
+          android:padding="@dimen/layout_12" />
+
+      <ImageView
+          android:layout_width="20dp"
+          android:layout_height="14dp"
+          android:layout_gravity="center"
+          android:layout_marginLeft="@dimen/layout_12"
+          android:layout_marginRight="@dimen/layout_12"
+          android:gravity="center"
+          android:src="@mipmap/mima01" />
+   </LinearLayout>
+   <View style="@style/View1"/>
+   <!--需6~20位字符-->
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_gravity="center|left"
+       android:layout_marginLeft="@dimen/layout_20"
+       android:layout_marginTop="@dimen/layout_12"
+       android:padding="@dimen/layout_5"
+       android:textSize="@dimen/Text_14"
+       android:text="@string/register_et09"
+       android:textColor="@color/orange" />
+   <!--完成-->
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="0dp"
+       android:layout_weight="1">
+      <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center"
+          android:layout_marginLeft="@dimen/layout_20"
+          android:layout_marginRight="@dimen/layout_20"
+          android:layout_marginTop="@dimen/layout_30"
+          android:background="@drawable/yuan_lanse50"
+          android:gravity="center"
+          android:padding="@dimen/layout_12"
+          android:text="@string/register_et010"
+          android:textColor="@color/white100"
+          android:textSize="@dimen/Text_24" />
+   </LinearLayout>
+
+</LinearLayout>

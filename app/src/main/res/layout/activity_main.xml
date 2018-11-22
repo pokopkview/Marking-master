@@ -1,0 +1,75 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+        <!--title-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/layout_60"
+            android:orientation="horizontal"
+            android:background="@color/blue"
+            android:layout_gravity="center" >
+
+                <LinearLayout
+                    android:layout_width="102dp"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="@dimen/layout_12"
+                            android:gravity="center"
+                            android:src="@mipmap/guanli01" />
+                        <TextView
+                            android:id="@+id/login_tv_register"
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:text="@string/administration_tv01"
+                            android:textColor="@color/white100"
+                            android:textSize="@dimen/Text_24" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="@string/register"
+                    android:textColor="@color/blue"
+                    android:textSize="@dimen/Text_24" />
+
+
+                <LinearLayout
+                    android:layout_width="102dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="right"
+                    android:orientation="horizontal">
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="@dimen/layout_30"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="@dimen/layout_12"
+                            android:src="@mipmap/saoyisao02" />
+                </LinearLayout>
+
+        </LinearLayout>
+
+        <com.intelligent.marking.common.view.PageRecyclerView
+            android:id="@+id/cusom_swipe_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <com.intelligent.marking.common.view.PageIndicatorView
+            android:id="@+id/indicator"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="20dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"/>
+
+</LinearLayout>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.intelligent.marking" >
+
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <activity android:name="com.intelligent.marking.activity.WelcomeInterfaceActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <!--省市区-->
+        <activity android:name="com.intelligent.marking.set.JsonDataActivity"/>
+        <activity android:name="com.intelligent.marking.set.FragmentTestActivity"/>
+        <!--登录-->
+        <activity
+            android:name="com.intelligent.marking.activity.LoginActivity" android:screenOrientation="portrait"/>
+        <!--注册-->
+        <activity android:name="com.intelligent.marking.activity.RegisterActivity" android:screenOrientation="portrait"/>
+        <!--主页面  管理-->
+        <activity android:name="com.intelligent.marking.activity.MainActivity" android:screenOrientation="portrait"/>
+
+
+    </application>
+
+</manifest>

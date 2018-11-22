@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/title_top"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/layout_60"
+    android:layout_alignParentTop="true"
+    android:background="@color/blue">
+
+    <RelativeLayout
+        android:layout_width="80dp"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:onClick="onLayoutClick"
+            android:padding="15dp"
+            android:src="@mipmap/fanhui01" />
+
+    </RelativeLayout>
+
+    <!--中间标题区域-->
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:singleLine="true"
+            android:text=""
+            android:textColor="@color/white100"
+            android:textSize="@dimen/Text_24"  />
+
+    </RelativeLayout>
+    <!--右边区域-->
+    <RelativeLayout
+        android:layout_width="80dp"
+        android:layout_height="match_parent">
+
+        <!--提交-->
+        <TextView
+            android:id="@+id/submit"
+            android:layout_width="80dp"
+            android:layout_height="fill_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:onClick="onLayoutClick"
+            android:text="保存"
+            android:textColor="@color/white100"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+</LinearLayout>
