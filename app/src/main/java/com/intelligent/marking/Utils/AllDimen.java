@@ -18,9 +18,10 @@ public class AllDimen {
 //        makeString(320, 480);
 //        makeString(480, 854);
 //        makeString(720, 1280);
+                makeString(720, 1208);
 //        makeString(1080, 1920);
 //        makeString(1440, 2560);
-        makeString(1152, 1920);
+//        makeString(1152, 1920);
     }
 
     public static void makeString(int w, int h) {

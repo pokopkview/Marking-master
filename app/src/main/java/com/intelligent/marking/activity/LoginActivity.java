@@ -1,119 +1,135 @@
 package com.intelligent.marking.activity;
 
-import android.app.Activity;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.util.DisplayMetrics;
-import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
-import android.view.WindowManager;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.intelligent.marking.BaseActivity;
+import com.intelligent.marking.Const.AppConst;
 import com.intelligent.marking.R;
-import com.intelligent.marking.common.app.CommonIp;
-import com.intelligent.marking.bean.ProvinceBean;
-import com.intelligent.marking.common.okgo.bean.ResponseBean;
-import com.intelligent.marking.common.okgo.callbck.JsonCallback;
-import com.intelligent.marking.common.okgo.net.OkUtil;
-import com.intelligent.marking.common.utils.TargetActivityUtils;
-import com.intelligent.marking.set.JsonDataActivity01;
-import com.lzy.okgo.model.Response;
+import com.intelligent.marking.adapter.SelectMoreAdapter;
+import com.intelligent.marking.net.model.BaseModel;
+import com.intelligent.marking.net.model.HospitalModel;
+import com.intelligent.marking.widget.PopUpwindowUtil;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public class LoginActivity extends AppCompatActivity {
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
-    private TextView login_tv_position;//设置省市区
-    private TextView login_tv_register;//注册
-    private TextView login_tv01;// 登录
-    private static final String TAG = LoginActivity.class.getSimpleName();
+public class LoginActivity extends BaseActivity {
 
-    String JsonData ;
+
+    String JsonData;
+    @BindView(R.id.login_tv_register)
+    TextView loginTvRegister;
+    @BindView(R.id.login_tv_position)
+    TextView loginTvPosition;
+    @BindView(R.id.ll_login_location)
+    LinearLayout llLoginLocation;
+    @BindView(R.id.ll_select_hist)
+    LinearLayout llSelectHist;
+    @BindView(R.id.ll_select_area)
+    LinearLayout llSelectArea;
+    @BindView(R.id.ll_select_depart)
+    LinearLayout llSelectDepart;
+    @BindView(R.id.ll_select_moreares)
+    LinearLayout llSelectMoreares;
+    @BindView(R.id.login_tv01)
+    TextView loginTv01;
+    @BindView(R.id.rl_login)
+    RelativeLayout rlLogin;
+    @BindView(R.id.rl_bottom)
+    RelativeLayout rlBottom;
+
+    @OnClick(R.id.iv_left)
+    public void clickLeft(View view){
+        //TODO 扫二维码
+    }
+
+    /**
+     * 获取医院大区数据
+     * @param view
+     */
+    @OnClick(R.id.ll_select_hist)
+    public void selectHosp(View view){
+        getHospiDate(25579,25580,25582);
+    }
+
+    @OnClick(R.id.ll_select_area)
+    public void selectArea(View view){
+        getAreaDate(2);
+    }
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        hideStatusBar();
         setContentView(R.layout.activity_login_new);
-
-        getRegion();
+        ButterKnife.bind(this);
         initView();
-        getDisteny();
-    }
-    private void hideStatusBar() {
-        WindowManager.LayoutParams attrs = getWindow().getAttributes();
-        attrs.flags |= WindowManager.LayoutParams.FLAG_FULLSCREEN;
-        getWindow().setAttributes(attrs);
     }
 
+    private void getAreaDate(int hospiid){
+        Map<String,Object> value = new HashMap<>();
+        value.put("hospital_id",hospiid);
+        HttpPost(AppConst.GETAREA,value,2);
+    }
 
-    private void getDisteny() {
-        DisplayMetrics dm = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(dm);
-        int screenWidthPx = dm.widthPixels;
-        int screenHeighPx = dm.heightPixels;
-        int virtualKeyHeight = 0;
-        Resources res = getResources();
-        int resourceId = res.getIdentifier("navigation_bar_height", "dimen", "android");
-        if (resourceId > 0)
-            virtualKeyHeight = res.getDimensionPixelSize(resourceId);
-        float density = getResources().getDisplayMetrics().density;
-        int screenWidthDp = (int) (screenWidthPx / density + 0.5f);
-        int screenHeighDp = (int) ((screenHeighPx + virtualKeyHeight) / density + 0.5f);
-        Log.i(TAG, "屏幕宽:" + screenWidthPx + "px,屏幕高:" + screenHeighPx + "px,虚拟键高:" + virtualKeyHeight + "px");
-        Log.i(TAG, "屏幕宽:" + screenWidthDp + "dp,屏幕高:" + screenHeighDp + "dp,density:" + density);
+    private void getHospiDate(int proid,int cityid,int disid) {
+        Map<String,Object> value = new HashMap<>();
+        value.put("province_id",proid);
+        value.put("city_id",cityid);
+        value.put("district_id",disid);
+        HttpPost(AppConst.GETHOSPITAL,value,1);
+    }
+
+    @Override
+    public void getCallBack(String response, int flag) {
+        switch (flag){
+            case 1:
+                //show dialog
+                System.out.println(response);
+                Type type = new TypeToken<BaseModel<List<HospitalModel>>>(){}.getType();
+                BaseModel<List<HospitalModel>> model = new Gson().fromJson(response,type);
+                List<String> objects = new ArrayList<>();
+                for(HospitalModel hospitalModel : model.getData()){
+                    objects.add(hospitalModel.getName());
+                }
+                PopupWindow popupWindow = PopUpwindowUtil.createPopUpWindow(R.layout.popupwindow_layout, this, objects, new SelectMoreAdapter.itemClickListener() {
+                    @Override
+                    public void itemclick(int pos, View view) {
+
+                    }
+
+                    @Override
+                    public void footclick() {
+
+                    }
+                });
+                int height = this.getResources().getDimensionPixelSize(R.dimen.y27);
+                popupWindow.setOutsideTouchable(true);
+                popupWindow.showAtLocation(llSelectHist,Gravity.NO_GRAVITY,(int)llSelectHist.getX(),(int)llSelectHist.getY()+height);
+            break;
+            case 2:
+                break;
+        }
     }
 
     private void initView() {
-        login_tv_position = (TextView)findViewById(R.id.login_tv_position);
-        login_tv_register = (TextView)findViewById(R.id.login_tv_register);
-        login_tv01 = (TextView)findViewById(R.id.login_tv01);
 
-
-
-        login_tv_position.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                JsonData  = new JsonDataActivity01().getPosition(LoginActivity.this,login_tv_position);
-
-//                login_tv_position.setText(JsonData);
-            }
-        });
-
-        login_tv_register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                TargetActivityUtils.intent(LoginActivity.this, RegisterActivity.class,null,false);
-            }
-        });
-
-        login_tv01.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                TargetActivityUtils.intent(LoginActivity.this, MainActivity.class,null,false);
-            }
-        });
     }
 
-
-
-    //                POST /account/updateUserHealthInfo
-    private void getRegion() {
-        Map map = new HashMap();
-        map.put("id","0");
-        // mTv.setText(response.body().Result.getName() + "-" + response.body().Result.getHabby());
-
-        OkUtil.getRequets(CommonIp.getProvince, this, map, new JsonCallback<ResponseBean<ProvinceBean>>() {
-            /**
-             * 对返回数据进行操作的回调， UI线程
-             * @param response
-             */
-            @Override
-            public void onSuccess(Response<ResponseBean<ProvinceBean>> response) {
-//                Log.e("-------",response.body().Result.getId() + "-" + response.body().Result.getName());
-            }
-        });
-    }
 }

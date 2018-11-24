@@ -20,17 +20,11 @@ public class RegisterActivity extends BaseActivity {
         initView();
     }
 
+    @Override
+    public void getCallBack(String response, int flag) {
+
+    }
+
     private void initView() {
-    }
-
-
-    @Override
-    public String title_text() {
-        return "注册";
-    }
-
-    @Override
-    public void onClick(View v) {
-
     }
 }

@@ -20,6 +20,15 @@
 
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/tv_header_title"
+            android:includeFontPadding="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/x18"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
         <LinearLayout
             android:orientation="horizontal"
             android:id="@+id/ll_right_container"
