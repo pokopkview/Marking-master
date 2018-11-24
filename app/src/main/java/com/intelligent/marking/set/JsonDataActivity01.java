@@ -11,10 +11,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
+import com.bigkoo.pickerview.listener.CustomListener;
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.google.gson.Gson;
 import com.intelligent.marking.R;
+import com.intelligent.marking.Utils.UtilsChange;
 import com.intelligent.marking.set.bean.JsonBean;
 
 import org.json.JSONArray;
@@ -35,11 +37,13 @@ public class JsonDataActivity01{
 
     private Context context;
     private TextView  login_tv_position;
+    private selectPosition listenner;
 
-    public String getPosition(Context context, TextView login_tv_position) {
+    public String getPosition(Context context, TextView login_tv_position,selectPosition listenner) {
         this.context = context;
         mHandler.sendEmptyMessage(MSG_LOAD_DATA);
         this.login_tv_position = login_tv_position;
+        this.listenner = listenner;
         return  null;
     }
 
@@ -93,18 +97,24 @@ public class JsonDataActivity01{
                         options3Items.get(options1).get(options2).get(options3);
 
                         Log.e("-------tx", Position);
+                listenner.getLocation(options1Items.get(options1).getPickerViewText(),
+                        options2Items.get(options1).get(options2),
+                        options3Items.get(options1).get(options2).get(options3));
                 login_tv_position.setText(Position);
-                Toast.makeText(context, Position, Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "1:"+options1Items.get(options1).getPickerViewText()+",2:"+options2Items.get(options1).get(options2)
+                        +",3:"+options3Items.get(options1).get(options2).get(options3), Toast.LENGTH_SHORT).show();
             }
         })
+                .setLayoutRes(R.layout.province_select_layout, null)
                 .setSubmitColor(Color.WHITE)
-                .setCancelColor(Color.rgb(204,204,204))
+                .setCancelColor(Color.TRANSPARENT)
                 .setTitleText("请选择省市区")
-                .setTitleSize(24)
-                .setTitleBgColor(Color.rgb(54,214,204))
+                .setTitleSize(20)
+                .setTitleBgColor(Color.WHITE)
                 .setDividerColor(Color.rgb(204,204,204))
                 .setTextColorCenter(Color.BLACK) //设置选中项文字颜色
-                .setContentTextSize(24)
+                .setSubCalSize(18)
+                .setContentTextSize(20)
                 .build();
 
         /*pvOptions.setPicker(options1Items);//一级选择器
@@ -180,6 +190,10 @@ public class JsonDataActivity01{
             mHandler.sendEmptyMessage(MSG_LOAD_FAILED);
         }
         return detail;
+    }
+
+    public interface selectPosition{
+        void getLocation(String pronvince,String city,String area);
     }
 
 }

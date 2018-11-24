@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@drawable/item_foot_background"
+    android:layout_height="@dimen/y51">
+
+    <View
+        android:background="@color/gray"
+        android:layout_marginLeft="@dimen/x2"
+        android:layout_marginRight="@dimen/x2"
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y1"/>
+    <TextView
+        android:textColor="@color/black_text_login"
+        android:textSize="@dimen/Text_14"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/y26"
+        android:layout_marginLeft="@dimen/x69"
+        android:id="@+id/tv_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</RelativeLayout>

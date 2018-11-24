@@ -3,26 +3,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/gray01"
+    android:background="@color/select_bg"
     tools:context="com.intelligent.marking.activity.RegisterActivity">
    <!--title-->
-   <include layout="@layout/include_title"/>
+   <include layout="@layout/header_layout"/>
+
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
    <!--省 市 区-->
    <LinearLayout
+       android:background="@color/white"
+       android:id="@+id/ll_select_location"
        android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:layout_marginLeft="@dimen/layout_20"
-       android:layout_marginRight="@dimen/layout_20"
-       android:layout_marginTop="@dimen/layout_12"
+       android:layout_height="@dimen/y49"
        android:orientation="horizontal">
 
       <TextView
+          android:textColor="@color/black_text_login"
+          android:includeFontPadding="false"
+          android:layout_marginTop="@dimen/y24"
+          android:textSize="15sp"
+          android:paddingLeft="@dimen/x20"
           android:id="@+id/login_tv_position"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:layout_weight="1"
-          android:padding="@dimen/layout_12"
-          android:text="请选择省-市-区" />
+          android:paddingBottom="@dimen/y8"
+          android:hint="请选择省-市-区" />
 
       <View
           android:layout_width="0.5dp"
@@ -41,22 +49,31 @@
           android:gravity="center"
           android:src="@mipmap/weizhi01" />
    </LinearLayout>
-   <View style="@style/View1"/>
+   <View
+       android:id="@+id/v_line1"
+       android:layout_below="@id/ll_select_location"
+       style="@style/View1"/>
    <!--医院-->
    <LinearLayout
+       android:background="@color/white"
+       android:layout_below="@id/v_line1"
+       android:id="@+id/ll_select_hospital"
        android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:layout_marginLeft="@dimen/layout_20"
-       android:layout_marginRight="@dimen/layout_20"
-       android:layout_marginTop="@dimen/layout_12"
+       android:layout_height="@dimen/y49"
        android:orientation="horizontal">
 
       <TextView
+          android:id="@+id/tv_hospital"
+          android:textColor="@color/black_text_login"
+          android:includeFontPadding="false"
+          android:layout_marginTop="@dimen/y24"
+          android:paddingLeft="@dimen/x20"
+          android:paddingBottom="@dimen/y8"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:layout_weight="1"
-          android:padding="@dimen/layout_12"
-          android:text="@string/login_et02" />
+          android:textSize="15sp"
+          android:hint="@string/login_et02" />
 
       <ImageView
           android:layout_width="20dp"
@@ -67,23 +84,31 @@
           android:gravity="center"
           android:src="@mipmap/xuanze01" />
    </LinearLayout>
-   <View style="@style/View1"/>
+   <View
+       android:id="@+id/v_line2"
+       android:layout_below="@id/ll_select_hospital"
+       style="@style/View1"/>
    <!--大区-->
    <LinearLayout
+       android:background="@color/white"
+       android:layout_below="@id/v_line2"
+       android:id="@+id/ll_select_area"
        android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:layout_marginLeft="@dimen/layout_20"
-       android:layout_marginRight="@dimen/layout_20"
-       android:layout_marginTop="@dimen/layout_12"
+       android:layout_height="@dimen/y49"
        android:focusable="true"
        android:focusableInTouchMode="true"
        android:orientation="horizontal">
 
       <EditText
+          android:id="@+id/et_area"
+          android:textColor="@color/black_text_login"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:layout_weight="1"
-          android:padding="@dimen/layout_12"
+          android:layout_marginTop="@dimen/y24"
+          android:textSize="15sp"
+          android:includeFontPadding="false"
+          android:paddingLeft="@dimen/x20"
           android:lines="1"
           android:maxLines="1"
           android:singleLine="true"
@@ -92,23 +117,31 @@
 
 
    </LinearLayout>
-   <View style="@style/View1"/>
+   <View
+       android:id="@+id/v_line3"
+       android:layout_below="@id/ll_select_area"
+       style="@style/View1"/>
    <!--科室-->
    <LinearLayout
+       android:background="@color/white"
+       android:layout_below="@id/v_line3"
+       android:id="@+id/ll_select_depart"
        android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:layout_marginLeft="@dimen/layout_20"
-       android:layout_marginRight="@dimen/layout_20"
-       android:layout_marginTop="@dimen/layout_12"
+       android:layout_height="@dimen/y49"
        android:focusable="true"
        android:focusableInTouchMode="true"
        android:orientation="horizontal">
 
       <EditText
+          android:id="@+id/et_department"
+          android:textColor="@color/black_text_login"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:layout_weight="1"
-          android:padding="@dimen/layout_12"
+          android:layout_marginTop="@dimen/y24"
+          android:textSize="15sp"
+          android:includeFontPadding="false"
+          android:paddingLeft="@dimen/x20"
           android:lines="1"
           android:maxLines="1"
           android:singleLine="true"
@@ -116,23 +149,31 @@
           android:hint="@string/register_et04" />
 
    </LinearLayout>
-   <View style="@style/View1"/>
+   <View
+       android:id="@+id/v_line4"
+       android:layout_below="@id/ll_select_depart"
+       style="@style/View1"/>
    <!--分区-->
    <LinearLayout
+       android:background="@color/white"
+       android:layout_below="@id/v_line4"
+       android:id="@+id/ll_select_subarea"
        android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:layout_marginLeft="@dimen/layout_20"
-       android:layout_marginRight="@dimen/layout_20"
-       android:layout_marginTop="@dimen/layout_12"
+       android:layout_height="@dimen/y49"
        android:focusable="true"
        android:focusableInTouchMode="true"
        android:orientation="horizontal">
 
       <EditText
+          android:id="@+id/et_subarea"
+          android:textColor="@color/black_text_login"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:layout_weight="1"
-          android:padding="@dimen/layout_12"
+          android:layout_marginTop="@dimen/y24"
+          android:textSize="15sp"
+          android:includeFontPadding="false"
+          android:paddingLeft="@dimen/x20"
           android:lines="1"
           android:maxLines="1"
           android:singleLine="true"
@@ -140,19 +181,24 @@
           android:hint="@string/register_et05" />
 
    </LinearLayout>
-   <View style="@style/View1"/>
+   <View
+       android:id="@+id/v_line5"
+       android:layout_below="@id/ll_select_subarea"
+       style="@style/View1"/>
    <!--床位-->
    <LinearLayout
+       android:background="@color/white"
+       android:layout_below="@id/v_line5"
+       android:id="@+id/ll_select_bed"
        android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:layout_marginLeft="@dimen/layout_20"
-       android:layout_marginRight="@dimen/layout_20"
-       android:layout_marginTop="@dimen/layout_12"
+       android:layout_height="@dimen/y49"
        android:focusable="true"
        android:focusableInTouchMode="true"
        android:orientation="horizontal">
 
       <EditText
+          android:id="@+id/et_bed"
+          android:textColor="@color/black_text_login"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:layout_weight="1"
@@ -160,27 +206,36 @@
           android:maxLines="1"
           android:singleLine="true"
           android:background="@null"
-          android:padding="@dimen/layout_12"
+          android:layout_marginTop="@dimen/y24"
+          android:textSize="15sp"
+          android:includeFontPadding="false"
+          android:paddingLeft="@dimen/x20"
           android:hint="@string/register_et06" />
 
    </LinearLayout>
-   <View style="@style/View1"
-       android:background="@color/gray"
-       android:layout_height="@dimen/layout_5"/>
+
+   <View
+       android:id="@+id/v_line6"
+       android:layout_below="@id/ll_select_bed"
+       style="@style/View1"
+       android:background="@color/select_bg"
+       android:layout_height="@dimen/y10"/>
 
    <!--密码-->
    <LinearLayout
+       android:background="@color/white"
+       android:id="@+id/ll_pwd"
+       android:layout_below="@id/v_line6"
        android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:layout_marginLeft="@dimen/layout_20"
-       android:layout_marginRight="@dimen/layout_20"
-       android:layout_marginTop="@dimen/layout_12"
+       android:layout_height="@dimen/y49"
        android:focusable="true"
        android:focusableInTouchMode="true"
        android:orientation="horizontal">
 
 
       <EditText
+          android:id="@+id/first_pwd"
+          android:textColor="@color/black_text_login"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:layout_weight="1"
@@ -190,7 +245,10 @@
           android:lines="1"
           android:maxLines="1"
           android:singleLine="true"
-          android:padding="@dimen/layout_12" />
+          android:layout_marginTop="@dimen/y24"
+          android:textSize="15sp"
+          android:includeFontPadding="false"
+          android:paddingLeft="@dimen/x20"/>
 
       <ImageView
           android:layout_width="20dp"
@@ -201,19 +259,24 @@
           android:gravity="center"
           android:src="@mipmap/mima01" />
    </LinearLayout>
-   <View style="@style/View1" />
+   <View
+       android:id="@+id/v_line7"
+       android:layout_below="@id/ll_pwd"
+       style="@style/View1" />
    <!--再次密码-->
    <LinearLayout
+       android:background="@color/white"
+       android:layout_below="@id/v_line7"
+       android:id="@+id/ll_pwd_retry"
        android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:layout_marginLeft="@dimen/layout_20"
-       android:layout_marginRight="@dimen/layout_20"
-       android:layout_marginTop="@dimen/layout_12"
+       android:layout_height="@dimen/y49"
        android:focusable="true"
        android:focusableInTouchMode="true"
        android:orientation="horizontal">
 
       <EditText
+          android:id="@+id/confirm_pwd"
+          android:textColor="@color/black_text_login"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:layout_weight="1"
@@ -223,7 +286,10 @@
           android:lines="1"
           android:maxLines="1"
           android:singleLine="true"
-          android:padding="@dimen/layout_12" />
+          android:layout_marginTop="@dimen/y24"
+          android:textSize="15sp"
+          android:includeFontPadding="false"
+          android:paddingLeft="@dimen/x20"/>
 
       <ImageView
           android:layout_width="20dp"
@@ -234,9 +300,13 @@
           android:gravity="center"
           android:src="@mipmap/mima01" />
    </LinearLayout>
-   <View style="@style/View1"/>
+   <View
+       android:layout_below="@id/ll_pwd_retry"
+       style="@style/View1"/>
    <!--需6~20位字符-->
    <TextView
+       android:layout_below="@id/ll_pwd_retry"
+       android:id="@+id/tv_tips"
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
        android:layout_gravity="center|left"
@@ -248,22 +318,23 @@
        android:textColor="@color/orange" />
    <!--完成-->
    <LinearLayout
+       android:id="@+id/ll_confirm"
+       android:layout_marginBottom="@dimen/y20"
+       android:layout_alignParentBottom="true"
        android:layout_width="match_parent"
-       android:layout_height="0dp"
+       android:layout_marginLeft="@dimen/x17"
+       android:layout_marginRight="@dimen/x17"
+       android:layout_height="@dimen/y49"
        android:layout_weight="1">
       <TextView
           android:layout_width="match_parent"
-          android:layout_height="wrap_content"
+          android:layout_height="match_parent"
           android:layout_gravity="center"
-          android:layout_marginLeft="@dimen/layout_20"
-          android:layout_marginRight="@dimen/layout_20"
-          android:layout_marginTop="@dimen/layout_30"
           android:background="@drawable/yuan_lanse50"
           android:gravity="center"
-          android:padding="@dimen/layout_12"
           android:text="@string/register_et010"
           android:textColor="@color/white100"
-          android:textSize="@dimen/Text_24" />
+          android:textSize="18sp" />
    </LinearLayout>
-
+   </RelativeLayout>
 </LinearLayout>

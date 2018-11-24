@@ -59,9 +59,11 @@
             android:textSize="@dimen/Text_14"
             android:id="@+id/login_tv_position"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:padding="@dimen/x15"
+            android:paddingLeft="@dimen/x20"
+            android:paddingTop="@dimen/x15"
+            android:paddingBottom="@dimen/x15"
             android:text="请选择省-市-区" />
 
         <View
@@ -98,20 +100,24 @@
         <TextView
             android:includeFontPadding="false"
             android:textSize="@dimen/Text_14"
-            android:layout_width="@dimen/x80"
+            android:layout_width="@dimen/x70"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textColor="@color/gray_login"
-            android:padding="@dimen/x15"
+            android:paddingLeft="@dimen/x15"
+            android:paddingTop="@dimen/x15"
+            android:paddingBottom="@dimen/x15"
             android:text="@string/login_tv02" />
 
         <TextView
+            android:id="@+id/tv_hospital"
             android:textColor="@color/black_text_login"
             android:textSize="@dimen/Text_14"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:padding="@dimen/x15"
+            android:paddingBottom="@dimen/x15"
+            android:paddingTop="@dimen/x15"
             android:text="@string/login_et02" />
 
         <ImageView
@@ -139,19 +145,23 @@
         <TextView
             android:textSize="@dimen/Text_14"
             android:textColor="@color/gray_login"
-            android:layout_width="@dimen/x80"
+            android:layout_width="@dimen/x70"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="@dimen/x15"
+            android:paddingLeft="@dimen/x15"
+            android:paddingTop="@dimen/x15"
+            android:paddingBottom="@dimen/x15"
             android:text="@string/login_tv03" />
 
         <TextView
+            android:id="@+id/tv_area"
             android:textColor="@color/black_text_login"
             android:textSize="@dimen/Text_14"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:padding="@dimen/layout_15"
+            android:paddingBottom="@dimen/x15"
+            android:paddingTop="@dimen/x15"
             android:text="@string/login_et03" />
 
         <ImageView
@@ -177,19 +187,23 @@
         <TextView
             android:textColor="@color/gray_login"
             android:textSize="@dimen/Text_14"
-            android:layout_width="@dimen/layout_80"
+            android:layout_width="@dimen/x70"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="@dimen/layout_15"
+            android:paddingLeft="@dimen/x15"
+            android:paddingTop="@dimen/x15"
+            android:paddingBottom="@dimen/x15"
             android:text="@string/login_tv04" />
 
         <TextView
+            android:id="@+id/tv_depart"
             android:textColor="@color/black_text_login"
             android:textSize="@dimen/Text_14"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:padding="@dimen/layout_15"
+            android:paddingBottom="@dimen/x15"
+            android:paddingTop="@dimen/x15"
             android:text="@string/login_et04" />
 
         <ImageView
@@ -216,19 +230,23 @@
         <TextView
             android:textColor="@color/gray_login"
             android:textSize="@dimen/Text_14"
-            android:layout_width="@dimen/layout_80"
+            android:layout_width="@dimen/x70"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="@dimen/layout_15"
+            android:paddingLeft="@dimen/x15"
+            android:paddingTop="@dimen/x15"
+            android:paddingBottom="@dimen/x15"
             android:text="@string/login_tv05" />
 
         <TextView
+            android:id="@+id/tv_subarea"
             android:textSize="@dimen/Text_14"
             android:textColor="@color/black_text_login"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:padding="@dimen/layout_15"
+            android:paddingBottom="@dimen/x15"
+            android:paddingTop="@dimen/x15"
             android:text="@string/login_et05" />
 
         <ImageView
@@ -257,13 +275,16 @@
         <TextView
             android:textColor="@color/gray_login"
             android:textSize="@dimen/Text_14"
-            android:layout_width="@dimen/x80"
+            android:layout_width="@dimen/x70"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="@dimen/layout_15"
+            android:paddingLeft="@dimen/x15"
+            android:paddingTop="@dimen/x15"
+            android:paddingBottom="@dimen/x15"
             android:text="@string/login_tv06" />
 
         <EditText
+            android:id="@+id/et_pwd"
             android:textSize="@dimen/Text_14"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -273,7 +294,9 @@
             android:inputType="textPassword"
             android:lines="1"
             android:maxLines="1"
-            android:padding="@dimen/layout_15" />
+            android:paddingLeft="@dimen/x6"
+            android:paddingBottom="@dimen/x15"
+            android:paddingTop="@dimen/x15"/>
 
         <ImageView
             android:id="@+id/iv_show_pwd"
