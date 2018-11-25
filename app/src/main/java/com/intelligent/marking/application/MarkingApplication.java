@@ -19,9 +19,8 @@ public class MarkingApplication extends Application {
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .connectTimeout(10000L, TimeUnit.MILLISECONDS)
                 .readTimeout(10000L, TimeUnit.MILLISECONDS)
-                .addInterceptor(interceptor)
+                .addNetworkInterceptor(interceptor)
                 .build();
         OkHttpUtils.initClient(okHttpClient);
-
     }
 }

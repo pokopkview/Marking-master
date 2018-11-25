@@ -3,6 +3,8 @@ package com.intelligent.marking.net;
 import android.content.Context;
 import android.util.Log;
 
+import com.intelligent.marking.R;
+
 import java.io.IOException;
 
 import okhttp3.Interceptor;
@@ -19,9 +21,14 @@ public class HttpInterceptor implements Interceptor {
 
     @Override
     public Response intercept(Chain chain) throws IOException {
-        Request request = chain.request();
+        Request uest = chain.request();
+        Request request = uest.newBuilder()
+                .addHeader("uuid","yb_iCep6EBTWxKCW9sutpl2kWm6LNBThGEPMr2BxEUoS6qAaWX0rN3YPVv9zJhmo0mQ")
+                .addHeader("Content-Type","application/json")
+                .build();
+
         Response response = chain.proceed(request);
-        Log.d("HTTPResponse",response.toString());
+        System.out.println("response:"+response.toString());
         return response;
     }
 }

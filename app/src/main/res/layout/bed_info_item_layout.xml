@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/x84"
+    android:layout_height="@dimen/y102">
+
+    <RelativeLayout
+        android:layout_marginTop="@dimen/y23"
+        android:id="@+id/bed_bg"
+        android:background="@drawable/bed_status_selector"
+        android:layout_centerHorizontal="true"
+        android:layout_width="@dimen/x58"
+        android:layout_height="@dimen/x58">
+
+        <TextView
+            android:id="@+id/bed_null"
+            android:visibility="gone"
+            android:text="空床"
+            android:textColor="@color/blue"
+            android:textSize="13sp"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_marginRight="@dimen/x4"
+            android:layout_marginLeft="@dimen/x4"
+            android:textColor="@color/white"
+            android:text="王某"
+            android:id="@+id/tv_bed_name"
+            android:includeFontPadding="false"
+            android:textSize="13sp"
+            android:layout_marginTop="@dimen/y16"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_marginRight="@dimen/x4"
+            android:layout_marginLeft="@dimen/x4"
+            android:textColor="@color/white"
+            android:text="男 17岁"
+            android:includeFontPadding="false"
+            android:textSize="13sp"
+            android:layout_below="@id/tv_bed_name"
+            android:id="@+id/tv_sex_age"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_msg_count"
+        android:layout_marginTop="@dimen/y11"
+        android:textSize="13sp"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:text="2"
+        android:layout_marginRight="@dimen/x1"
+        android:background="@mipmap/orange"
+        android:layout_alignParentRight="true"
+        android:layout_width="@dimen/x24"
+        android:layout_height="@dimen/x24"/>
+
+
+    <TextView
+        android:id="@+id/tv_number"
+        android:layout_marginTop="@dimen/x6"
+        android:layout_below="@id/bed_bg"
+        android:includeFontPadding="false"
+        android:text="01"
+        android:textColor="@color/black_text_login"
+        android:textSize="13sp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    
+</RelativeLayout>

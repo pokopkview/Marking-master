@@ -111,6 +111,11 @@ public class LoginActivity extends BaseActivity {
 //        if() {
 //            loginModel.setArea_id();
 //        }
+//        Map<String,Object> value = new HashMap<>();
+//        value.put("id",47494);
+//        HttpPost(AppConst.GETPROVINCE,value,5);
+        startActivity(new Intent(LoginActivity.this,MainActivity.class));
+
 
     }
 
@@ -227,6 +232,7 @@ public class LoginActivity extends BaseActivity {
                 }.getType();
                 hospital = new Gson().fromJson(response, type);
                 hosList = new ArrayList<>();
+                hosListid = new ArrayList<>();
                 for (HospitalModel hospitalModel : hospital.getData()) {
                     hosList.add(hospitalModel.getName());
                     hosListid.add(hospitalModel.getHospital_id());
@@ -240,7 +246,8 @@ public class LoginActivity extends BaseActivity {
                 type = new TypeToken<BaseModel<List<AreaModel>>>() {
                 }.getType();
                 area = new Gson().fromJson(response, type);
-                 areList = new ArrayList<>();
+                areList = new ArrayList<>();
+                areListid = new ArrayList<>();
                 for (AreaModel hospitalModel : area.getData()) {
                     areList.add(hospitalModel.getArea_name());
                     areListid.add(hospitalModel.getArea_id());
@@ -255,6 +262,7 @@ public class LoginActivity extends BaseActivity {
                 }.getType();
                 subArea = new Gson().fromJson(response, type);
                 subList = new ArrayList<>();
+                subListid = new ArrayList<>();
                 for (SubAreModel hospitalModel : subArea.getData()) {
                     subList.add(hospitalModel.getSubarea_name());
                     subListid.add(hospitalModel.getSubarea_id());
@@ -269,6 +277,7 @@ public class LoginActivity extends BaseActivity {
                 }.getType();
                 depart = new Gson().fromJson(response, type);
                 departList = new ArrayList<>();
+                departListid = new ArrayList<>();
                 for (DepartModel hospitalModel : depart.getData()) {
                     departList.add(hospitalModel.getDepartment_name());
                     departListid.add(hospitalModel.getDepartment_id());
@@ -277,6 +286,9 @@ public class LoginActivity extends BaseActivity {
                     departList.add("全部");
                 }
                 setPopDate(tvDepart,departList,departListid,llSelectDepart);
+                break;
+            case 5:
+                System.out.println(response);
                 break;
         }
     }
@@ -295,6 +307,7 @@ public class LoginActivity extends BaseActivity {
             public void footclick() {
                 //select all
                 textView.setText("全部");
+                textView.setTag(0);
                 PopUpwindowUtil.popupWindow.dismiss();
             }
         });
