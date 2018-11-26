@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/x310"
+    android:background="@drawable/duct_add_bg_selector"
+    android:layout_height="@dimen/y260">
+
+    <TextView
+        android:includeFontPadding="false"
+        android:textColor="@color/black_black"
+        android:layout_marginTop="@dimen/y35"
+        android:layout_centerHorizontal="true"
+        android:text="PICC"
+        android:textSize="@dimen/x18"
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:textColor="@color/black_text_login"
+        android:layout_marginTop="@dimen/y17"
+        android:layout_below="@id/tv_title"
+        android:layout_centerHorizontal="true"
+        android:includeFontPadding="false"
+        android:textSize="@dimen/x15"
+        android:text="请您选择"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+
+    <TextView
+        android:id="@+id/tv_first"
+        android:layout_marginTop="@dimen/x111"
+        android:textSize="@dimen/x17"
+        android:textColor="@color/blue"
+        android:text="管"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/duct_add_text_selector"
+        android:layout_width="@dimen/x251"
+        android:layout_height="@dimen/y50" />
+
+    <TextView
+        android:id="@+id/tv_secend"
+        android:layout_marginTop="@dimen/x171"
+        android:textSize="@dimen/x17"
+        android:textColor="@color/blue"
+        android:text="膜"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/duct_add_text_selector"
+        android:layout_width="@dimen/x251"
+        android:layout_height="@dimen/y50" />
+
+
+    <View
+        android:id="@+id/v_close"
+        android:layout_marginRight="@dimen/y16"
+        android:layout_marginTop="@dimen/x16"
+        android:layout_alignParentRight="true"
+        android:background="@mipmap/close"
+        android:layout_width="@dimen/x16"
+        android:layout_height="@dimen/y16"/>
+
+
+</RelativeLayout>

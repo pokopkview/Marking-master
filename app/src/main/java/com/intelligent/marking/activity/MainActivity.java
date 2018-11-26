@@ -7,10 +7,13 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SnapHelper;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -25,6 +28,7 @@ import com.intelligent.marking.net.model.BedInfoModel;
 import com.intelligent.marking.widget.HorizontalPageLayoutManager;
 import com.intelligent.marking.widget.PagingItemDecoration;
 import com.intelligent.marking.widget.PagingScrollHelper;
+import com.intelligent.marking.widget.PopUpwindowUtil;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -35,7 +39,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends BaseActivity implements PagingScrollHelper.onPageChangeListener {
+public class MainActivity extends BaseActivity implements PagingScrollHelper.onPageChangeListener,RecyPagerAdapter.BedInfoViewholer.ItemSelectListener {
 
 
     @BindView(R.id.ll_left_container)
@@ -52,6 +56,7 @@ public class MainActivity extends BaseActivity implements PagingScrollHelper.onP
     View vAddBed;
 
     PagingScrollHelper scrollHelper = new PagingScrollHelper();
+    RecyPagerAdapter adapter;
 
 
     @OnClick(R.id.ll_left_container)
@@ -62,6 +67,16 @@ public class MainActivity extends BaseActivity implements PagingScrollHelper.onP
     @OnClick(R.id.ll_right_container)
     public void rightClick(View view){
         //TODO 右侧扫描
+    }
+
+    @OnClick(R.id.v_add_bed)
+    public void addBed(View view){
+        if(adapter.getDelete()) {
+            adapter.setDeleteVisi(false);
+        }else{
+            adapter.setDeleteVisi(true);
+        }
+        adapter.notifyDataSetChanged();
     }
 
 
@@ -106,22 +121,92 @@ public class MainActivity extends BaseActivity implements PagingScrollHelper.onP
         PagingItemDecoration pagingItemDecoration = new PagingItemDecoration(this, horizontalPageLayoutManager);
 
 //        gridLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        RecyPagerAdapter adapter =  new RecyPagerAdapter(MainActivity.this,bedInfoModelList);
+        adapter =  new RecyPagerAdapter(MainActivity.this,bedInfoModelList);
         cusomSwipeView.setLayoutManager(horizontalPageLayoutManager);
 //        cusomSwipeView.addItemDecoration(pagingItemDecoration);
         cusomSwipeView.setAdapter(adapter);
+        adapter.setListener(this);
         scrollHelper.setUpRecycleView(cusomSwipeView);
         scrollHelper.setOnPageChangeListener(this);
         cusomSwipeView.post(new Runnable() {
             @Override
             public void run() {
-                scrollHelper.getPageCount();
+                indicator.initIndicator(scrollHelper.getPageCount());
             }
         });
     }
 
     @Override
     public void onPageChange(int index) {
+        indicator.setSelectedPage(index);
+    }
 
+
+
+    @Override
+    public void deleteClick(int position) {
+        System.out.println("deleteClick:"+position);
+        PopupWindow dialog = PopUpwindowUtil.createPopUpWindowDialogStyle(this, "test出院", "name:name,sex:meal,age:12","出院","取消", new PopUpwindowUtil.dialogClickListener() {
+            @Override
+            public void confirm() {
+                PopUpwindowUtil.popupWindow.dismiss();
+
+            }
+
+            @Override
+            public void cancle() {
+                PopUpwindowUtil.popupWindow.dismiss();
+
+            }
+        });
+        WindowManager.LayoutParams lp=MainActivity.this.getWindow().getAttributes();
+        lp.alpha=0.4f;
+        MainActivity.this.getWindow().setAttributes(lp);
+        dialog.showAtLocation(cusomSwipeView,Gravity.CENTER,0,0);
+    }
+
+    @Override
+    public void itemLongClick(int position) {
+        System.out.println("itemLongClick:"+position);
+        PopupWindow popupWindow = PopUpwindowUtil.createPopUpWindowaddTemporaryBed(this, new PopUpwindowUtil.dialogClickContentListener() {
+            @Override
+            public void confirm(String prefix, String bed_no) {
+                PopUpwindowUtil.popupWindow.dismiss();
+            }
+
+            @Override
+            public void cancle() {
+                PopUpwindowUtil.popupWindow.dismiss();
+            }
+        });
+        WindowManager.LayoutParams lp=MainActivity.this.getWindow().getAttributes();
+        lp.alpha=0.4f;
+        MainActivity.this.getWindow().setAttributes(lp);
+        popupWindow.showAtLocation(cusomSwipeView,Gravity.CENTER,0,0);
+    }
+
+    @Override
+    public void itemClick(int position) {
+        System.out.println("itemClick"+position);
+        PopupWindow popupWindow = PopUpwindowUtil.createPopUpWindowDuctInfo(this, null, null, new PopUpwindowUtil.dialogClickDuctListener() {
+            @Override
+            public void firstClick() {
+
+            }
+
+            @Override
+            public void secendClick() {
+
+            }
+
+            @Override
+            public void closeClick() {
+                PopUpwindowUtil.popupWindow.dismiss();
+            }
+        });
+        WindowManager.LayoutParams lp=MainActivity.this.getWindow().getAttributes();
+        lp.alpha=0.4f;
+        MainActivity.this.getWindow().setAttributes(lp);
+        popupWindow.showAtLocation(cusomSwipeView,Gravity.CENTER,0,0);
     }
 }

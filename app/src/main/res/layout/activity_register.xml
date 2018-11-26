@@ -23,7 +23,7 @@
           android:textColor="@color/black_text_login"
           android:includeFontPadding="false"
           android:layout_marginTop="@dimen/y24"
-          android:textSize="15sp"
+          android:textSize="@dimen/x15"
           android:paddingLeft="@dimen/x20"
           android:id="@+id/login_tv_position"
           android:layout_width="0dp"
@@ -72,7 +72,7 @@
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:layout_weight="1"
-          android:textSize="15sp"
+          android:textSize="@dimen/x15"
           android:hint="@string/login_et02" />
 
       <ImageView
@@ -106,7 +106,7 @@
           android:layout_height="wrap_content"
           android:layout_weight="1"
           android:layout_marginTop="@dimen/y24"
-          android:textSize="15sp"
+          android:textSize="@dimen/x15"
           android:includeFontPadding="false"
           android:paddingLeft="@dimen/x20"
           android:lines="1"
@@ -139,7 +139,7 @@
           android:layout_height="wrap_content"
           android:layout_weight="1"
           android:layout_marginTop="@dimen/y24"
-          android:textSize="15sp"
+          android:textSize="@dimen/x15"
           android:includeFontPadding="false"
           android:paddingLeft="@dimen/x20"
           android:lines="1"
@@ -171,7 +171,7 @@
           android:layout_height="wrap_content"
           android:layout_weight="1"
           android:layout_marginTop="@dimen/y24"
-          android:textSize="15sp"
+          android:textSize="@dimen/x15"
           android:includeFontPadding="false"
           android:paddingLeft="@dimen/x20"
           android:lines="1"
@@ -207,7 +207,7 @@
           android:singleLine="true"
           android:background="@null"
           android:layout_marginTop="@dimen/y24"
-          android:textSize="15sp"
+          android:textSize="@dimen/x15"
           android:includeFontPadding="false"
           android:paddingLeft="@dimen/x20"
           android:hint="@string/register_et06" />
@@ -246,7 +246,7 @@
           android:maxLines="1"
           android:singleLine="true"
           android:layout_marginTop="@dimen/y24"
-          android:textSize="15sp"
+          android:textSize="@dimen/x15"
           android:includeFontPadding="false"
           android:paddingLeft="@dimen/x20"/>
 
@@ -287,7 +287,7 @@
           android:maxLines="1"
           android:singleLine="true"
           android:layout_marginTop="@dimen/y24"
-          android:textSize="15sp"
+          android:textSize="@dimen/x15"
           android:includeFontPadding="false"
           android:paddingLeft="@dimen/x20"/>
 
@@ -313,7 +313,7 @@
        android:layout_marginLeft="@dimen/layout_20"
        android:layout_marginTop="@dimen/layout_12"
        android:padding="@dimen/layout_5"
-       android:textSize="@dimen/Text_14"
+       android:textSize="@dimen/x12"
        android:text="@string/register_et09"
        android:textColor="@color/orange" />
    <!--完成-->
@@ -334,7 +334,7 @@
           android:gravity="center"
           android:text="@string/register_et010"
           android:textColor="@color/white100"
-          android:textSize="18sp" />
+          android:textSize="@dimen/x18" />
    </LinearLayout>
    </RelativeLayout>
 </LinearLayout>

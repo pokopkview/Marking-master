@@ -6,6 +6,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.intelligent.marking.R;
 import com.intelligent.marking.common.utils.DimensionConvert;
 
 import java.util.ArrayList;
@@ -20,8 +21,8 @@ import java.util.List;
 public class PageIndicatorView extends LinearLayout {
 
     private Context mContext = null;
-    private int dotSize = 15; // 指示器的大小（dp）
-    private int margins = 4; // 指示器间距（dp）
+    private int dotSize = 8; // 指示器的大小（dp）
+    private int margins = 7; // 指示器间距（dp）
     private List<View> indicatorViews = null; // 存放指示器
 
     public PageIndicatorView(Context context) {
@@ -43,8 +44,8 @@ public class PageIndicatorView extends LinearLayout {
         setGravity(Gravity.CENTER);
         setOrientation(HORIZONTAL);
 
-        dotSize = DimensionConvert.dip2px(context, dotSize);
-        margins = DimensionConvert.dip2px(context, margins);
+        dotSize = context.getResources().getDimensionPixelSize(R.dimen.x8);
+        margins = context.getResources().getDimensionPixelSize(R.dimen.x3);
     }
 
     /**
@@ -65,12 +66,12 @@ public class PageIndicatorView extends LinearLayout {
         params.setMargins(margins, margins, margins, margins);
         for (int i = 0; i < count; i++) {
             view = new View(mContext);
-            view.setBackgroundResource(android.R.drawable.presence_invisible);
+            view.setBackgroundResource(R.mipmap.white_gray);
             addView(view, params);
             indicatorViews.add(view);
         }
         if (indicatorViews.size() > 0) {
-            indicatorViews.get(0).setBackgroundResource(android.R.drawable.presence_online);
+            indicatorViews.get(0).setBackgroundResource(R.mipmap.white_deep_gray);
         }
     }
 
@@ -82,9 +83,9 @@ public class PageIndicatorView extends LinearLayout {
     public void setSelectedPage(int selected) {
         for (int i = 0; i < indicatorViews.size(); i++) {
             if (i == selected) {
-                indicatorViews.get(i).setBackgroundResource(android.R.drawable.presence_online);
+                indicatorViews.get(i).setBackgroundResource(R.mipmap.white_deep_gray);
             } else {
-                indicatorViews.get(i).setBackgroundResource(android.R.drawable.presence_invisible);
+                indicatorViews.get(i).setBackgroundResource(R.mipmap.white_gray);
             }
         }
     }

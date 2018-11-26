@@ -23,6 +23,9 @@ public class RecyPagerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private List<BedInfoModel> date;
     private Context mContext;
     private LayoutInflater mLayoutInflate;
+    private boolean isDetele = false;
+    private BedInfoViewholer.ItemSelectListener selectListener;
+
 
     public RecyPagerAdapter(Context context, List<BedInfoModel> date) {
         this.date = date;
@@ -30,6 +33,14 @@ public class RecyPagerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         mLayoutInflate = LayoutInflater.from(mContext);
     }
 
+
+    public boolean getDelete(){
+        return isDetele;
+    }
+
+    public void setDeleteVisi(boolean isDetele){
+        this.isDetele = isDetele;
+    }
 
     @NonNull
     @Override
@@ -54,6 +65,40 @@ public class RecyPagerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             ((BedInfoViewholer) viewHolder).tvNumber.setText(date.get(i).getBed_name());
             ((BedInfoViewholer) viewHolder).bedBg.setBackgroundResource(R.drawable.bed_status_selector);
         }
+
+
+
+
+
+
+
+        if(!isDetele){
+            ((BedInfoViewholer) viewHolder).vDelete.setVisibility(View.GONE);
+        }else{
+            ((BedInfoViewholer) viewHolder).vDelete.setVisibility(View.VISIBLE);
+        }
+        ((BedInfoViewholer) viewHolder).vDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectListener.deleteClick(i);
+            }
+        });
+
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectListener.itemClick(i);
+            }
+        });
+
+        viewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                selectListener.itemLongClick(i);
+                return false;
+            }
+        });
+
         switch (date.get(i).getShow_color()) {
             case "red":
                 ((BedInfoViewholer) viewHolder).tvMsgCount.setBackgroundResource(R.mipmap.red);
@@ -83,8 +128,12 @@ public class RecyPagerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         return date.size();
     }
 
+    public void setListener(BedInfoViewholer.ItemSelectListener itemSelectListener){
+        this.selectListener = itemSelectListener;
+    }
 
-    static class BedInfoViewholer extends RecyclerView.ViewHolder {
+
+    public static class BedInfoViewholer extends RecyclerView.ViewHolder {
         @BindView(R.id.bed_null)
         TextView bedNull;
         @BindView(R.id.tv_bed_name)
@@ -97,10 +146,19 @@ public class RecyPagerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         TextView tvMsgCount;
         @BindView(R.id.tv_number)
         TextView tvNumber;
+        @BindView(R.id.v_delete_icon)
+        View vDelete;
 
         public BedInfoViewholer(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);
+        }
+
+
+        public interface ItemSelectListener{
+            void deleteClick(int position);
+            void itemLongClick(int position);
+            void itemClick(int position);
         }
     }
 

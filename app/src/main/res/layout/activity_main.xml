@@ -16,6 +16,7 @@
 
         <com.intelligent.marking.common.view.PageIndicatorView
             android:id="@+id/indicator"
+            android:layout_marginTop="@dimen/y17"
             android:layout_width="match_parent"
             android:layout_marginBottom="@dimen/y17"
             android:layout_height="@dimen/y8"
@@ -39,7 +40,7 @@
                     android:layout_marginLeft="@dimen/x6"
                     android:layout_toRightOf="@id/v_add_bed"
                     android:layout_centerVertical="true"
-                    android:textSize="@dimen/Text_14"
+                    android:textSize="@dimen/x14"
                     android:textColor="@color/black_text_login"
                     android:text="添加"
                     android:layout_width="wrap_content"

@@ -13,7 +13,7 @@
         android:layout_height="@dimen/y1"/>
     <TextView
         android:textColor="@color/black_text_login"
-        android:textSize="@dimen/Text_14"
+        android:textSize="@dimen/x14"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="@dimen/y26"
         android:layout_marginLeft="@dimen/x69"

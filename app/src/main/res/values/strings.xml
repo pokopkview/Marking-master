@@ -44,5 +44,9 @@
     <string name="register_et010">完成</string>
 
     <string name="administration_tv01">管理</string>
+    <string name="deletebedtitle">要删除“%1$s”吗？</string>
+    <string name="deletecontent">姓名：%1$s，性别：%2$s，年龄：%3$d岁</string>
+    <string name="leavehostitle">%1$s号床位病人已出院？</string>
 
+    
 </resources>

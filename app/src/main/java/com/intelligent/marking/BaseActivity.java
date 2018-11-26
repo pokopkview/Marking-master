@@ -51,6 +51,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     protected void HttpPost(String url, Map<String,Object> value, final int flag){
+        showProgress();
         OkHttpUtils
                 .postString()
                 .url(url)
@@ -60,11 +61,12 @@ public abstract class BaseActivity extends AppCompatActivity {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-
+                        disMissPro();
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
+                        disMissPro();
                         getCallBack(response,flag);
                     }
                 });

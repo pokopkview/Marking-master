@@ -16,7 +16,7 @@
 
     <TextView
         android:textColor="@color/black_text_login"
-        android:textSize="@dimen/Text_14"
+        android:textSize="@dimen/x14"
         android:layout_marginLeft="@dimen/x69"
         android:id="@+id/tv_item"
         android:layout_width="wrap_content"

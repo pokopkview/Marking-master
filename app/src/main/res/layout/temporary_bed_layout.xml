@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/x260"
+    android:background="@drawable/temporary_bed_add_layout"
+    android:layout_height="@dimen/y229">
+
+    <RelativeLayout
+        android:background="@drawable/temporary_add_bed_top_selector"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y43">
+
+        <ImageView
+            android:layout_marginRight="@dimen/x11"
+            android:layout_toLeftOf="@id/tv_title"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/add_temporary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:textSize="@dimen/x17"
+            android:textColor="@color/white"
+            android:text="添加临时床位"
+            android:layout_centerInParent="true"
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+    <EditText
+        android:textSize="@dimen/x14"
+        android:paddingLeft="@dimen/x8"
+        android:gravity="center|start"
+        android:hint="请输入前缀"
+        android:layout_marginLeft="@dimen/x10"
+        android:layout_marginRight="@dimen/x10"
+        android:layout_marginTop="@dimen/y69"
+        android:id="@+id/tv_prefix"
+        android:background="@drawable/temporary_bed_text_selector"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y45" />
+
+    <EditText
+        android:layout_marginTop="-1px"
+        android:textSize="@dimen/x14"
+        android:hint="请输入床位数"
+        android:paddingLeft="@dimen/x8"
+        android:gravity="center|start"
+        android:layout_below="@id/tv_prefix"
+        android:layout_marginLeft="@dimen/x10"
+        android:layout_marginRight="@dimen/x10"
+        android:id="@+id/tv_bed_no"
+        android:background="@drawable/temporary_bed_text_selector"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y45" />
+
+    <View
+        android:background="@color/gray"
+        android:layout_marginBottom="@dimen/y42"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="1px"/>
+
+    <View
+        android:background="@color/gray"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_width="1px"
+        android:layout_height="@dimen/y42"/>
+
+
+    <TextView
+        android:textSize="@dimen/x14"
+        android:includeFontPadding="false"
+        android:padding="@dimen/x6"
+        android:layout_marginLeft="@dimen/x43"
+        android:layout_marginBottom="@dimen/y6"
+        android:layout_alignParentBottom="true"
+        android:textColor="@color/gray_text"
+        android:text="取消"
+        android:id="@+id/tv_cancle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_marginRight="@dimen/x49"
+        android:layout_alignParentRight="true"
+        android:textSize="@dimen/x14"
+        android:includeFontPadding="false"
+        android:padding="@dimen/x6"
+        android:layout_marginLeft="@dimen/x43"
+        android:layout_marginBottom="@dimen/y6"
+        android:layout_alignParentBottom="true"
+        android:textColor="@color/blue"
+        android:text="确认"
+        android:id="@+id/tv_confirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+</RelativeLayout>
