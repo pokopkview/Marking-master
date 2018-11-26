@@ -48,7 +48,7 @@ public class LoginActivity extends BaseActivity {
     @BindView(R.id.ll_login_location)
     LinearLayout llLoginLocation;
     @BindView(R.id.ll_select_hist)
-    LinearLayout llSelectHist;
+    RelativeLayout llSelectHist;
     @BindView(R.id.ll_select_area)
     LinearLayout llSelectArea;
     @BindView(R.id.ll_select_depart)

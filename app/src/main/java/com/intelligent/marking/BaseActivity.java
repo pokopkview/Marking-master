@@ -46,7 +46,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     private void hideStatusBar() {
         WindowManager.LayoutParams attrs = getWindow().getAttributes();
-        attrs.flags |= WindowManager.LayoutParams.FLAG_FULLSCREEN;
+        attrs.flags |= WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS;
         getWindow().setAttributes(attrs);
     }
 

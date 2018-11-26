@@ -30,6 +30,7 @@ public class SelectMoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        System.out.println("viewType:"+viewType);
         switch (viewType){
             case 1:
                 return new simpleItemViewHolder(layoutInflater.inflate(R.layout.item_layout,parent,false));
@@ -80,12 +81,13 @@ public class SelectMoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     @Override
     public int getItemViewType(int position) {
+        System.out.println("position:"+position+",count:"+getItemCount());
         if(position == 0){
             if(getItemCount() == 1){
                 return 3;
             }
             return 0;
-        }else if(position == getItemCount()){
+        }else if(position == getItemCount()-1){
             return 2;
         }else{
             return 1;
