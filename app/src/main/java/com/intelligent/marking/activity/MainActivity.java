@@ -67,6 +67,11 @@ public class MainActivity extends BaseActivity implements PagingScrollHelper.onP
     @OnClick(R.id.ll_right_container)
     public void rightClick(View view){
         //TODO 右侧扫描
+        PopupWindow popupWindow = PopUpwindowUtil.createDuctToUserDialog(this);
+        WindowManager.LayoutParams lp=MainActivity.this.getWindow().getAttributes();
+        lp.alpha=0.4f;
+        MainActivity.this.getWindow().setAttributes(lp);
+        popupWindow.showAtLocation(cusomSwipeView,Gravity.CENTER,0,0);
     }
 
     @OnClick(R.id.v_add_bed)

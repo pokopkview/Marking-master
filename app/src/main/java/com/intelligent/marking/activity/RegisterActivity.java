@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.intelligent.marking.BaseActivity;
 import com.intelligent.marking.R;
+import com.intelligent.marking.net.model.LocationInfoModel;
 import com.intelligent.marking.set.JsonDataActivity01;
 
 import butterknife.BindView;
@@ -18,7 +19,7 @@ import butterknife.OnClick;
 
 public class RegisterActivity extends BaseActivity {
 
-    String JsonData;
+    JsonDataActivity01 JsonData;
     @BindView(R.id.ll_left_container)
     LinearLayout llLeftContainer;
     @BindView(R.id.tv_header_title)
@@ -87,6 +88,11 @@ public class RegisterActivity extends BaseActivity {
             @Override
             public void getLocation(String pronvince, String city, String area) {
                 //TODO 完成选择后的返回
+            }
+
+            @Override
+            public void getLocationID(int pid, int cid, int aid) {
+
             }
         });
     }

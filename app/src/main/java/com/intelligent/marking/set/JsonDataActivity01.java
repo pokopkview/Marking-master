@@ -27,9 +27,12 @@ import java.util.ArrayList;
  * 解析省市区数据示例
  */
 public class JsonDataActivity01{
-    private ArrayList<JsonBean> options1Items = new ArrayList<>();
-    private ArrayList<ArrayList<String>> options2Items = new ArrayList<>();
-    private ArrayList<ArrayList<ArrayList<String>>> options3Items = new ArrayList<>();
+    public ArrayList<JsonBean> options1Items = new ArrayList<>();
+    public ArrayList<ArrayList<String>> options2Items = new ArrayList<>();
+    public ArrayList<ArrayList<ArrayList<String>>> options3Items = new ArrayList<>();
+//    public ArrayList<Integer> options1Items1 = new ArrayList<>();
+//    public ArrayList<ArrayList<Integer>> options2Items1 = new ArrayList<>();
+//    public ArrayList<ArrayList<ArrayList<Integer>>> options3Items1 = new ArrayList<>();
     private Thread thread;
     private static final int MSG_LOAD_DATA = 0x0001;
     private static final int MSG_LOAD_SUCCESS = 0x0002;
@@ -39,12 +42,14 @@ public class JsonDataActivity01{
     private TextView  login_tv_position;
     private selectPosition listenner;
 
-    public String getPosition(Context context, TextView login_tv_position,selectPosition listenner) {
+
+
+    public JsonDataActivity01 getPosition(Context context, TextView login_tv_position,selectPosition listenner) {
         this.context = context;
         mHandler.sendEmptyMessage(MSG_LOAD_DATA);
         this.login_tv_position = login_tv_position;
         this.listenner = listenner;
-        return  null;
+        return this;
     }
 
 //    if (mHandler != null) {
@@ -100,6 +105,8 @@ public class JsonDataActivity01{
                 listenner.getLocation(options1Items.get(options1).getPickerViewText(),
                         options2Items.get(options1).get(options2),
                         options3Items.get(options1).get(options2).get(options3));
+                listenner.getLocationID(options1,options2,options3);
+
                 login_tv_position.setText(Position);
                 Toast.makeText(context, "1:"+options1Items.get(options1).getPickerViewText()+",2:"+options2Items.get(options1).get(options2)
                         +",3:"+options3Items.get(options1).get(options2).get(options3), Toast.LENGTH_SHORT).show();
@@ -146,17 +153,19 @@ public class JsonDataActivity01{
             ArrayList<String> CityList = new ArrayList<>();//该省的城市列表（第二级）
             ArrayList<ArrayList<String>> Province_AreaList = new ArrayList<>();//该省的所有地区列表（第三极）
 
-            for (int c = 0; c < jsonBean.get(i).getCityList().size(); c++) {//遍历该省份的所有城市
-                String CityName = jsonBean.get(i).getCityList().get(c).getName();
+            for (int c = 0; c < jsonBean.get(i).getCity().size(); c++) {//遍历该省份的所有城市
+                String CityName = jsonBean.get(i).getCity().get(c).getName();
                 CityList.add(CityName);//添加城市
                 ArrayList<String> City_AreaList = new ArrayList<>();//该城市的所有地区列表
 
                 //如果无地区数据，建议添加空字符串，防止数据为null 导致三个选项长度不匹配造成崩溃
-                if (jsonBean.get(i).getCityList().get(c).getArea() == null
-                        || jsonBean.get(i).getCityList().get(c).getArea().size() == 0) {
+                if (jsonBean.get(i).getCity().get(c).getArea() == null
+                        || jsonBean.get(i).getCity().get(c).getArea().size() == 0) {
                     City_AreaList.add("");
                 } else {
-                    City_AreaList.addAll(jsonBean.get(i).getCityList().get(c).getArea());
+                    for(int j =0;j<jsonBean.get(i).getCity().get(c).getArea().size();j++) {
+                        City_AreaList.add(jsonBean.get(i).getCity().get(c).getArea().get(j).getName());
+                    }
                 }
                 Province_AreaList.add(City_AreaList);//添加该省所有地区数据
             }
@@ -194,6 +203,7 @@ public class JsonDataActivity01{
 
     public interface selectPosition{
         void getLocation(String pronvince,String city,String area);
+        void getLocationID(int pid,int cid,int aid);
     }
 
 }

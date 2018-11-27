@@ -47,4 +47,6 @@
 
 
     <color name="yellow">#FFF200</color>
+    <color name="orange_yellow">#FF6C02</color>
+    <color name="light_red">#FB4747</color>
 </resources>

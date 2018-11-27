@@ -15,9 +15,11 @@ import android.widget.TextView;
 import com.intelligent.marking.R;
 import com.intelligent.marking.Utils.ToastUtil;
 import com.intelligent.marking.activity.MainActivity;
+import com.intelligent.marking.adapter.DuctToUserAdapter;
 import com.intelligent.marking.adapter.SelectMoreAdapter;
 import com.intelligent.marking.common.utils.StringUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PopUpwindowUtil {
@@ -161,6 +163,53 @@ public class PopUpwindowUtil {
         });
         return popupWindow;
     }
+
+    public static PopupWindow createDuctToUserDialog(Context context){
+        View contentView = LayoutInflater.from(context).inflate(R.layout.duct_to_user_dialog_layout,null,false);
+        int width = context.getResources().getDimensionPixelSize(R.dimen.x340);
+        int height = context.getResources().getDimensionPixelSize(R.dimen.y422);
+        popupWindow = new PopupWindow(width,height);
+        popupWindow.setContentView(contentView);
+        popupWindow.setOutsideTouchable(true);
+        RecyclerView recyclerView = popupWindow.getContentView().findViewById(R.id.rv_duct_view);
+        List<Object> objects = new ArrayList<>();
+        objects.add("1");
+        objects.add("1");
+        objects.add("1");
+        objects.add("1");
+        objects.add("1");
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        DuctToUserAdapter adapter = new DuctToUserAdapter(context, objects, new DuctToUserAdapter.DuctItemClick() {
+            @Override
+            public void slideChange(int position) {
+            }
+
+            @Override
+            public void slideDelete(int position) {
+                objects.remove(position);
+                recyclerView.getAdapter().notifyItemRangeRemoved(position,1);
+                recyclerView.getAdapter().notifyItemRangeChanged(position,objects.size());
+            }
+
+            @Override
+            public void itemClick(int position) {
+
+            }
+        });
+        recyclerView.setAdapter(adapter);
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                WindowManager.LayoutParams lp=((Activity)context).getWindow().getAttributes();
+                lp.alpha=1f;
+                ((Activity)context).getWindow().setAttributes(lp);
+            }
+        });
+        return popupWindow;
+    }
+
+
+
 
 
 

@@ -17,6 +17,7 @@ import com.google.gson.reflect.TypeToken;
 import com.intelligent.marking.BaseActivity;
 import com.intelligent.marking.Const.AppConst;
 import com.intelligent.marking.R;
+import com.intelligent.marking.Utils.ToastUtil;
 import com.intelligent.marking.adapter.SelectMoreAdapter;
 import com.intelligent.marking.net.model.AreaModel;
 import com.intelligent.marking.net.model.BaseModel;
@@ -40,7 +41,7 @@ import butterknife.OnClick;
 public class LoginActivity extends BaseActivity {
 
 
-    String JsonData;
+    JsonDataActivity01 JsonData;
     @BindView(R.id.login_tv_register)
     TextView loginTvRegister;
     @BindView(R.id.login_tv_position)
@@ -96,6 +97,13 @@ public class LoginActivity extends BaseActivity {
             public void getLocation(String pronvince, String city, String area) {
                 //TODO 完成选择后的操作，请求医院接口
             }
+
+            @Override
+            public void getLocationID(int pid, int cid, int aid) {
+                ToastUtil.getInstance(LoginActivity.this).show("pid:"+JsonData.options1Items.get(pid).getId()
+                +",cid:"+JsonData.options1Items.get(pid).getCity().get(cid).getId()
+                +",aid:"+JsonData.options1Items.get(pid).getCity().get(cid).getArea().get(aid).getId());
+            }
         });
     }
 
@@ -103,6 +111,7 @@ public class LoginActivity extends BaseActivity {
     @OnClick(R.id.iv_left)
     public void clickLeft(View view) {
         //TODO 扫二维码
+        startActivity(new Intent(this,ChangeBedInfoActivity.class));
 
     }
 

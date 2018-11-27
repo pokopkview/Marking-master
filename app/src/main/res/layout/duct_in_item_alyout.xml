@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.intelligent.marking.view.SwipeMenuLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/y84">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <View
+        android:layout_marginLeft="@dimen/x16"
+        android:layout_marginTop="@dimen/y7"
+        android:background="@mipmap/red_dots"
+        android:layout_width="@dimen/x9"
+        android:layout_height="@dimen/y9"/>
+
+    <TextView
+        android:includeFontPadding="false"
+        android:layout_marginTop="@dimen/y17"
+        android:layout_marginLeft="@dimen/x24"
+        android:textSize="@dimen/x15"
+        android:text="导尿管"
+        android:textColor="@color/blue"
+        android:id="@+id/tv_duct_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:includeFontPadding="false"
+        android:text="置入时间：2018/11/09"
+        android:layout_marginLeft="@dimen/x24"
+        android:layout_marginTop="@dimen/y39"
+        android:textColor="@color/black_text_login"
+        android:textSize="@dimen/x12"
+        android:id="@+id/tv_duct_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:textColor="@color/black_text_login"
+        android:textSize="@dimen/x12"
+        android:includeFontPadding="false"
+        android:text="/"
+        android:layout_marginLeft="@dimen/x10"
+        android:layout_marginTop="@dimen/y39"
+        android:layout_toRightOf="@id/tv_duct_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_toRightOf="@id/tv_duct_time"
+        android:includeFontPadding="false"
+        android:text="置入地点：ICU"
+        android:layout_marginLeft="@dimen/x24"
+        android:layout_marginTop="@dimen/y39"
+        android:textColor="@color/black_text_login"
+        android:textSize="@dimen/x12"
+        android:id="@+id/tv_duct_place"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_below="@id/tv_duct_time"
+        android:includeFontPadding="false"
+        android:text="置入人：某某某"
+        android:layout_marginLeft="@dimen/x24"
+        android:layout_marginTop="@dimen/y3"
+        android:textColor="@color/black_text_login"
+        android:textSize="@dimen/x12"
+        android:id="@+id/tv_duct_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <View
+        android:layout_marginRight="@dimen/x15"
+        android:layout_marginLeft="@dimen/x16"
+        android:background="@mipmap/dot_line"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="1px"/>
+    </RelativeLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="@dimen/x116"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:textSize="@dimen/x12"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:text="更换"
+            android:background="@color/orange_yellow"
+            android:id="@+id/tv_change"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+        <TextView
+            android:textSize="@dimen/x12"
+            android:background="@color/light_red"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:text="移除"
+            android:id="@+id/tv_delete"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+</com.intelligent.marking.view.SwipeMenuLayout>
