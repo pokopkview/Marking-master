@@ -2,6 +2,18 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.intelligent.marking">
 
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.NFC" />
+    <!-- 存储权限                    SD卡读写权限 -->
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+
+    <uses-feature
+        android:name="android.hardware.nfc"
+        android:required="true" />
+
     <application
         android:name=".application.MarkingApplication"
         android:allowBackup="true"
@@ -18,7 +30,7 @@
             </intent-filter>
         </activity>
         <!-- 省市区 -->
-        <activity android:name=".set.JsonDataActivity" />
+        <!--<activity android:name=".set.JsonDataActivity" />-->
         <activity android:name=".set.FragmentTestActivity" />
         <!-- 登录 -->
         <activity

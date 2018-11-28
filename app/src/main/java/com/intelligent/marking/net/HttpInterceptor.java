@@ -28,7 +28,7 @@ public class HttpInterceptor implements Interceptor {
                 .build();
 
         Response response = chain.proceed(request);
-        System.out.println("response:"+response.toString());
+//        System.out.println("response:"+response.body().string());
         return response;
     }
 }

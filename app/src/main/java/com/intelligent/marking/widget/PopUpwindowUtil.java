@@ -164,7 +164,7 @@ public class PopUpwindowUtil {
         return popupWindow;
     }
 
-    public static PopupWindow createDuctToUserDialog(Context context){
+    public static PopupWindow createDuctToUserDialog(Context context,dialogClickPatient clickPatient){
         View contentView = LayoutInflater.from(context).inflate(R.layout.duct_to_user_dialog_layout,null,false);
         int width = context.getResources().getDimensionPixelSize(R.dimen.x340);
         int height = context.getResources().getDimensionPixelSize(R.dimen.y422);
@@ -172,6 +172,25 @@ public class PopUpwindowUtil {
         popupWindow.setContentView(contentView);
         popupWindow.setOutsideTouchable(true);
         RecyclerView recyclerView = popupWindow.getContentView().findViewById(R.id.rv_duct_view);
+
+        popupWindow.getContentView().findViewById(R.id.iv_close_icon).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                clickPatient.closeClick();
+            }
+        });
+        popupWindow.getContentView().findViewById(R.id.tv_edit).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                clickPatient.editPatient();
+            }
+        });
+        popupWindow.getContentView().findViewById(R.id.ll_bottom_ductin).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                clickPatient.setToPatient();
+            }
+        });
         List<Object> objects = new ArrayList<>();
         objects.add("1");
         objects.add("1");
@@ -230,5 +249,11 @@ public class PopUpwindowUtil {
         void firstClick();
         void secendClick();
         void closeClick();
+    }
+
+    public interface dialogClickPatient{
+        void closeClick();
+        void setToPatient();
+        void editPatient();
     }
 }
