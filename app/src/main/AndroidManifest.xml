@@ -46,6 +46,9 @@
             android:screenOrientation="portrait" />
         <!-- <activity android:name=".activity.testActivity"></activity> -->
         <activity android:name=".activity.ChangeBedInfoActivity"></activity>
+
+        <service android:name=".service.ScanService" >
+        </service>
     </application>
 
 </manifest>
