@@ -64,9 +64,6 @@ public class ScanService extends Service {
 
 		super.onCreate();
 
-		Intent newIntent = new Intent(this, ScanService.class);
-		newIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		this.startService(newIntent);
 	}
 
 	public static void init() {

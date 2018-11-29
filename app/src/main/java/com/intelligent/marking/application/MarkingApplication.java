@@ -1,11 +1,13 @@
 package com.intelligent.marking.application;
 
 import android.app.Application;
+import android.content.Intent;
 import android.os.Build;
 import android.posapi.PosApi;
 
 import com.intelligent.marking.common.okgo.App;
 import com.intelligent.marking.net.HttpInterceptor;
+import com.intelligent.marking.service.ScanService;
 import com.zhy.http.okhttp.OkHttpUtils;
 
 import java.util.concurrent.TimeUnit;
@@ -40,6 +42,10 @@ public class MarkingApplication extends Application {
         mPosApi = PosApi.getInstance(this);
         //初始
         init();
+
+        Intent newIntent = new Intent(this, ScanService.class);
+        newIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        this.startService(newIntent);
     }
 
 
