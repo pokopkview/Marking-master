@@ -41,6 +41,7 @@ import com.intelligent.marking.net.model.DepartModel;
 import com.intelligent.marking.net.model.HospitalModel;
 import com.intelligent.marking.net.model.LoginModel;
 import com.intelligent.marking.net.model.SubAreModel;
+import com.intelligent.marking.service.ScanService;
 import com.intelligent.marking.set.JsonDataActivity01;
 import com.intelligent.marking.widget.PopUpwindowUtil;
 
@@ -154,8 +155,8 @@ public class LoginActivity extends BaseActivity {
         //TODO 扫二维码
 //        startActivity(new Intent(this,ChangeBedInfoActivity.class));
 
-        ScanDomn();
-
+//        ScanDomn();
+        openDevice();
     }
 
     @OnClick(R.id.rl_login)
@@ -253,23 +254,23 @@ public class LoginActivity extends BaseActivity {
         ButterKnife.bind(this);
         loginModel = new LoginModel();
         initView();
-        mPosSDK = PosApi.getInstance(this);
-
-        // 根据型号进行初始化mPosApi类
-        if (Build.MODEL.contains("LTE")
-                || android.os.Build.DISPLAY.contains("3508")
-                || android.os.Build.DISPLAY.contains("403")
-                || android.os.Build.DISPLAY.contains("35S09")) {
-            mPosSDK.initPosDev("ima35s09");
-        } else if (Build.MODEL.contains("5501")) {
-            mPosSDK.initPosDev("ima35s12");
-        } else {
-            mPosSDK.initPosDev(PosApi.PRODUCT_MODEL_IMA80M01);
-        }
-
-        IntentFilter mFilter = new IntentFilter();
-        mFilter.addAction(PosApi.ACTION_POS_COMM_STATUS);
-        registerReceiver(receiver,mFilter);
+//        mPosSDK = PosApi.getInstance(this);
+//
+//        // 根据型号进行初始化mPosApi类
+//        if (Build.MODEL.contains("LTE")
+//                || android.os.Build.DISPLAY.contains("3508")
+//                || android.os.Build.DISPLAY.contains("403")
+//                || android.os.Build.DISPLAY.contains("35S09")) {
+//            mPosSDK.initPosDev("ima35s09");
+//        } else if (Build.MODEL.contains("5501")) {
+//            mPosSDK.initPosDev("ima35s12");
+//        } else {
+//            mPosSDK.initPosDev(PosApi.PRODUCT_MODEL_IMA80M01);
+//        }
+//
+//        IntentFilter mFilter = new IntentFilter();
+//        mFilter.addAction(PosApi.ACTION_POS_COMM_STATUS);
+//        registerReceiver(receiver,mFilter);
     }
 
     @Override
@@ -603,5 +604,21 @@ public class LoginActivity extends BaseActivity {
             isScan = false;
         }
     };
+
+
+    private void openDevice(){
+        //open power
+
+        ScanService.mApi.gpioControl(mGpioPower,0,1);
+
+        ScanService.mApi.extendSerialInit(mCurSerialNo, mBaudrate, 1, 1, 1, 1);
+
+    }
+
+    private void closeDevice(){
+        //close power
+        ScanService.mApi.gpioControl(mGpioPower,0,0);
+        ScanService.mApi.extendSerialClose(mCurSerialNo);
+    }
 
 }
