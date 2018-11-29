@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.posapi.PosApi;
@@ -115,6 +116,12 @@ public class LoginActivity extends BaseActivity {
     private int select_depart;
     private int select_subarea;
     private int select_hosid;
+
+
+//    static {
+//        System.loadLibrary("");
+//    }
+
 
     @OnClick(R.id.ll_login_location)
     public void setLcation(View view){
@@ -247,6 +254,19 @@ public class LoginActivity extends BaseActivity {
         loginModel = new LoginModel();
         initView();
         mPosSDK = PosApi.getInstance(this);
+
+        // 根据型号进行初始化mPosApi类
+        if (Build.MODEL.contains("LTE")
+                || android.os.Build.DISPLAY.contains("3508")
+                || android.os.Build.DISPLAY.contains("403")
+                || android.os.Build.DISPLAY.contains("35S09")) {
+            mPosSDK.initPosDev("ima35s09");
+        } else if (Build.MODEL.contains("5501")) {
+            mPosSDK.initPosDev("ima35s12");
+        } else {
+            mPosSDK.initPosDev(PosApi.PRODUCT_MODEL_IMA80M01);
+        }
+
         IntentFilter mFilter = new IntentFilter();
         mFilter.addAction(PosApi.ACTION_POS_COMM_STATUS);
         registerReceiver(receiver,mFilter);
