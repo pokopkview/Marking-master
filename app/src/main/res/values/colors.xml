@@ -10,13 +10,21 @@
     <color name="gray">#cccccc</color>
     <color name="gray01">#F3F4F8</color>
 
+    <color name="gray_tab">#F8F8FA</color>
+    <color name="gray_tab_deep">#EBECED</color>
+
     <color name="gray_login">#C7C7C7</color>
     <color name="gray_bottom_bg">#F5F7FA</color>
+
+    <color name="gray_manager_edit">#DCDCDC</color>
 
     <color name="gray_text">#9D9D9D</color>
     <color name="gray_line">#CDCDCD</color>
 
     <color name="black_black">#000000</color>
+    <color name="black_28">#282828</color>
+
+    <color name="gray_listview">#EEEEEE</color>
 
     <color name="white">#ffffff</color>
     <color name="text33">#333333</color>

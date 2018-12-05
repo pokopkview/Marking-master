@@ -63,6 +63,7 @@
        android:orientation="horizontal">
 
       <TextView
+          android:textColorHint="@color/gray"
           android:id="@+id/tv_hospital"
           android:textColor="@color/black_text_login"
           android:includeFontPadding="false"
@@ -100,6 +101,7 @@
        android:orientation="horizontal">
 
       <EditText
+          android:textColorHint="@color/gray"
           android:id="@+id/et_area"
           android:textColor="@color/black_text_login"
           android:layout_width="0dp"
@@ -133,6 +135,7 @@
        android:orientation="horizontal">
 
       <EditText
+          android:textColorHint="@color/gray"
           android:id="@+id/et_department"
           android:textColor="@color/black_text_login"
           android:layout_width="0dp"
@@ -165,6 +168,7 @@
        android:orientation="horizontal">
 
       <EditText
+          android:textColorHint="@color/gray"
           android:id="@+id/et_subarea"
           android:textColor="@color/black_text_login"
           android:layout_width="0dp"
@@ -197,6 +201,7 @@
        android:orientation="horizontal">
 
       <EditText
+          android:textColorHint="@color/gray"
           android:id="@+id/et_bed"
           android:textColor="@color/black_text_login"
           android:layout_width="0dp"
@@ -234,6 +239,7 @@
 
 
       <EditText
+          android:textColorHint="@color/gray"
           android:id="@+id/first_pwd"
           android:textColor="@color/black_text_login"
           android:layout_width="0dp"
@@ -275,6 +281,7 @@
        android:orientation="horizontal">
 
       <EditText
+          android:textColorHint="@color/gray"
           android:id="@+id/confirm_pwd"
           android:textColor="@color/black_text_login"
           android:layout_width="0dp"

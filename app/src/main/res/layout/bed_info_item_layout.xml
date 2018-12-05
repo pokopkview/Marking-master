@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="@dimen/x84"
-    android:layout_height="@dimen/y98">
+    android:layout_height="@dimen/y102">
 
     <RelativeLayout
-        android:layout_marginTop="@dimen/y20"
+        android:layout_marginTop="@dimen/y18"
         android:id="@+id/bed_bg"
         android:background="@drawable/bed_status_selector"
         android:layout_centerHorizontal="true"

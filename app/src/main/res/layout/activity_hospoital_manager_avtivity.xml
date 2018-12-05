@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.HospoitalManagerAvtivity">
+
+    <include layout="@layout/header_layout"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ListView
+            android:divider="@null"
+            android:id="@+id/left_menu_lv"
+            android:background="@color/gray_listview"
+            android:layout_width="@dimen/x100"
+            android:layout_height="match_parent"/>
+
+        <LinearLayout
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:id="@+id/ll_right_detail_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y108">
+
+                <TextView
+                    android:id="@+id/tv_edit_subarea"
+                    android:includeFontPadding="false"
+                    android:paddingTop="@dimen/x15"
+                    android:paddingBottom="@dimen/x18"
+                    android:gravity="center"
+                    android:textColor="@color/blue"
+                    android:textSize="@dimen/x13"
+                    android:text="片区管理"
+                    android:drawablePadding="@dimen/x6"
+                    android:drawableTop="@mipmap/edit_subarea"
+                    android:layout_marginLeft="@dimen/x23"
+                    android:layout_marginTop="@dimen/y23"
+                    android:background="@drawable/round_blue_bg"
+                    android:layout_width="@dimen/x85"
+                    android:layout_height="@dimen/y85" />
+
+                <View
+                    android:layout_marginTop="@dimen/y42"
+                    android:layout_marginLeft="@dimen/x20"
+                    android:background="@color/blue"
+                    android:layout_width="@dimen/x1"
+                    android:layout_height="@dimen/y52"/>
+
+
+                <TextView
+                    android:id="@+id/tv_edit_employee"
+                    android:includeFontPadding="false"
+                    android:paddingTop="@dimen/x15"
+                    android:paddingBottom="@dimen/x18"
+                    android:gravity="center"
+                    android:textColor="@color/blue"
+                    android:textSize="@dimen/x13"
+                    android:text="人员管理"
+                    android:drawablePadding="@dimen/x6"
+                    android:drawableTop="@mipmap/edit_employee"
+                    android:layout_marginLeft="@dimen/x20"
+                    android:layout_marginTop="@dimen/y23"
+                    android:background="@drawable/round_blue_bg"
+                    android:layout_width="@dimen/x85"
+                    android:layout_height="@dimen/y85" />
+
+            </LinearLayout>
+
+            <ListView
+                android:divider="@null"
+                android:layout_marginTop="@dimen/y43"
+                android:id="@+id/lv_show_detail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

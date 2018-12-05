@@ -12,7 +12,6 @@ android {
 
         javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
 
-
 //        externalNativeBuild {
 //            cmake {
 //                cppFlags 'libposApi'
@@ -46,7 +45,7 @@ android {
     tasks.withType(JavaCompile) {
         compileTask -> compileTask.dependsOn(nativeLibsToJar)
     }
-    sourceSets.main{
+    sourceSets.main {
         jniLibs.srcDirs = ['src/main/jniLibs'];
     }
 

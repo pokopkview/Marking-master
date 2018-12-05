@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.Intent;
 import android.os.Build;
 import android.posapi.PosApi;
+import android.posapi.PrintQueue;
+import android.widget.Toast;
 
 import com.intelligent.marking.common.okgo.App;
 import com.intelligent.marking.net.HttpInterceptor;
@@ -22,6 +24,7 @@ public class MarkingApplication extends Application {
     static MarkingApplication instance = null;
     //PosSDK mSDK = null;
     static PosApi mPosApi = null;
+    static PrintQueue mPrintQueue = null;
     public MarkingApplication(){
         super.onCreate();
         instance = this;
@@ -40,12 +43,12 @@ public class MarkingApplication extends Application {
         OkHttpUtils.initClient(okHttpClient);
 
         mPosApi = PosApi.getInstance(this);
-        //初始
+//        //初始
         init();
-
-        Intent newIntent = new Intent(this, ScanService.class);
-        newIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        this.startService(newIntent);
+//
+//        Intent newIntent = new Intent(this, ScanService.class);
+//        newIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//        this.startService(newIntent);
     }
 
 
@@ -63,6 +66,9 @@ public class MarkingApplication extends Application {
             mPosApi.initPosDev(PosApi.PRODUCT_MODEL_IMA80M01);
             setCurDevice(PosApi.PRODUCT_MODEL_IMA80M01);
         }
+
+
+
 
     }
 
@@ -83,7 +89,11 @@ public class MarkingApplication extends Application {
     }
 
     //其他地方引用mPosApi变量
-    public PosApi getPosApi(){
+    public static PosApi getPosApi(){
         return mPosApi;
+    }
+
+    public PrintQueue getPrintQueue(){
+        return mPrintQueue;
     }
 }

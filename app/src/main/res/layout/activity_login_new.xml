@@ -132,7 +132,7 @@
             android:src="@mipmap/xuanze01" />
     </RelativeLayout>
     <!--大区-->
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/ll_select_area"
         android:layout_below="@id/ll_select_hist"
         android:layout_width="@dimen/x306"
@@ -145,37 +145,41 @@
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/tv_de_area"
+            android:includeFontPadding="false"
             android:textSize="@dimen/x14"
-            android:textColor="@color/gray_login"
-            android:layout_width="@dimen/x70"
+            android:layout_marginLeft="@dimen/x22"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:paddingLeft="@dimen/x15"
-            android:paddingTop="@dimen/x15"
-            android:paddingBottom="@dimen/x15"
+            android:textColor="@color/gray_login"
+            android:layout_centerVertical="true"
             android:text="@string/login_tv03" />
 
         <TextView
+            android:includeFontPadding="false"
+            android:layout_marginLeft="@dimen/x14"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/tv_de_area"
             android:id="@+id/tv_area"
             android:textColor="@color/black_text_login"
             android:textSize="@dimen/x14"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:paddingBottom="@dimen/x15"
-            android:paddingTop="@dimen/x15"
             android:text="@string/login_et03" />
 
         <ImageView
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
             android:layout_width="@dimen/x12"
             android:layout_height="@dimen/y7"
             android:layout_gravity="center"
             android:layout_marginRight="@dimen/x23"
             android:gravity="center"
             android:src="@mipmap/xuanze01" />
-    </LinearLayout>
+    </RelativeLayout>
     <!--科室-->
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/ll_select_depart"
         android:layout_below="@id/ll_select_area"
         android:layout_width="@dimen/x306"
@@ -187,37 +191,41 @@
         android:orientation="horizontal">
 
         <TextView
-            android:textColor="@color/gray_login"
+            android:id="@+id/tv_de_depart"
+            android:includeFontPadding="false"
             android:textSize="@dimen/x14"
-            android:layout_width="@dimen/x70"
+            android:layout_marginLeft="@dimen/x22"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:paddingLeft="@dimen/x15"
-            android:paddingTop="@dimen/x15"
-            android:paddingBottom="@dimen/x15"
+            android:textColor="@color/gray_login"
+            android:layout_centerVertical="true"
             android:text="@string/login_tv04" />
 
         <TextView
+            android:includeFontPadding="false"
+            android:layout_marginLeft="@dimen/x14"
+            android:layout_toRightOf="@id/tv_de_depart"
+            android:layout_centerVertical="true"
             android:id="@+id/tv_depart"
             android:textColor="@color/black_text_login"
             android:textSize="@dimen/x14"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:paddingBottom="@dimen/x15"
-            android:paddingTop="@dimen/x15"
             android:text="@string/login_et04" />
 
         <ImageView
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
             android:layout_width="@dimen/x12"
             android:layout_height="@dimen/y7"
             android:layout_gravity="center"
             android:layout_marginRight="@dimen/x23"
             android:gravity="center"
             android:src="@mipmap/xuanze01" />
-    </LinearLayout>
+    </RelativeLayout>
     <!--分区-->
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/ll_select_moreares"
         android:layout_below="@id/ll_select_depart"
         android:layout_width="@dimen/x306"
@@ -230,39 +238,42 @@
         android:orientation="horizontal">
 
         <TextView
-            android:textColor="@color/gray_login"
+            android:id="@+id/tv_de_subarea"
+            android:includeFontPadding="false"
             android:textSize="@dimen/x14"
-            android:layout_width="@dimen/x70"
+            android:layout_marginLeft="@dimen/x22"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:paddingLeft="@dimen/x15"
-            android:paddingTop="@dimen/x15"
-            android:paddingBottom="@dimen/x15"
+            android:textColor="@color/gray_login"
+            android:layout_centerVertical="true"
             android:text="@string/login_tv05" />
 
         <TextView
+            android:layout_marginLeft="@dimen/x14"
+            android:layout_toRightOf="@id/tv_de_subarea"
+            android:layout_centerVertical="true"
             android:id="@+id/tv_subarea"
             android:textSize="@dimen/x14"
             android:textColor="@color/black_text_login"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:paddingBottom="@dimen/x15"
-            android:paddingTop="@dimen/x15"
             android:text="@string/login_et05" />
 
         <ImageView
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
             android:layout_width="@dimen/x12"
             android:layout_height="@dimen/y7"
             android:layout_gravity="center"
             android:layout_marginRight="@dimen/x23"
             android:gravity="center"
             android:src="@mipmap/xuanze01" />
-    </LinearLayout>
+    </RelativeLayout>
 
 
     <!--密码-->
-    <LinearLayout
+    <RelativeLayout
         android:layout_below="@id/ll_select_moreares"
         android:layout_width="@dimen/x306"
         android:layout_height="@dimen/y47"
@@ -275,32 +286,35 @@
         android:orientation="horizontal">
 
         <TextView
-            android:textColor="@color/gray_login"
+            android:id="@+id/tv_de_pwd"
+            android:includeFontPadding="false"
             android:textSize="@dimen/x14"
-            android:layout_width="@dimen/x70"
+            android:layout_marginLeft="@dimen/x22"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:paddingLeft="@dimen/x15"
-            android:paddingTop="@dimen/x15"
-            android:paddingBottom="@dimen/x15"
+            android:textColor="@color/gray_login"
+            android:layout_centerVertical="true"
             android:text="@string/login_tv06" />
 
         <EditText
+            android:layout_marginLeft="@dimen/x18"
+            android:includeFontPadding="false"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/tv_de_pwd"
             android:id="@+id/et_pwd"
             android:textSize="@dimen/x14"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/x170"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:background="@null"
             android:hint="@string/login_et06"
             android:inputType="textPassword"
             android:lines="1"
-            android:maxLines="1"
-            android:paddingLeft="@dimen/x6"
-            android:paddingBottom="@dimen/x15"
-            android:paddingTop="@dimen/x15"/>
+            android:maxLines="1"/>
 
         <ImageView
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
             android:id="@+id/iv_show_pwd"
             android:layout_width="@dimen/x21"
             android:layout_height="@dimen/y9"
@@ -308,7 +322,7 @@
             android:layout_marginRight="@dimen/x20"
             android:gravity="center"
             android:src="@mipmap/mima01" />
-    </LinearLayout>
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_alignParentRight="true"
@@ -336,7 +350,7 @@
             android:layout_centerInParent="true"
             android:includeFontPadding="false"
             android:layout_width="@dimen/x58"
-            android:layout_height="@dimen/y18"
+            android:layout_height="wrap_content"
             android:id="@+id/login_tv01"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/y17"

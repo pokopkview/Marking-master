@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="@dimen/y360">
+
+    <TextView
+        android:textColor="@color/black_text_login"
+        android:includeFontPadding="false"
+        android:textSize="@dimen/x15"
+        android:layout_marginTop="@dimen/y19"
+        android:layout_centerHorizontal="true"
+        android:text="请选择时间"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:paddingLeft="@dimen/x16"
+        android:paddingRight="@dimen/x16"
+        android:layout_alignParentRight="true"
+        android:src="@mipmap/duct_close_icon"
+        android:layout_width="@dimen/x48"
+        android:layout_height="@dimen/y51"/>
+
+    <LinearLayout
+        android:layout_marginBottom="@dimen/y35"
+        android:layout_above="@id/ll_bottom"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y177">
+
+        <com.contrarywind.view.WheelView
+            android:id="@+id/hour"
+            android:layout_weight="3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+        <TextView
+            android:textSize="@dimen/x14"
+            android:gravity="center"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/blue"
+            android:layout_weight="2"
+            android:text="时"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+        <com.contrarywind.view.WheelView
+            android:id="@+id/secend"
+            android:layout_weight="3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+        <TextView
+            android:textSize="@dimen/x14"
+            android:gravity="center"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/blue"
+            android:layout_weight="2"
+            android:text="分"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:gravity="center"
+        android:id="@+id/ll_bottom"
+        android:layout_alignParentBottom="true"
+        android:background="@color/blue"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y45">
+
+        <TextView
+            android:textSize="@dimen/x16"
+            android:textColor="@color/white"
+            android:text="确定"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:layout_height="@dimen/y50">
+
+
+    <View
+        android:layout_marginLeft="@dimen/x39"
+        android:background="@mipmap/subarea_dot"
+        android:layout_width="@dimen/x8"
+        android:layout_height="@dimen/y8"/>
+
+    <TextView
+        android:id="@+id/tv_subarea_name"
+        android:includeFontPadding="false"
+        android:textColor="@color/gray_text"
+        android:text="片区"
+        android:textSize="@dimen/x15"
+        android:layout_marginLeft="@dimen/x9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

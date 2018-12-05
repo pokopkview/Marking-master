@@ -2,6 +2,8 @@ package com.intelligent.marking.activity;
 
 
 import android.app.Activity;
+import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -25,6 +28,7 @@ import com.intelligent.marking.adapter.RecyPagerAdapter;
 import com.intelligent.marking.common.view.PageIndicatorView;
 import com.intelligent.marking.net.model.BaseModel;
 import com.intelligent.marking.net.model.BedInfoModel;
+import com.intelligent.marking.set.TimerPicer;
 import com.intelligent.marking.widget.HorizontalPageLayoutManager;
 import com.intelligent.marking.widget.PagingItemDecoration;
 import com.intelligent.marking.widget.PagingScrollHelper;
@@ -62,6 +66,7 @@ public class MainActivity extends BaseActivity implements PagingScrollHelper.onP
     @OnClick(R.id.ll_left_container)
     public void leftClick(View view){
         //TODO 左侧管理
+        startActivity(new Intent(this,HospoitalManagerAvtivity.class));
     }
 
     @OnClick(R.id.ll_right_container)
@@ -219,6 +224,9 @@ public class MainActivity extends BaseActivity implements PagingScrollHelper.onP
             @Override
             public void setToPatient() {
                 //置入
+                TimerPicer.showTimePic(MainActivity.this,cusomSwipeView);
+
+
             }
 
             @Override

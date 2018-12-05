@@ -16,10 +16,10 @@
 
         <com.intelligent.marking.common.view.PageIndicatorView
             android:id="@+id/indicator"
-            android:layout_marginTop="@dimen/y17"
+            android:layout_marginTop="@dimen/y5"
             android:layout_width="match_parent"
-            android:layout_marginBottom="@dimen/y17"
-            android:layout_height="@dimen/y8"
+            android:layout_marginBottom="@dimen/y5"
+            android:layout_height="@dimen/y10"
             android:layout_gravity="bottom"/>
 
         <RelativeLayout

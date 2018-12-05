@@ -2,10 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.intelligent.marking">
 
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.NFC" />
     <!-- 存储权限                    SD卡读写权限 -->
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
@@ -30,7 +31,7 @@
             </intent-filter>
         </activity>
         <!-- 省市区 -->
-        <!--<activity android:name=".set.JsonDataActivity" />-->
+        <!-- <activity android:name=".set.JsonDataActivity" /> -->
         <activity android:name=".set.FragmentTestActivity" />
         <!-- 登录 -->
         <activity
@@ -45,10 +46,15 @@
             android:name=".activity.MainActivity"
             android:screenOrientation="portrait" />
         <!-- <activity android:name=".activity.testActivity"></activity> -->
-        <activity android:name=".activity.ChangeBedInfoActivity"></activity>
+        <activity android:name=".activity.ChangeBedInfoActivity" />
 
-        <service android:name=".service.ScanService" >
-        </service>
+        <service android:name=".service.ScanService" />
+
+        <activity android:name=".activity.ScanPatientInfoActivity" />
+        <activity android:name=".activity.HospoitalManagerAvtivity" />
+        <activity android:name=".activity.SubAreaManagerActivity" />
+        <activity android:name=".activity.SubAreaEmployeeActivity" />
+        <activity android:name=".activity.BedInfoActivity"></activity>
     </application>
 
 </manifest>

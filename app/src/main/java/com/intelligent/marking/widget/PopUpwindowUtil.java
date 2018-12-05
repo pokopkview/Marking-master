@@ -57,6 +57,7 @@ public class PopUpwindowUtil {
             @Override
             public void onClick(View view) {
                 listener.cancle();
+                popupWindow.dismiss();
             }
         });
         tvConfirm.setOnClickListener(new View.OnClickListener() {
@@ -65,7 +66,6 @@ public class PopUpwindowUtil {
                 listener.confirm();
             }
         });
-        popupWindow.setOutsideTouchable(true);
         popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {

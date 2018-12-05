@@ -1,6 +1,8 @@
 package com.intelligent.marking.net.model;
 
-public class SubAreModel {
+import java.io.Serializable;
+
+public class SubAreModel implements Serializable {
 
     /**
      * subarea_id : 1

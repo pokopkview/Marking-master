@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.ScanPatientInfoActivity">
+
+
+    <include layout="@layout/header_layout"/>
+    <RelativeLayout
+        android:background="@color/gray01"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y133">
+
+        <TextView
+            android:id="@+id/patient_title"
+            android:includeFontPadding="false"
+            android:textSize="@dimen/x18"
+            android:layout_marginLeft="@dimen/x26"
+            android:layout_marginTop="@dimen/y36"
+            android:textColor="@color/black_black"
+            android:text="病人信息"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+        <TextView
+            android:id="@+id/tv_bed_no"
+            android:layout_below="@id/patient_title"
+            android:textColor="@color/black_text_login"
+            android:textSize="@dimen/x14"
+            android:includeFontPadding="false"
+            android:layout_marginLeft="@dimen/x25"
+            android:text="床号：01"
+            android:layout_marginTop="@dimen/y16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginTop="@dimen/y16"
+            android:layout_below="@id/patient_title"
+            android:id="@+id/tv_patient_name"
+            android:textColor="@color/black_text_login"
+            android:textSize="@dimen/x14"
+            android:includeFontPadding="false"
+            android:layout_marginLeft="@dimen/x120"
+            android:text="姓名：某某某"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tv_patient_sex"
+            android:layout_below="@id/tv_bed_no"
+            android:textColor="@color/black_text_login"
+            android:textSize="@dimen/x14"
+            android:includeFontPadding="false"
+            android:layout_marginLeft="@dimen/x25"
+            android:text="性别：男"
+            android:layout_marginTop="@dimen/y5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginTop="@dimen/y5"
+            android:layout_below="@id/tv_bed_no"
+            android:id="@+id/tv_patient_age"
+            android:textColor="@color/black_text_login"
+            android:textSize="@dimen/x14"
+            android:includeFontPadding="false"
+            android:layout_marginLeft="@dimen/x120"
+            android:text="年龄：27"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_marginLeft="@dimen/x25"
+        android:layout_marginTop="@dimen/y29"
+        android:textSize="@dimen/x17"
+        android:textColor="@color/black_black"
+        android:text="将病人安排到几号床?"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/y16"
+        android:layout_marginRight="@dimen/x17"
+        android:layout_marginLeft="@dimen/x17"
+        android:background="@drawable/bed_info_text_bg"
+        android:layout_width="@dimen/x327"
+        android:layout_height="@dimen/y50" >
+
+        <TextView
+            android:layout_marginLeft="@dimen/x11"
+            android:layout_gravity="center_vertical"
+            android:text="床  位："
+            android:textSize="@dimen/x15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/et_patient_no"
+            android:layout_marginLeft="@dimen/x14"
+            android:background="@null"
+            android:layout_gravity="center_vertical"
+            android:textSize="@dimen/x15"
+            android:hint="请输入床位号"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+
+
+
+
+</LinearLayout>

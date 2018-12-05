@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:layout_height="@dimen/y49">
+
+    <TextView
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/y26"
+        android:textColor="@color/black_text_login"
+        android:textSize="@dimen/x15"
+        android:text="一片区"
+        android:id="@+id/tv_subarea_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:layout_marginLeft="@dimen/x183"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:text="50"
+        android:background="@drawable/edit_clom_bg"
+        android:id="@+id/et_bed_count"
+        android:layout_width="@dimen/x70"
+        android:layout_height="@dimen/y30" />
+    <View
+        android:id="@+id/v_delete"
+        android:layout_marginLeft="@dimen/x319"
+        android:layout_centerVertical="true"
+        android:background="@mipmap/delete_list_icon"
+        android:layout_width="@dimen/x19"
+        android:layout_height="@dimen/y19"/>
+
+    <View
+        android:layout_alignParentBottom="true"
+        android:background="@color/gray_bottom_bg"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y2"/>
+
+</RelativeLayout>

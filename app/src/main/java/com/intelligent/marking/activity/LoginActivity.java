@@ -1,7 +1,9 @@
 package com.intelligent.marking.activity;
 
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Bitmap;
@@ -20,6 +22,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -35,6 +38,7 @@ import com.intelligent.marking.Utils.BitmapTools;
 import com.intelligent.marking.Utils.PosUtils;
 import com.intelligent.marking.Utils.ToastUtil;
 import com.intelligent.marking.adapter.SelectMoreAdapter;
+import com.intelligent.marking.application.MarkingApplication;
 import com.intelligent.marking.net.model.AreaModel;
 import com.intelligent.marking.net.model.BaseModel;
 import com.intelligent.marking.net.model.DepartModel;
@@ -70,11 +74,11 @@ public class LoginActivity extends BaseActivity {
     @BindView(R.id.ll_select_hist)
     RelativeLayout llSelectHist;
     @BindView(R.id.ll_select_area)
-    LinearLayout llSelectArea;
+    RelativeLayout llSelectArea;
     @BindView(R.id.ll_select_depart)
-    LinearLayout llSelectDepart;
+    RelativeLayout llSelectDepart;
     @BindView(R.id.ll_select_moreares)
-    LinearLayout llSelectMoreares;
+    RelativeLayout llSelectMoreares;
     @BindView(R.id.login_tv01)
     TextView loginTv01;
     @BindView(R.id.rl_login)
@@ -156,7 +160,8 @@ public class LoginActivity extends BaseActivity {
 //        startActivity(new Intent(this,ChangeBedInfoActivity.class));
 
 //        ScanDomn();
-        openDevice();
+//        openDevice();
+        printQRCode();
     }
 
     @OnClick(R.id.rl_login)
@@ -167,6 +172,10 @@ public class LoginActivity extends BaseActivity {
 //        Map<String,Object> value = new HashMap<>();
 //        value.put("id",47494);
 //        HttpPost(AppConst.GETPROVINCE,value,5);
+        hospitalName = "湘雅附二";
+        areaName = "外科楼";
+        departName = "骨科";
+        subareaName = "骨一科";
         startActivity(new Intent(LoginActivity.this,MainActivity.class));
 
 
@@ -254,6 +263,9 @@ public class LoginActivity extends BaseActivity {
         ButterKnife.bind(this);
         loginModel = new LoginModel();
         initView();
+        Intent newIntent = new Intent(this, ScanService.class);
+        newIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startService(newIntent);
 //        mPosSDK = PosApi.getInstance(this);
 //
 //        // 根据型号进行初始化mPosApi类
@@ -268,9 +280,70 @@ public class LoginActivity extends BaseActivity {
 //            mPosSDK.initPosDev(PosApi.PRODUCT_MODEL_IMA80M01);
 //        }
 //
-//        IntentFilter mFilter = new IntentFilter();
-//        mFilter.addAction(PosApi.ACTION_POS_COMM_STATUS);
-//        registerReceiver(receiver,mFilter);
+        IntentFilter mFilter = new IntentFilter();
+        mFilter.addAction(PosApi.ACTION_POS_COMM_STATUS);
+        registerReceiver(receiver,mFilter);
+//        System.out.println(ScanService.mApi);
+        mPrintQueue = new PrintQueue(this, ScanService.mApi);
+        // 打印队列初始化
+        mPrintQueue.init();
+        // 打印结果监听
+        mPrintQueue.setOnPrintListener(new PrintQueue.OnPrintListener() {
+            @Override
+            public void onFinish() {
+                // TODO Auto-generated method stub
+                Toast.makeText(getApplicationContext(), "打印完成",
+                        Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailed(int state) {
+                // TODO Auto-generated method stub
+                switch (state) {
+                    case PosApi.ERR_POS_PRINT_NO_PAPER:
+                        // 打印缺纸
+                        showTip("打印缺纸");
+                        break;
+                    case PosApi.ERR_POS_PRINT_FAILED:
+                        // 打印失败
+                        showTip("打印失败");
+                        break;
+                    case PosApi.ERR_POS_PRINT_VOLTAGE_LOW:
+                        // 电压过低
+                        showTip("电压过低");
+                        break;
+                    case PosApi.ERR_POS_PRINT_VOLTAGE_HIGH:
+                        // 电压过高
+                        showTip("电压过高");
+                        break;
+                }
+            }
+
+            @Override
+            public void onGetState(int arg0) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void onPrinterSetting(int state) {
+                // TODO Auto-generated method stub
+                switch (state) {
+                    case 0:
+                        Toast.makeText(LoginActivity.this, "持续有纸",
+                                Toast.LENGTH_SHORT).show();
+                        break;
+                    case 1:
+                        Toast.makeText(LoginActivity.this, "缺纸",
+                                Toast.LENGTH_SHORT).show();
+                        break;
+                    case 2:
+                        Toast.makeText(LoginActivity.this, "检测到黑标",
+                                Toast.LENGTH_SHORT).show();
+                        break;
+                }
+            }
+        });
     }
 
     @Override
@@ -621,4 +694,21 @@ public class LoginActivity extends BaseActivity {
         ScanService.mApi.extendSerialClose(mCurSerialNo);
     }
 
+
+    /**
+     * 弹出提示框
+     *
+     * @param msg
+     */
+    private void showTip(String msg) {
+        new AlertDialog.Builder(this).setTitle("提示").setMessage(msg)
+                .setNegativeButton("关闭", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // TODO Auto-generated method stub
+                        dialog.dismiss();
+                        // isCanPrint=true;
+                    }
+                }).show();
+    }
 }

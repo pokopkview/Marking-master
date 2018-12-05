@@ -70,6 +70,7 @@ public class ScanService extends Service {
 
 		//mApi类赋值
 		mApi = MarkingApplication.getInstance().getPosApi();
+		System.out.println("mApi:"+mApi);
 		//延迟一秒打开串口，这个为了初始化扫描头，必须延迟一秒执行，否则会出现延迟打印或者打印不出的现象，需注意
 		new Handler().postDelayed(new Runnable() {
 			@Override

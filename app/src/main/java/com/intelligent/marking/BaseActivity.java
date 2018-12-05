@@ -2,11 +2,14 @@ package com.intelligent.marking;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
@@ -31,6 +34,11 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     private ProgressDialog progressDialog;
     protected final String TAG = this.getClass().getSimpleName();
+    protected String hospitalName = "";
+    protected String areaName = "";
+    protected String departName = "";
+    protected String subareaName = "";
+
 
 
     @Override
@@ -45,9 +53,22 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     private void hideStatusBar() {
-        WindowManager.LayoutParams attrs = getWindow().getAttributes();
-        attrs.flags |= WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS;
-        getWindow().setAttributes(attrs);
+//        WindowManager.LayoutParams attrs = getWindow().getAttributes();
+////        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//        attrs.flags |= WindowManager.LayoutParams.FLAG_FULLSCREEN|;
+//        getWindow().setAttributes(attrs);
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
+                    | WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+//                    | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION  //该参数指布局能延伸到navigationbar，我们场景中不应加这个参数
+                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(Color.TRANSPARENT);
+//            window.setNavigationBarColor(Color.TRANSPARENT); //设置navigationbar颜色为透明
+        }
     }
 
     protected void HttpPost(String url, Map<String,Object> value, final int flag){
