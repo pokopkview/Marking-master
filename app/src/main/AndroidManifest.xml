@@ -48,13 +48,19 @@
         <!-- <activity android:name=".activity.testActivity"></activity> -->
         <activity android:name=".activity.ChangeBedInfoActivity" />
 
-        <service android:name=".service.ScanService" />
+        <service android:name=".service.IMyAidlInterface">
+            <intent-filter>
+                <action android:name="COM.QS.DEMO.QSSERVICE" />
+            </intent-filter>
+        </service>
 
         <activity android:name=".activity.ScanPatientInfoActivity" />
         <activity android:name=".activity.HospoitalManagerAvtivity" />
         <activity android:name=".activity.SubAreaManagerActivity" />
         <activity android:name=".activity.SubAreaEmployeeActivity" />
-        <activity android:name=".activity.BedInfoActivity"></activity>
+        <activity android:name=".activity.BedInfoActivity" />
+        <activity android:name=".activity.SelectDuctActivity" />
+        <activity android:name=".activity.DuctinfoEditActivity"></activity>
     </application>
 
 </manifest>

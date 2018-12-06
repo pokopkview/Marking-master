@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:layout_height="@dimen/y62">
+
+    <ImageView
+        android:layout_marginLeft="@dimen/x21"
+        android:id="@+id/iv_duct_icon"
+        android:layout_width="@dimen/x64"
+        android:layout_height="@dimen/y45" />
+
+    <TextView
+        android:layout_weight="1"
+        android:layout_marginLeft="@dimen/x15"
+        android:textColor="@color/black_text_login"
+        android:textSize="@dimen/x15"
+        android:id="@+id/tv_duct_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:layout_marginRight="@dimen/x29"
+        android:src="@mipmap/duct_select_icon"
+        android:layout_width="@dimen/x24"
+        android:layout_height="@dimen/y24" />
+
+</LinearLayout>
