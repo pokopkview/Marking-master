@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.PrintPreviewActivity">
+
+    <include layout="@layout/header_layout" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/iv_top"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y184"
+            android:background="@color/blue" />
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/iv_top" />
+
+
+        <RelativeLayout
+            android:layout_width="@dimen/x342"
+            android:layout_height="@dimen/y427"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/y66"
+            android:background="@drawable/dashed_line_bg">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y10"
+                android:layout_marginTop="@dimen/y74"
+                android:background="@drawable/dashed_line_width"
+                android:layerType="software" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x22"
+                android:layout_marginTop="@dimen/y50"
+                android:includeFontPadding="false"
+                android:text="病人信息"
+                android:textColor="@color/black_black"
+                android:textSize="@dimen/x18" />
+
+            <TextView
+                android:id="@+id/def_text_bed_no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x21"
+                android:layout_marginTop="@dimen/y95"
+                android:text="床号 :"
+                android:textColor="@color/black_text_login"
+                android:textSize="@dimen/x14" />
+
+            <TextView
+                android:id="@+id/tv_text_bed_no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x5"
+                android:layout_marginTop="@dimen/y95"
+                android:layout_toRightOf="@id/def_text_bed_no"
+                android:text="01"
+                android:textColor="@color/black_text_login"
+                android:textSize="@dimen/x14" />
+
+
+            <TextView
+                android:id="@+id/def_text_bed_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x111"
+                android:layout_marginTop="@dimen/y95"
+                android:text="姓名 :"
+                android:textColor="@color/black_text_login"
+                android:textSize="@dimen/x14" />
+
+            <TextView
+                android:id="@+id/tv_text_bed_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x5"
+                android:layout_marginTop="@dimen/y95"
+                android:layout_toRightOf="@id/def_text_bed_name"
+                android:text="某某某"
+                android:textColor="@color/black_text_login"
+                android:textSize="@dimen/x14" />
+
+
+            <TextView
+                android:id="@+id/def_text_bed_sex"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x21"
+                android:layout_marginTop="@dimen/y115"
+                android:text="性别 :"
+                android:textColor="@color/black_text_login"
+                android:textSize="@dimen/x14" />
+
+            <TextView
+                android:id="@+id/tv_text_bed_sex"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x5"
+                android:layout_marginTop="@dimen/y115"
+                android:layout_toRightOf="@id/def_text_bed_sex"
+                android:text="男"
+                android:textColor="@color/black_text_login"
+                android:textSize="@dimen/x14" />
+
+
+            <TextView
+                android:id="@+id/def_text_bed_age"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x111"
+                android:layout_marginTop="@dimen/y115"
+                android:text="年龄 :"
+                android:textColor="@color/black_text_login"
+                android:textSize="@dimen/x14" />
+
+            <TextView
+                android:id="@+id/tv_text_bed_age"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x5"
+                android:layout_marginTop="@dimen/y115"
+                android:layout_toRightOf="@id/def_text_bed_age"
+                android:text="27"
+                android:textColor="@color/black_text_login"
+                android:textSize="@dimen/x14" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x22"
+                android:layout_marginTop="@dimen/y176"
+                android:text="打印预览"
+                android:textColor="@color/black_black" />
+
+
+            <RelativeLayout
+                android:layout_width="@dimen/x310"
+                android:layout_height="@dimen/y107"
+                android:layout_marginLeft="@dimen/x16"
+                android:layout_marginTop="@dimen/y204"
+                android:background="@drawable/dashed_line_bg">
+
+                <View
+                    android:layout_width="@dimen/x100"
+                    android:layout_height="@dimen/y86"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/dashed_ling_height"
+                    android:layerType="software" />
+
+
+                <TextView
+                    android:id="@+id/tv_duct_type_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x11"
+                    android:layout_marginTop="@dimen/y23"
+                    android:includeFontPadding="false"
+                    android:text="PICC 管"
+                    android:textColor="@color/black_black"
+                    android:textSize="@dimen/x20" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x225"
+                    android:layout_marginTop="@dimen/y15"
+                    android:includeFontPadding="false"
+                    android:text="PICC 管"
+                    android:textColor="@color/black_black"
+                    android:textSize="@dimen/x18" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_bitmap_container"
+                    android:layout_width="@dimen/x57"
+                    android:layout_height="@dimen/y57"
+                    android:layout_marginLeft="@dimen/x227"
+                    android:layout_marginTop="@dimen/y40"
+                    android:background="@color/gray_bitmap_bg"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/iv_printq"
+                        android:layout_width="@dimen/x48"
+                        android:layout_height="@dimen/y48" />
+                </RelativeLayout>
+
+
+                <TextView
+                    android:id="@+id/tv_time_create"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x10"
+                    android:layout_marginTop="@dimen/y58"
+                    android:includeFontPadding="false"
+                    android:text="2018-11-05 13:00"
+                    android:textColor="@color/black_text_login"
+                    android:textSize="@dimen/x13" />
+
+                <TextView
+                    android:id="@+id/def_manager"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x10"
+                    android:layout_marginTop="@dimen/y75"
+                    android:includeFontPadding="false"
+                    android:text="操作人 :"
+                    android:textColor="@color/black_text_login"
+                    android:textSize="@dimen/x13" />
+
+                <TextView
+                    android:id="@+id/tv_manager_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x5"
+                    android:layout_marginTop="@dimen/y75"
+                    android:layout_toRightOf="@+id/def_manager"
+                    android:includeFontPadding="false"
+                    android:text="某某某 05"
+                    android:textColor="@color/black_text_login"
+                    android:textSize="@dimen/x13" />
+
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_print_btn"
+            android:layout_width="@dimen/x192"
+            android:layout_height="@dimen/y46"
+            android:background="@drawable/dashed_line_bg"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/y466">
+
+            <ImageView
+                android:scaleType="fitXY"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@mipmap/print_bitmap_bt" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="打印"
+                android:textColor="@color/black_text_login"
+                android:textSize="@dimen/x14" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</LinearLayout>

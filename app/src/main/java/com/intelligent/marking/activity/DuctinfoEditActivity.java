@@ -1,6 +1,7 @@
 package com.intelligent.marking.activity;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -8,9 +9,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bigkoo.pickerview.view.TimePickerView;
 import com.intelligent.marking.BaseActivity;
 import com.intelligent.marking.R;
-import com.intelligent.marking.set.TimerPicer;
+import com.intelligent.marking.Utils.TimePickerUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -58,6 +60,50 @@ public class DuctinfoEditActivity extends BaseActivity {
     TextView tvLocation;
     @BindView(R.id.root_view)
     LinearLayout rootView;
+    @BindView(R.id.ll_bottom_comfirm_btn)
+    LinearLayout llBottomComfirmBtn;
+    private TimePickerView pickerView;
+    ;
+//    @BindView(R.id.btnCancel)
+//    Button btnCancel;
+//    @BindView(R.id.tvTitle)
+//    TextView tvTitle;
+//    @BindView(R.id.btnSubmit)
+//    Button btnSubmit;
+//    @BindView(R.id.rv_topbar)
+//    RelativeLayout rvTopbar;
+//    @BindView(R.id.year)
+//    WheelView year;
+//    @BindView(R.id.month)
+//    WheelView month;
+//    @BindView(R.id.day)
+//    WheelView day;
+//    @BindView(R.id.hour)
+//    WheelView hour;
+//    @BindView(R.id.min)
+//    WheelView min;
+//    @BindView(R.id.second)
+//    WheelView second;
+//    @BindView(R.id.timepicker)
+//    LinearLayout timepicker;
+
+    @OnClick(R.id.ll_left_container)
+    public void back(View view){
+        onBackPressed();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this,MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.ll_bottom_comfirm_btn)
+    public void confirm(View view){
+        //TODO
+        startActivity(new Intent(DuctinfoEditActivity.this,PrintPreviewActivity.class));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +118,26 @@ public class DuctinfoEditActivity extends BaseActivity {
 
     @OnClick(R.id.ll_select_day)
     public void getDate(View view) {
-        TimerPicer.showTimePic(DuctinfoEditActivity.this, rootView);
+        TimePickerUtils.showTimePicker(this, new TimePickerUtils.timeBack() {
+            @Override
+            public void getTime(String str) {
+                System.out.println(str);
+                tvShowDay.setText(str);
+            }
+        }, 2);
+
+    }
+
+
+    @OnClick(R.id.ll_select_time)
+    public void getTimeDaate(View view) {
+        TimePickerUtils.showTimePicker(this, new TimePickerUtils.timeBack() {
+            @Override
+            public void getTime(String str) {
+                System.out.println(str);
+                tvShowTime.setText(str);
+            }
+        }, 1);
     }
 
     @Override

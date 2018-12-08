@@ -10,6 +10,7 @@ import java.io.IOException;
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
+import okhttp3.internal.cache.CacheStrategy;
 
 public class HttpInterceptor implements Interceptor {
 
@@ -22,6 +23,7 @@ public class HttpInterceptor implements Interceptor {
     @Override
     public Response intercept(Chain chain) throws IOException {
         Request uest = chain.request();
+
         Request request = uest.newBuilder()
                 .addHeader("uuid","yb_iCep6EBTWxKCW9sutpl2kWm6LNBThGEPMr2BxEUoS6qAaWX0rN3YPVv9zJhmo0mQ")
                 .addHeader("Content-Type","application/json")

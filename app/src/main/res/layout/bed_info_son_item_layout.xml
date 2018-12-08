@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/y76">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:includeFontPadding="false"
+            android:layout_marginTop="@dimen/y9"
+            android:layout_marginLeft="@dimen/x25"
+            android:textSize="@dimen/x15"
+            android:text="导尿管"
+            android:textColor="@color/blue"
+            android:id="@+id/tv_duct_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:includeFontPadding="false"
+            android:text="置入时间：2018/11/09"
+            android:layout_marginLeft="@dimen/x25"
+            android:layout_marginTop="@dimen/y31"
+            android:textColor="@color/black_text_login"
+            android:textSize="@dimen/x12"
+            android:id="@+id/tv_duct_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:textColor="@color/black_text_login"
+            android:textSize="@dimen/x12"
+            android:includeFontPadding="false"
+            android:text="/"
+            android:layout_marginLeft="@dimen/x10"
+            android:layout_marginTop="@dimen/y31"
+            android:layout_toRightOf="@id/tv_duct_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_toRightOf="@id/tv_duct_time"
+            android:includeFontPadding="false"
+            android:text="置入地点：ICU"
+            android:layout_marginLeft="@dimen/x24"
+            android:layout_marginTop="@dimen/y31"
+            android:textColor="@color/black_text_login"
+            android:textSize="@dimen/x12"
+            android:id="@+id/tv_duct_place"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_below="@id/tv_duct_time"
+            android:includeFontPadding="false"
+            android:text="置入人：某某某"
+            android:layout_marginLeft="@dimen/x25"
+            android:layout_marginTop="@dimen/y3"
+            android:textColor="@color/black_text_login"
+            android:textSize="@dimen/x12"
+            android:id="@+id/tv_duct_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <View
+            android:layout_marginRight="@dimen/x15"
+            android:layout_marginLeft="@dimen/x16"
+            android:background="@drawable/dashed_line_width"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="3px"/>
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:orientation="horizontal"
+    android:background="@drawable/duct_list_item_bg"
     android:gravity="center_vertical"
     android:layout_height="@dimen/y62">
 

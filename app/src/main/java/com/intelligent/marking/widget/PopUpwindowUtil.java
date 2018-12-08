@@ -119,7 +119,7 @@ public class PopUpwindowUtil {
     }
 
 
-    public static PopupWindow createPopUpWindowDuctInfo(Context context,String title,String content,dialogClickDuctListener listener){
+    public static PopupWindow createPopUpWindowDuctInfo(Context context,String title,String content,String first,String second,dialogClickDuctListener listener){
         View contentView = LayoutInflater.from(context).inflate(R.layout.duct_add_dialog_layout,null,false);
         int width = context.getResources().getDimensionPixelSize(R.dimen.x310);
         int height = context.getResources().getDimensionPixelSize(R.dimen.y260);
@@ -133,7 +133,13 @@ public class PopUpwindowUtil {
             ((TextView)popupWindow.getContentView().findViewById(R.id.tv_content)).setText(content);
         }
         TextView confirm = popupWindow.getContentView().findViewById(R.id.tv_first);
+        if(first!=null){
+            confirm.setText(first);
+        }
         TextView cancle = popupWindow.getContentView().findViewById(R.id.tv_secend);
+        if(second!=null){
+            cancle.setText(second);
+        }
         View view = popupWindow.getContentView().findViewById(R.id.v_close);
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override

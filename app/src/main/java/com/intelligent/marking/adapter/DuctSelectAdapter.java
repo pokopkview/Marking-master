@@ -9,19 +9,21 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.intelligent.marking.R;
+import com.intelligent.marking.net.model.DuctListInfo;
 
 import java.util.List;
 
 public class DuctSelectAdapter extends RecyclerView.Adapter {
 
     Context mContext;
-    List<Object> value;
+    List<DuctListInfo> value;
 
     private ItemClick itemClick;
 
 
-    public DuctSelectAdapter(Context context,List<Object> data){
+    public DuctSelectAdapter(Context context,List<DuctListInfo> data){
         mContext = context;
         value = data;
     }
@@ -45,8 +47,9 @@ public class DuctSelectAdapter extends RecyclerView.Adapter {
                 itemClick.itemClick(i);
             }
         });
-        ((ductViewHolder)viewHolder).tvDuctName.setText(value.get(i)+"");
-
+//        ((ductViewHolder)viewHolder).imageView
+        Glide.with(mContext).load(value.get(i).getDuct_img()).into(((ductViewHolder)viewHolder).imageView);
+        ((ductViewHolder)viewHolder).tvDuctName.setText(value.get(i).getDuct_name());
     }
 
     @Override

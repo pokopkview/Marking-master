@@ -60,7 +60,9 @@
         <activity android:name=".activity.SubAreaEmployeeActivity" />
         <activity android:name=".activity.BedInfoActivity" />
         <activity android:name=".activity.SelectDuctActivity" />
-        <activity android:name=".activity.DuctinfoEditActivity"></activity>
+        <activity android:name=".activity.DuctinfoEditActivity" />
+        <activity android:name=".activity.PrintPreviewActivity" />
+        <activity android:name=".activity.ResetPasswordActivity"></activity>
     </application>
 
 </manifest>

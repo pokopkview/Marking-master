@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.intelligent.marking.view.SwipeMenuLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="@dimen/y49">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/x33"
+        android:src="@mipmap/subarea_dot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:includeFontPadding="false"
+        android:layout_centerVertical="true"
+        android:id="@+id/tv_employee_name"
+        android:textColor="@color/black_text_login"
+        android:textSize="@dimen/x15"
+        android:layout_marginLeft="@dimen/x58"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <View
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/x204"
+        android:background="@color/gray_bottom_bg"
+        android:layout_width="@dimen/x1"
+        android:layout_height="match_parent"/>
+
+    <TextView
+        android:includeFontPadding="false"
+        android:textColor="@color/black_text_login"
+        android:textSize="@dimen/x15"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/x249"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_delete_view"
+        android:gravity="center"
+        android:background="@color/red"
+        android:layout_width="@dimen/x64"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:textSize="@dimen/x15"
+            android:textColor="@color/white"
+            android:text="删除"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+    </RelativeLayout>
+
+
+</com.intelligent.marking.view.SwipeMenuLayout>

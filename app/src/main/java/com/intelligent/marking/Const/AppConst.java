@@ -24,4 +24,21 @@ public class AppConst {
     public static final String GETBEDINFO = BASE_URL + "bed/index";
 
     public static final String ADDBED = BASE_URL + "bed/add";
+
+    public static final String REMOVEBED = BASE_URL +"bed/remove";
+
+    public static final String REMOVEALLBED = BASE_URL +"bed/remove_all";
+
+    public static final String OUTHOSPITAL = BASE_URL + "leave/index";
+
+    public static final String NULLBEDADDPAT = BASE_URL + "course/index";
+
+    public static final String DUCTINDEX = BASE_URL +"duct/index";
+
+    public static final String SERCHMANAGER = BASE_URL + "nurse/index";
+
+    public static final String REMOVEDUCT = BASE_URL + "treat/duct_remove";
+
+
+
 }

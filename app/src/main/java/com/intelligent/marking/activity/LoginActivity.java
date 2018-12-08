@@ -171,7 +171,7 @@ public class LoginActivity extends BaseActivity {
     @OnClick(R.id.iv_left)
     public void clickLeft(View view) {
         //TODO 扫二维码
-//        startActivity(new Intent(this,ChangeBedInfoActivity.class));
+        startActivity(new Intent(this,BedInfoActivity.class));
 
 //        ScanDomn();
 //        openDevice();
@@ -179,8 +179,9 @@ public class LoginActivity extends BaseActivity {
 //        printeText("test");
 //        printQrCode();
 //        printBarCode();
-        MarkingApplication.openScan();
+//        MarkingApplication.openScan();
     }
+
 
     // 打印二维码
     private void printQrCode() {
@@ -218,6 +219,11 @@ public class LoginActivity extends BaseActivity {
         areaName = "外科楼";
         departName = "骨科";
         subareaName = "骨一科";
+
+        hospitalNameid = 20;
+        areaNameid = 1;
+        departNameid = 1;
+        subareaNameid = 1;
         startActivity(new Intent(LoginActivity.this,MainActivity.class));
 
 

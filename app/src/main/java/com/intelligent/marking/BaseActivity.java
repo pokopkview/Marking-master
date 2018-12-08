@@ -39,6 +39,11 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected String departName = "";
     protected String subareaName = "";
 
+    protected int hospitalNameid = -1;
+    protected int areaNameid = -1;
+    protected int departNameid = -1;
+    protected int subareaNameid = -1;
+
 
 
     @Override

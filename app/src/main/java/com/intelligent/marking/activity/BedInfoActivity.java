@@ -57,6 +57,8 @@ public class BedInfoActivity extends BaseActivity {
         Map<String,Object> value = new HashMap<>();
         value.put("subarea_id",subareaid);
         HttpPost(AppConst.GETBEDINFO,value,1);
+
+        //TODO
     }
 
     @Override
