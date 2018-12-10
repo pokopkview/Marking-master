@@ -26,6 +26,7 @@ import com.google.zxing.EncodeHintType;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
+import com.intelligent.marking.R;
 import com.intelligent.marking.common.okgo.App;
 import com.intelligent.marking.net.HttpInterceptor;
 //import com.intelligent.marking.service.ScanService;
@@ -93,7 +94,7 @@ public class MarkingApplication extends Application {
                 .addNetworkInterceptor(interceptor)
                 .build();
         OkHttpUtils.initClient(okHttpClient);
-
+        player = MediaPlayer.create(getApplicationContext(), R.raw.beep);
 //        //初始
         init();
     }

@@ -257,6 +257,7 @@
           android:paddingLeft="@dimen/x20"/>
 
       <ImageView
+          android:id="@+id/iv_check_pwd"
           android:layout_width="20dp"
           android:layout_height="14dp"
           android:layout_gravity="center"
@@ -299,6 +300,7 @@
           android:paddingLeft="@dimen/x20"/>
 
       <ImageView
+          android:id="@+id/iv_check_pwd_re"
           android:layout_width="20dp"
           android:layout_height="14dp"
           android:layout_gravity="center"

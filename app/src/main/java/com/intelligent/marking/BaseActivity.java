@@ -20,6 +20,7 @@ import com.intelligent.marking.common.utils.StringUtil;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import okhttp3.Call;
@@ -43,6 +44,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected int areaNameid = -1;
     protected int departNameid = -1;
     protected int subareaNameid = -1;
+
+    protected Map<String,Object> value = new HashMap<>();
 
 
 
@@ -77,7 +80,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     protected void HttpPost(String url, Map<String,Object> value, final int flag){
-        showProgress();
+//        showProgress();
         OkHttpUtils
                 .postString()
                 .url(url)
@@ -92,7 +95,8 @@ public abstract class BaseActivity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(String response, int id) {
-                        disMissPro();
+//                        disMissPro();
+                        System.out.println(response);
                         getCallBack(response,flag);
                     }
                 });

@@ -1,6 +1,10 @@
 package com.intelligent.marking.adapter;
 
+import android.annotation.TargetApi;
+import android.content.ClipData;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -25,6 +29,13 @@ public class RecyPagerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private LayoutInflater mLayoutInflate;
     private boolean isDetele = false;
     private BedInfoViewholer.ItemSelectListener selectListener;
+    private boolean isLongclick = false;
+    private boolean isoutMode = false;
+
+    public void removeItem(int pos){
+        date.remove(pos);
+        notifyDataSetChanged();
+    }
 
 
     public RecyPagerAdapter(Context context, List<BedInfoModel> date) {
@@ -66,11 +77,15 @@ public class RecyPagerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             ((BedInfoViewholer) viewHolder).bedBg.setBackgroundResource(R.drawable.bed_status_selector);
         }
 
+        if(date.get(i).getLevel()==0){
+            selectListener.hastempbed();
+        }
 
-
-
-
-
+        if(isoutMode){
+            ((BedInfoViewholer) viewHolder).bedBg.setBackgroundResource(R.drawable.bed_status_yellow_selector);
+        }else{
+            ((BedInfoViewholer) viewHolder).bedBg.setBackgroundResource(R.drawable.bed_status_selector);
+        }
 
         if(!isDetele){
             ((BedInfoViewholer) viewHolder).vDelete.setVisibility(View.GONE);
@@ -94,6 +109,15 @@ public class RecyPagerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         viewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
+                if(isLongclick) {
+                    Intent intent = new Intent();
+
+                    ClipData clipData = ClipData.newIntent("label", intent);
+                    View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(view);
+                    view.startDrag(null, shadowBuilder, view, 0);
+//                    view.startDragAndDrop(null, shadowBuilder, viewHolder.itemView, 0);
+                }
+                isLongclick = true;
                 selectListener.itemLongClick(i);
                 return false;
             }
@@ -159,7 +183,13 @@ public class RecyPagerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             void deleteClick(int position);
             void itemLongClick(int position);
             void itemClick(int position);
+            void hastempbed();
         }
+    }
+
+    public void setOutHospital(boolean isout){
+        isoutMode = isout;
+        notifyDataSetChanged();
     }
 
 }

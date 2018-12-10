@@ -27,11 +27,13 @@
 
 
         <RelativeLayout
+            android:id="@+id/rl_print_view"
             android:layout_width="@dimen/x342"
             android:layout_height="@dimen/y427"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/y66"
             android:background="@drawable/dashed_line_bg">
+
 
             <View
                 android:layout_width="match_parent"
@@ -147,6 +149,7 @@
 
 
             <RelativeLayout
+                android:id="@+id/rl_print_pruview"
                 android:layout_width="@dimen/x310"
                 android:layout_height="@dimen/y107"
                 android:layout_marginLeft="@dimen/x16"

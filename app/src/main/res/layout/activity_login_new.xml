@@ -1,31 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:background="@color/white"
     android:layout_height="match_parent">
 
     <ImageView
         android:id="@+id/iv_left"
-        android:layout_marginLeft="@dimen/y27"
-        android:layout_marginTop="@dimen/y31"
-        android:layout_width="@dimen/x24"
-        android:layout_height="@dimen/y20"
+        android:layout_marginLeft="@dimen/y12"
+        android:layout_marginTop="@dimen/y21"
+        android:paddingLeft="@dimen/x15"
+        android:paddingRight="@dimen/x15"
+        android:paddingTop="@dimen/y10"
+        android:paddingBottom="@dimen/y10"
+        android:layout_width="@dimen/x54"
+        android:layout_height="@dimen/y40"
         android:gravity="center"
         android:src="@mipmap/saoyisao01"
         android:contentDescription="TODO" />
 
 
     <TextView
-        android:layout_marginTop="@dimen/x33"
-        android:layout_marginRight="@dimen/y28"
+        android:layout_marginTop="@dimen/y23"
+        android:layout_marginRight="@dimen/x13"
+        android:paddingTop="@dimen/y10"
+        android:paddingBottom="@dimen/y10"
+        android:paddingRight="@dimen/x15"
+        android:paddingLeft="@dimen/x15"
         android:layout_alignParentRight="true"
         android:id="@+id/login_tv_register"
-        android:layout_width="@dimen/x36"
-        android:layout_height="@dimen/y17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/register"
         android:includeFontPadding="false"
         android:textColor="@color/blue"
-        android:textSize="17sp" />
+        android:textSize="@dimen/x17" />
+
+
+    <!--<include layout="@layout/header_layout"/>-->
 
 
 

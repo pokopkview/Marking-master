@@ -17,7 +17,9 @@ import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.google.gson.Gson;
 import com.intelligent.marking.R;
+import com.intelligent.marking.Utils.PreferencesUtils;
 import com.intelligent.marking.Utils.UtilsChange;
+import com.intelligent.marking.activity.LoginActivity;
 import com.intelligent.marking.set.bean.JsonBean;
 
 import org.json.JSONArray;
@@ -98,8 +100,8 @@ public class JsonDataActivity01{
             @Override
             public void onOptionsSelect(int options1, int options2, int options3, View v) {
                 //返回的分别是三个级别的选中位置
-                String Position = options1Items.get(options1).getPickerViewText() +
-                        options2Items.get(options1).get(options2) +
+                String Position = options1Items.get(options1).getPickerViewText() +"-"+
+                        options2Items.get(options1).get(options2) +"-"+
                         options3Items.get(options1).get(options2).get(options3);
 
                         Log.e("-------tx", Position);
@@ -123,8 +125,10 @@ public class JsonDataActivity01{
                 .setTextColorCenter(Color.BLACK) //设置选中项文字颜色
                 .setSubCalSize(18)
                 .setContentTextSize(20)
+                .setSelectOptions(PreferencesUtils.getInt(context,PreferencesUtils.PROVINCE,1)
+                        ,PreferencesUtils.getInt(context,PreferencesUtils.CITY,1)
+                        ,PreferencesUtils.getInt(context,PreferencesUtils.ARE,1))
                 .build();
-
         /*pvOptions.setPicker(options1Items);//一级选择器
         pvOptions.setPicker(options1Items, options2Items);//二级选择器*/
         System.out.println(pvOptions.getDialog());

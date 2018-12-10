@@ -4,6 +4,8 @@ import android.content.Context;
 import android.util.Log;
 
 import com.intelligent.marking.R;
+import com.intelligent.marking.Utils.PreferencesUtils;
+import com.intelligent.marking.application.MarkingApplication;
 
 import java.io.IOException;
 
@@ -23,14 +25,17 @@ public class HttpInterceptor implements Interceptor {
     @Override
     public Response intercept(Chain chain) throws IOException {
         Request uest = chain.request();
-
-        Request request = uest.newBuilder()
-                .addHeader("uuid","yb_iCep6EBTWxKCW9sutpl2kWm6LNBThGEPMr2BxEUoS6qAaWX0rN3YPVv9zJhmo0mQ")
-                .addHeader("Content-Type","application/json")
-                .build();
-
-        Response response = chain.proceed(request);
-//        System.out.println("response:"+response.body().string());
+        String uiid = PreferencesUtils.getString(MarkingApplication.getInstance().getApplicationContext(),PreferencesUtils.UUID);
+        Response response;
+        if(null != uiid){
+            Request request = uest.newBuilder()
+                    .addHeader("uuid",uiid)
+                    .addHeader("Content-Type","application/json")
+                    .build();
+            response = chain.proceed(request);
+        }else{
+            response = chain.proceed(uest);
+        }
         return response;
     }
 }

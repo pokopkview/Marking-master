@@ -1,5 +1,7 @@
 package com.intelligent.marking.activity;
 
+import android.graphics.Bitmap;
+import android.graphics.Matrix;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -9,6 +11,7 @@ import android.widget.TextView;
 
 import com.intelligent.marking.BaseActivity;
 import com.intelligent.marking.R;
+import com.intelligent.marking.application.MarkingApplication;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -54,6 +57,10 @@ public class PrintPreviewActivity extends BaseActivity {
     TextView tvManagerName;
     @BindView(R.id.rl_print_btn)
     RelativeLayout rlPrintBtn;
+    @BindView(R.id.rl_print_view)
+    RelativeLayout rlPrintView;
+    @BindView(R.id.rl_print_pruview)
+    RelativeLayout rlPrintPruview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,11 +71,30 @@ public class PrintPreviewActivity extends BaseActivity {
         back.setImageResource(R.mipmap.fanhui01);
         llLeftContainer.addView(back);
         tvHeaderTitle.setText("打印预览");
+        ivPrintq.setImageBitmap(MarkingApplication.createQRImage("testetstetstetst", 170, 170));
     }
 
     @OnClick(R.id.rl_print_btn)
-    public void print(View view){
+    public void print(View view) {
         //TODO
+
+        rlPrintPruview.setDrawingCacheEnabled(true);
+        rlPrintPruview.buildDrawingCache();
+        Bitmap bitmap = rlPrintPruview.getDrawingCache();
+        int width = bitmap.getWidth();
+        int height = bitmap.getHeight();
+        int newWidth = this.getResources().getDimensionPixelSize(R.dimen.x192);
+        int newHeight = this.getResources().getDimensionPixelSize(R.dimen.y80);
+
+        float scaleWidth = ((float) newWidth) / width;
+        float scaleHeight = ((float) newHeight) / height;
+        Matrix matrix = new Matrix();
+        matrix.postScale(scaleWidth, scaleHeight);
+//        Bitmap newbm = Bitmap.createBitmap(bitmap, 0, 0, width, height, matrix,
+//                true);
+
+        Bitmap newbm = Bitmap.createScaledBitmap(bitmap,newWidth,newHeight,true);
+        MarkingApplication.printBitmap(0, newbm);
     }
 
 

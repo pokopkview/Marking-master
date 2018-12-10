@@ -16,6 +16,7 @@ import com.intelligent.marking.R;
 import com.intelligent.marking.Utils.ToastUtil;
 import com.intelligent.marking.activity.MainActivity;
 import com.intelligent.marking.adapter.DuctToUserAdapter;
+import com.intelligent.marking.adapter.RegisterPagePopAdapter;
 import com.intelligent.marking.adapter.SelectMoreAdapter;
 import com.intelligent.marking.common.utils.StringUtil;
 
@@ -26,6 +27,14 @@ public class PopUpwindowUtil {
 
     public static PopupWindow popupWindow;
 
+    /**
+     * 登陆页
+     * @param resID
+     * @param context
+     * @param value
+     * @param listener
+     * @return
+     */
     public static PopupWindow createPopUpWindow(int resID, Context context, List<String> value,SelectMoreAdapter.itemClickListener listener){
         View contentView = LayoutInflater.from(context).inflate(resID,null,false);
         int width = context.getResources().getDimensionPixelSize(R.dimen.x306);
@@ -40,6 +49,38 @@ public class PopUpwindowUtil {
         return popupWindow;
     }
 
+    /**
+     * 注册页
+     * @param resID
+     * @param context
+     * @param value
+     * @param listener
+     * @return
+     */
+    public static PopupWindow createPopUpWindowReg(int resID, Context context, List<String> value,RegisterPagePopAdapter.ItemClickListener listener){
+        View contentView = LayoutInflater.from(context).inflate(resID,null,false);
+        int width = context.getResources().getDimensionPixelSize(R.dimen.x306);
+        int height = context.getResources().getDimensionPixelSize(R.dimen.y152);
+        popupWindow = new PopupWindow(width,ViewGroup.LayoutParams.WRAP_CONTENT);
+        RecyclerView recyclerView = contentView.findViewById(R.id.rl_select_more);
+        RegisterPagePopAdapter adapter = new RegisterPagePopAdapter(context,value);
+        adapter.setListener(listener);
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        recyclerView.setAdapter(adapter);
+        popupWindow.setContentView(contentView);
+        return popupWindow;
+    }
+
+    /**
+     * 删除dialog
+     * @param context
+     * @param Title
+     * @param content
+     * @param confirm
+     * @param cancle
+     * @param listener
+     * @return
+     */
     public static PopupWindow createPopUpWindowDialogStyle(Context context,String Title,String content,String confirm,String cancle,dialogClickListener listener){
         View contentView = LayoutInflater.from(context).inflate(R.layout.popupwindow_dialog_layout,null,false);
         int width = context.getResources().getDimensionPixelSize(R.dimen.x260);
@@ -79,6 +120,12 @@ public class PopUpwindowUtil {
     }
 
 
+    /**
+     * 添加床位
+     * @param context
+     * @param listener
+     * @return
+     */
     public static PopupWindow createPopUpWindowaddTemporaryBed(Context context,dialogClickContentListener listener){
         View contentView = LayoutInflater.from(context).inflate(R.layout.temporary_bed_layout,null,false);
         int width = context.getResources().getDimensionPixelSize(R.dimen.x260);
@@ -119,6 +166,16 @@ public class PopUpwindowUtil {
     }
 
 
+    /**
+     * 添加导管类型
+     * @param context
+     * @param title
+     * @param content
+     * @param first
+     * @param second
+     * @param listener
+     * @return
+     */
     public static PopupWindow createPopUpWindowDuctInfo(Context context,String title,String content,String first,String second,dialogClickDuctListener listener){
         View contentView = LayoutInflater.from(context).inflate(R.layout.duct_add_dialog_layout,null,false);
         int width = context.getResources().getDimensionPixelSize(R.dimen.x310);
@@ -170,6 +227,12 @@ public class PopUpwindowUtil {
         return popupWindow;
     }
 
+    /**
+     * 床位详情设置
+     * @param context
+     * @param clickPatient
+     * @return
+     */
     public static PopupWindow createDuctToUserDialog(Context context,dialogClickPatient clickPatient){
         View contentView = LayoutInflater.from(context).inflate(R.layout.duct_to_user_dialog_layout,null,false);
         int width = context.getResources().getDimensionPixelSize(R.dimen.x340);

@@ -94,9 +94,9 @@ public class SelectMoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         }
     }
 
-    public class simpleItemViewHolder extends RecyclerView.ViewHolder{
-        private TextView tv_item;
-        private View rootView;
+    static class simpleItemViewHolder extends RecyclerView.ViewHolder{
+        TextView tv_item;
+        View rootView;
         public simpleItemViewHolder(View itemView) {
             super(itemView);
             rootView = itemView;
@@ -104,7 +104,7 @@ public class SelectMoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         }
     }
 
-    public class headerItem extends RecyclerView.ViewHolder{
+    static class headerItem extends RecyclerView.ViewHolder{
         private TextView tv_item;
         private View rootView;
         private View v_top;
@@ -116,7 +116,7 @@ public class SelectMoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         }
     }
 
-    public class footItem extends RecyclerView.ViewHolder{
+    static class footItem extends RecyclerView.ViewHolder{
         private TextView tv_item;
         private View rootView;
         public footItem(View itemView) {
