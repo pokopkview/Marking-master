@@ -8,7 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
@@ -18,7 +20,10 @@ import com.intelligent.marking.activity.MainActivity;
 import com.intelligent.marking.adapter.DuctToUserAdapter;
 import com.intelligent.marking.adapter.RegisterPagePopAdapter;
 import com.intelligent.marking.adapter.SelectMoreAdapter;
+import com.intelligent.marking.adapter.SimpleDuctInfoBeanAdapter;
 import com.intelligent.marking.common.utils.StringUtil;
+import com.intelligent.marking.net.model.DuctListInfo;
+import com.intelligent.marking.net.model.TreatInfoModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +32,7 @@ public class PopUpwindowUtil {
 
     public static PopupWindow popupWindow;
 
+    public static DuctToUserAdapter adapter;
     /**
      * 登陆页
      * @param resID
@@ -171,12 +177,10 @@ public class PopUpwindowUtil {
      * @param context
      * @param title
      * @param content
-     * @param first
-     * @param second
      * @param listener
      * @return
      */
-    public static PopupWindow createPopUpWindowDuctInfo(Context context,String title,String content,String first,String second,dialogClickDuctListener listener){
+    public static PopupWindow createPopUpWindowDuctInfo(Context context, String title, String content, List<DuctListInfo.DuctCatBean> beanList, dialogClickDuctListener listener){
         View contentView = LayoutInflater.from(context).inflate(R.layout.duct_add_dialog_layout,null,false);
         int width = context.getResources().getDimensionPixelSize(R.dimen.x310);
         int height = context.getResources().getDimensionPixelSize(R.dimen.y260);
@@ -189,27 +193,36 @@ public class PopUpwindowUtil {
         if(content!=null){
             ((TextView)popupWindow.getContentView().findViewById(R.id.tv_content)).setText(content);
         }
-        TextView confirm = popupWindow.getContentView().findViewById(R.id.tv_first);
-        if(first!=null){
-            confirm.setText(first);
-        }
-        TextView cancle = popupWindow.getContentView().findViewById(R.id.tv_secend);
-        if(second!=null){
-            cancle.setText(second);
-        }
+        ListView listView = popupWindow.getContentView().findViewById(R.id.lv_show_duct_type);
+        SimpleDuctInfoBeanAdapter adapter = new SimpleDuctInfoBeanAdapter(context,beanList);
+        listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                listener.itemClick(position,(int)id);
+            }
+        });
+//        TextView confirm = popupWindow.getContentView().findViewById(R.id.tv_first);
+//        if(first!=null){
+//            confirm.setText(first);
+//        }
+//        TextView cancle = popupWindow.getContentView().findViewById(R.id.tv_secend);
+//        if(second!=null){
+//            cancle.setText(second);
+//        }
         View view = popupWindow.getContentView().findViewById(R.id.v_close);
-        confirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                listener.firstClick();
-            }
-        });
-        cancle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                listener.secendClick();
-            }
-        });
+//        confirm.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                listener.firstClick();
+//            }
+//        });
+//        cancle.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                listener.secendClick();
+//            }
+//        });
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -227,13 +240,21 @@ public class PopUpwindowUtil {
         return popupWindow;
     }
 
+    public static DuctToUserAdapter getDuctToUserDialogAdapter(){
+        return adapter;
+    }
+
+
+
+
+
     /**
      * 床位详情设置
      * @param context
      * @param clickPatient
      * @return
      */
-    public static PopupWindow createDuctToUserDialog(Context context,dialogClickPatient clickPatient){
+    public static PopupWindow createDuctToUserDialog(Context context, List<TreatInfoModel> value,dialogClickPatient clickPatient){
         View contentView = LayoutInflater.from(context).inflate(R.layout.duct_to_user_dialog_layout,null,false);
         int width = context.getResources().getDimensionPixelSize(R.dimen.x340);
         int height = context.getResources().getDimensionPixelSize(R.dimen.y422);
@@ -260,28 +281,25 @@ public class PopUpwindowUtil {
                 clickPatient.setToPatient();
             }
         });
-        List<Object> objects = new ArrayList<>();
-        objects.add("1");
-        objects.add("1");
-        objects.add("1");
-        objects.add("1");
-        objects.add("1");
+
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        DuctToUserAdapter adapter = new DuctToUserAdapter(context, objects, new DuctToUserAdapter.DuctItemClick() {
+        adapter = new DuctToUserAdapter(context, value, new DuctToUserAdapter.DuctItemClick() {
             @Override
             public void slideChange(int position) {
+                clickPatient.editDuct(position);
             }
 
             @Override
             public void slideDelete(int position) {
-                objects.remove(position);
-                recyclerView.getAdapter().notifyItemRangeRemoved(position,1);
-                recyclerView.getAdapter().notifyItemRangeChanged(position,objects.size());
+                clickPatient.deleteDuct(position);
+//                value.remove(position);
+//                recyclerView.getAdapter().notifyItemRangeRemoved(position,1);
+//                recyclerView.getAdapter().notifyItemRangeChanged(position,value.size());
             }
 
             @Override
             public void itemClick(int position) {
-
+                clickPatient.clickitem(position);
             }
         });
         recyclerView.setAdapter(adapter);
@@ -315,8 +333,7 @@ public class PopUpwindowUtil {
     }
 
     public interface dialogClickDuctListener{
-        void firstClick();
-        void secendClick();
+        void itemClick(int pos,int id);
         void closeClick();
     }
 
@@ -324,5 +341,9 @@ public class PopUpwindowUtil {
         void closeClick();
         void setToPatient();
         void editPatient();
+
+        void editDuct(int pos);
+        void deleteDuct(int pos);
+        void clickitem(int pos);
     }
 }

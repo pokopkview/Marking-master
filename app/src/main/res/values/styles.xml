@@ -19,6 +19,14 @@
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
+    <style name="mypopwindow_anim_style">
+        <item name="android:windowEnterAnimation">@anim/popshow</item>
+        <!-- 指定显示的动画xml -->
+
+        <item name="android:windowExitAnimation">@anim/popdismiss</item>
+        <!-- 指定消失的动画xml -->
+    </style>
+
 
     <!--  分割线     0.5dp 高度 -->
     <style name="View1">

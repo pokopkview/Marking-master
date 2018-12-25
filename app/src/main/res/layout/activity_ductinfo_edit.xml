@@ -291,29 +291,37 @@
             android:src="@mipmap/glass_big"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-        <TextView
+
+        <EditText
+            android:id="@+id/et_search_nurse"
+            android:background="@null"
             android:textSize="@dimen/x15"
-            android:textColor="@color/black_black"
             android:layout_marginLeft="@dimen/x12"
-            android:id="@+id/edit_manager_name"
-            android:text="某某某"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:textSize="@dimen/x15"
-            android:textColor="@color/black_black"
-            android:layout_marginLeft="@dimen/x14"
-            android:text="工号"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:textSize="@dimen/x15"
-            android:textColor="@color/black_black"
-            android:layout_marginLeft="@dimen/x5"
-            android:text="05"
-            android:id="@+id/manager_no"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <!--<TextView-->
+            <!--android:textSize="@dimen/x15"-->
+            <!--android:textColor="@color/black_black"-->
+            <!--android:layout_marginLeft="@dimen/x12"-->
+            <!--android:id="@+id/edit_manager_name"-->
+            <!--android:text="某某某"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content" />-->
+        <!--<TextView-->
+            <!--android:textSize="@dimen/x15"-->
+            <!--android:textColor="@color/black_black"-->
+            <!--android:layout_marginLeft="@dimen/x14"-->
+            <!--android:text="工号"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content" />-->
+        <!--<TextView-->
+            <!--android:textSize="@dimen/x15"-->
+            <!--android:textColor="@color/black_black"-->
+            <!--android:layout_marginLeft="@dimen/x5"-->
+            <!--android:text="05"-->
+            <!--android:id="@+id/manager_no"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content" />-->
 
 
     </LinearLayout>
@@ -357,7 +365,7 @@
             android:textSize="@dimen/x18"
             android:gravity="center"
             android:textColor="@color/white"
-            android:text="完成"
+            android:text="下一步"
             android:layout_marginRight="@dimen/x17"
             android:layout_marginLeft="@dimen/x17"
             android:background="@drawable/yuan_lanse50"

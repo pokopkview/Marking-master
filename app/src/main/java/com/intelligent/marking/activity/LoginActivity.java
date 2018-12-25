@@ -140,6 +140,7 @@ public class LoginActivity extends BaseActivity {
                 select_cityid = JsonData.options1Items.get(pid).getCity().get(cid).getId();
                 select_areaid = JsonData.options1Items.get(pid).getCity().get(cid).getArea().get(aid).getId();
 
+
                 PreferencesUtils.putInt(LoginActivity.this,PreferencesUtils.PROVINCE,pid);
                 PreferencesUtils.putInt(LoginActivity.this,PreferencesUtils.CITY,cid);
                 PreferencesUtils.putInt(LoginActivity.this,PreferencesUtils.ARE,aid);
@@ -147,6 +148,8 @@ public class LoginActivity extends BaseActivity {
                 PreferencesUtils.putInt(LoginActivity.this,PreferencesUtils.PROVINCEID,select_provinceid);
                 PreferencesUtils.putInt(LoginActivity.this,PreferencesUtils.CITYID,select_cityid);
                 PreferencesUtils.putInt(LoginActivity.this,PreferencesUtils.AREID,select_areaid);
+
+
 
 
                 Map<String, Object> value = new HashMap<>();
@@ -301,6 +304,7 @@ public class LoginActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_new);
         ButterKnife.bind(this);
+        etPwd.setText("123456");
         loginModel = new LoginModel();
         initView();
         scanBroadcastReceiver = new ScanBroadcastReceiver();
@@ -447,7 +451,20 @@ public class LoginActivity extends BaseActivity {
                     PreferencesUtils.putInt(this,PreferencesUtils.AREANAMEID,areaNameid);
                     PreferencesUtils.putInt(this,PreferencesUtils.DEPARTNAMEID,departNameid);
                     PreferencesUtils.putInt(this,PreferencesUtils.SUBAREANAMEID,subareaNameid);
-                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    if(areaNameid==0 && departNameid==0 && departNameid==0 && subareaNameid == 0){
+                        PreferencesUtils.putInt(this,PreferencesUtils.ROLE,1);//医院总账户
+                        startActivity(new Intent(LoginActivity.this, HospoitalManagerAvtivity.class));
+                    }else if(areaNameid!=0 && departNameid==0 && subareaNameid == 0){
+                        PreferencesUtils.putInt(this,PreferencesUtils.ROLE,2);//大区总账户
+                        startActivity(new Intent(LoginActivity.this, HospoitalManagerAvtivity.class));
+                    }else if(areaNameid!=0 && departNameid!=0 && subareaNameid == 0){
+                        PreferencesUtils.putInt(this,PreferencesUtils.ROLE,3);//科室总账户
+                        startActivity(new Intent(LoginActivity.this, HospoitalManagerAvtivity.class));
+                    }else if(areaNameid!=0 && departNameid!=0 && subareaNameid != 0){
+                        PreferencesUtils.putInt(this,PreferencesUtils.ROLE,4);//区域总账户
+                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    }
+                    finish();
                 }
                 break;
             case 11:
@@ -550,9 +567,15 @@ public class LoginActivity extends BaseActivity {
                     textView.setTag(0);
                     if(rootView.equals(llSelectArea)){
                         llSelectDepart.setClickable(false);
+                        tvDepart.setText("全部");
+                        tvDepart.setTag(0);
+                        tvSubarea.setText("全部");
+                        tvSubarea.setTag(0);
                         llSelectMoreares.setClickable(false);
                     }else if(rootView.equals(llSelectDepart)){
                         llSelectMoreares.setClickable(false);
+                        tvSubarea.setText("全部");
+                        tvSubarea.setTag(0);
                     }
                     PopUpwindowUtil.popupWindow.dismiss();
                 }

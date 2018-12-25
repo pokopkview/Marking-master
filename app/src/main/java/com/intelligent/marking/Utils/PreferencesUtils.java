@@ -29,6 +29,7 @@ public class PreferencesUtils {
 
 
     public static String LOCATION = "location";
+    public static String ROLE = "role";
 
 
     /**存储字符串*/

@@ -48,11 +48,11 @@
         <!-- <activity android:name=".activity.testActivity"></activity> -->
         <activity android:name=".activity.ChangeBedInfoActivity" />
 
-        <service android:name=".service.IMyAidlInterface">
-            <intent-filter>
-                <action android:name="COM.QS.DEMO.QSSERVICE" />
-            </intent-filter>
-        </service>
+        <!--<service android:name=".service.IMyAidlInterface">-->
+            <!--<intent-filter>-->
+                <!--<action android:name="COM.QS.DEMO.QSSERVICE" />-->
+            <!--</intent-filter>-->
+        <!--</service>-->
 
         <activity android:name=".activity.ScanPatientInfoActivity" />
         <activity android:name=".activity.HospoitalManagerAvtivity" />
@@ -60,7 +60,8 @@
         <activity android:name=".activity.SubAreaEmployeeActivity" />
         <activity android:name=".activity.BedInfoActivity" />
         <activity android:name=".activity.SelectDuctActivity" />
-        <activity android:name=".activity.DuctinfoEditActivity" />
+        <activity android:name=".activity.DuctinfoEditActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
         <activity android:name=".activity.PrintPreviewActivity" />
         <activity android:name=".activity.ResetPasswordActivity"></activity>
     </application>

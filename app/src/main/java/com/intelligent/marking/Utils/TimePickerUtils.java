@@ -21,11 +21,11 @@ public class TimePickerUtils {
         boolean [] timetype = null;
         switch (type){
             case 1:
-                sdf = new SimpleDateFormat("HH:mm分");
+                sdf = new SimpleDateFormat("HH:mm");
                 timetype = new boolean[]{false, false, false, true, true, false};
                 break;
             case 2:
-                sdf = new SimpleDateFormat("yyyy年MM月dd日");
+                sdf = new SimpleDateFormat("yyyy-MM-dd");
                 timetype = new boolean[]{true, true, true, false, false, false};
                 break;
         }

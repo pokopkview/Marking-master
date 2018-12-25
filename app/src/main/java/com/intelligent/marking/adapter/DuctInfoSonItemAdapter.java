@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.intelligent.marking.R;
+import com.intelligent.marking.net.model.BedStatusModel;
+import com.intelligent.marking.net.model.TreatInfoModel;
 
 import java.util.List;
 
@@ -18,9 +20,9 @@ import butterknife.ButterKnife;
 public class DuctInfoSonItemAdapter extends RecyclerView.Adapter {
 
     Context mContext;
-    List<Object> data;
+    List<BedStatusModel.DataBean> data;
 
-    public DuctInfoSonItemAdapter(Context context, List<Object> value) {
+    public DuctInfoSonItemAdapter(Context context, List<BedStatusModel.DataBean> value) {
         mContext = context;
         data = value;
     }
@@ -30,12 +32,18 @@ public class DuctInfoSonItemAdapter extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.bed_info_son_item_layout, viewGroup, false);
-        return new ViewHolder(view);
+        return new ViewHolders(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-
+        ((ViewHolders)viewHolder).tvDuctName.setText(data.get(i).getDuct_name());
+        ((ViewHolders) viewHolder).tvDuctTime.setText(data.get(i).getInsert_time());
+        ((ViewHolders) viewHolder).tvDuctPlace.setText(data.get(i).getOperate_place());
+        ((ViewHolders) viewHolder).tvDuctUser.setText(data.get(i).getNurse_name());
+        if(isFoot(i)){
+            ((ViewHolders) viewHolder).view.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override
@@ -43,24 +51,29 @@ public class DuctInfoSonItemAdapter extends RecyclerView.Adapter {
         return data.size();
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.tv_duct_name)
+    static class ViewHolders extends RecyclerView.ViewHolder {
         TextView tvDuctName;
-        @BindView(R.id.tv_duct_time)
         TextView tvDuctTime;
-        @BindView(R.id.tv_duct_place)
         TextView tvDuctPlace;
-        @BindView(R.id.tv_duct_user)
         TextView tvDuctUser;
+        View view;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolders(@NonNull View itemView) {
             super(itemView);
-            ButterKnife.bind(this,itemView);
+            tvDuctName = itemView.findViewById(R.id.tv_duct_name);
+            tvDuctTime = itemView.findViewById(R.id.tv_duct_time);
+            tvDuctPlace = itemView.findViewById(R.id.tv_duct_place);
+            tvDuctUser = itemView.findViewById(R.id.tv_duct_user);
+            view = itemView.findViewById(R.id.v_bottom_line);
         }
 
 
 //        ViewHolder(View view) {
 //            ButterKnife.bind(this, view);
 //        }
+    }
+
+    private boolean isFoot(int pos){
+        return pos == data.size()-1;
     }
 }

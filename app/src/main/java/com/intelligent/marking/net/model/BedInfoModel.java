@@ -1,5 +1,7 @@
 package com.intelligent.marking.net.model;
 
+import java.util.List;
+
 public class BedInfoModel {
 
     /**
@@ -37,6 +39,15 @@ public class BedInfoModel {
     private String info;
     private String show_color;
     private int show_number;
+    private List<TreatInfoModel> treatInfoModelList;
+
+    public List<TreatInfoModel> getTreatInfoModelList() {
+        return treatInfoModelList;
+    }
+
+    public void setTreatInfoModelList(List<TreatInfoModel> treatInfoModelList) {
+        this.treatInfoModelList = treatInfoModelList;
+    }
 
     public String getBed_sn() {
         return bed_sn;

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:gravity="center_horizontal"
+    android:layout_height="@dimen/y60">
+    <TextView
+        android:gravity="center"
+        android:id="@+id/tv_first"
+        android:textSize="@dimen/x17"
+        android:textColor="@color/blue"
+        android:text="管"
+        android:background="@drawable/duct_add_text_selector"
+        android:layout_width="@dimen/x251"
+        android:layout_height="@dimen/y50" />
+
+</LinearLayout>

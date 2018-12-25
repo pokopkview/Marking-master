@@ -32,6 +32,7 @@
         android:layout_height="match_parent"/>
 
     <TextView
+        android:id="@+id/tv_nurse_no"
         android:includeFontPadding="false"
         android:textColor="@color/black_text_login"
         android:textSize="@dimen/x15"

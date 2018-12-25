@@ -26,6 +26,7 @@ public class HttpInterceptor implements Interceptor {
     public Response intercept(Chain chain) throws IOException {
         Request uest = chain.request();
         String uiid = PreferencesUtils.getString(MarkingApplication.getInstance().getApplicationContext(),PreferencesUtils.UUID);
+        System.out.println(uiid);
         Response response;
         if(null != uiid){
             Request request = uest.newBuilder()

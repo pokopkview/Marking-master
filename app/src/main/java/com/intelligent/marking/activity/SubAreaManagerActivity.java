@@ -13,6 +13,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.intelligent.marking.BaseActivity;
+import com.intelligent.marking.Const.AppConst;
 import com.intelligent.marking.R;
 import com.intelligent.marking.Utils.UtilsChange;
 import com.intelligent.marking.adapter.SubaAreaAdapter;
@@ -38,6 +39,10 @@ public class SubAreaManagerActivity extends BaseActivity {
     List<SubAreModel> modelList = new ArrayList<>();
     @BindView(R.id.lv_subarea)
     RecyclerView lvSubarea;
+
+
+    SubaAreaAdapter adapter;
+    int deleteClick = -1;
 
     @OnClick(R.id.ll_left_container)
     public void back(View view){
@@ -65,19 +70,22 @@ public class SubAreaManagerActivity extends BaseActivity {
         modelList = (List<SubAreModel>) getIntent().getSerializableExtra("subarealist");
         System.out.println(modelList.toString());
         lvSubarea.setLayoutManager(new LinearLayoutManager(this));
-        SubaAreaAdapter adapter = new SubaAreaAdapter(this,modelList);
+        adapter = new SubaAreaAdapter(this,modelList);
         adapter.setListener(new SubaAreaAdapter.deleteItemClick() {
             @Override
             public void deleteClick(int position) {
-
+                deleteClick = position;
                 PopupWindow popupWindow = PopUpwindowUtil.createPopUpWindowDialogStyle(SubAreaManagerActivity.this
                         , "确定移除", "hospital" + modelList.get(position).getSubarea_name(),
                         "移除", "取消", new PopUpwindowUtil.dialogClickListener() {
                             @Override
                             public void confirm() {
-                                modelList.remove(position);
-                                adapter.notifyDataSetChanged();
-                                PopUpwindowUtil.popupWindow.dismiss();
+                                value.clear();
+                                value.put("subarea_id",modelList.get(position).getSubarea_id());
+                                HttpPost(AppConst.REMOVESUBAREA,value,1);
+
+
+
                             }
 
                             @Override
@@ -89,7 +97,6 @@ public class SubAreaManagerActivity extends BaseActivity {
                 lp.alpha=0.4f;
                 ((Activity)SubAreaManagerActivity.this).getWindow().setAttributes(lp);
                 popupWindow.showAtLocation(lvSubarea,Gravity.CENTER,0,0);
-
             }
         });
         lvSubarea.setAdapter(adapter);
@@ -98,7 +105,13 @@ public class SubAreaManagerActivity extends BaseActivity {
 
     @Override
     public void getCallBack(String response, int flag) {
-
+        switch (flag){
+            case 1:
+                modelList.remove(deleteClick);
+                adapter.notifyDataSetChanged();
+                PopUpwindowUtil.popupWindow.dismiss();
+                break;
+        }
     }
 
     @Override

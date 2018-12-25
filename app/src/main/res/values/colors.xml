@@ -36,6 +36,8 @@
     <color name="text99">#999999</color>
     <color name="select_bg">#F1F1F1</color>
 
+    <color name="select_are">#E6E9EC</color>
+
 
     <!--黑色-->
     <color name="black_text_login">#505050</color>

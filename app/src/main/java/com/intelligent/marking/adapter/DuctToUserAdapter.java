@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.intelligent.marking.R;
 import com.intelligent.marking.Utils.ToastUtil;
+import com.intelligent.marking.net.model.TreatInfoModel;
 
 import java.util.List;
 
@@ -20,12 +21,15 @@ public class DuctToUserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
 
     LayoutInflater mLayoutInflater;
-    List<Object> objectList;
+    List<TreatInfoModel> objectList;
     DuctItemClick ductItemClick;
-    public DuctToUserAdapter(Context context, List<Object> objects,DuctItemClick itemClick) {
+    public DuctToUserAdapter(Context context, List<TreatInfoModel> objects, DuctItemClick itemClick) {
         mLayoutInflater = LayoutInflater.from(context);
         objectList = objects;
         ductItemClick = itemClick;
+    }
+    public List<TreatInfoModel> getDataList(){
+        return objectList;
     }
 
     @NonNull
@@ -38,6 +42,8 @@ public class DuctToUserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
         //TODO  缺少数据
+
+
         ((DuctViewHolder)viewHolder).tvChange.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,6 +62,12 @@ public class DuctToUserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 ductItemClick.itemClick(i);
             }
         });
+
+        ((DuctViewHolder) viewHolder).tvDuctName.setText(objectList.get(i).getDuct_name());
+        ((DuctViewHolder) viewHolder).tvDuctUser.setText("置入人："+objectList.get(i).getNurse_name());
+        ((DuctViewHolder) viewHolder).tvDuctTime.setText("置入时间："+objectList.get(i).getInsert_date());
+        ((DuctViewHolder) viewHolder).tvDuctPlace.setText("置入地点："+objectList.get(i).getOperate_place());
+
     }
 
     @Override

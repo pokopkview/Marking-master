@@ -1,8 +1,9 @@
 package com.intelligent.marking.net.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class DuctListInfo {
+public class DuctListInfo implements Serializable{
 
 
     /**
@@ -79,7 +80,7 @@ public class DuctListInfo {
         this.duct_cat = duct_cat;
     }
 
-    public static class DuctCatBean {
+    public static class DuctCatBean implements Serializable {
         /**
          * duct_attr_id : 1
          * duct_cat_id : 1

@@ -38,7 +38,8 @@ public class SubaAreaAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-        ((tempViewHolder)viewHolder).tvSubareaText.setText(data.get(i).getBed_number()+"");
+        System.out.println(data.get(i).getSubarea_name()+","+data.get(i).getBed_number());
+        ((tempViewHolder)viewHolder).etBedCount.setText(data.get(i).getBed_number()+"");
         ((tempViewHolder)viewHolder).vDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

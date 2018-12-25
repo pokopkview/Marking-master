@@ -151,14 +151,14 @@
             <RelativeLayout
                 android:id="@+id/rl_print_pruview"
                 android:layout_width="@dimen/x310"
-                android:layout_height="@dimen/y107"
+                android:layout_height="@dimen/y214"
                 android:layout_marginLeft="@dimen/x16"
                 android:layout_marginTop="@dimen/y204"
                 android:background="@drawable/dashed_line_bg">
 
                 <View
                     android:layout_width="@dimen/x100"
-                    android:layout_height="@dimen/y86"
+                    android:layout_height="@dimen/y186"
                     android:layout_centerInParent="true"
                     android:background="@drawable/dashed_ling_height"
                     android:layerType="software" />
@@ -173,32 +173,42 @@
                     android:includeFontPadding="false"
                     android:text="PICC 管"
                     android:textColor="@color/black_black"
-                    android:textSize="@dimen/x20" />
+                    android:textSize="@dimen/x28" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/x225"
+                    android:layout_marginLeft="@dimen/x190"
                     android:layout_marginTop="@dimen/y15"
                     android:includeFontPadding="false"
                     android:text="PICC 管"
                     android:textColor="@color/black_black"
-                    android:textSize="@dimen/x18" />
+                    android:textSize="@dimen/x26" />
 
                 <RelativeLayout
                     android:id="@+id/rl_bitmap_container"
-                    android:layout_width="@dimen/x57"
-                    android:layout_height="@dimen/y57"
-                    android:layout_marginLeft="@dimen/x227"
-                    android:layout_marginTop="@dimen/y40"
+                    android:layout_width="@dimen/x110"
+                    android:layout_height="@dimen/y110"
+                    android:layout_marginLeft="@dimen/x187"
+                    android:layout_marginTop="@dimen/y60"
                     android:background="@color/gray_bitmap_bg"
                     android:gravity="center">
 
                     <ImageView
                         android:id="@+id/iv_printq"
-                        android:layout_width="@dimen/x48"
-                        android:layout_height="@dimen/y48" />
+                        android:layout_width="@dimen/x100"
+                        android:layout_height="@dimen/y100" />
                 </RelativeLayout>
+                <TextView
+                    android:id="@+id/def_manager_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x10"
+                    android:layout_marginTop="@dimen/y70"
+                    android:includeFontPadding="false"
+                    android:text="时间 :"
+                    android:textColor="@color/black_text_login"
+                    android:textSize="@dimen/x18" />
 
 
                 <TextView
@@ -206,34 +216,34 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/x10"
-                    android:layout_marginTop="@dimen/y58"
+                    android:layout_marginTop="@dimen/y95"
                     android:includeFontPadding="false"
                     android:text="2018-11-05 13:00"
                     android:textColor="@color/black_text_login"
-                    android:textSize="@dimen/x13" />
+                    android:textSize="@dimen/x18" />
 
                 <TextView
                     android:id="@+id/def_manager"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/x10"
-                    android:layout_marginTop="@dimen/y75"
+                    android:layout_marginTop="@dimen/y130"
                     android:includeFontPadding="false"
                     android:text="操作人 :"
                     android:textColor="@color/black_text_login"
-                    android:textSize="@dimen/x13" />
+                    android:textSize="@dimen/x18" />
 
                 <TextView
                     android:id="@+id/tv_manager_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/x5"
-                    android:layout_marginTop="@dimen/y75"
-                    android:layout_toRightOf="@+id/def_manager"
+                    android:layout_marginLeft="@dimen/x10"
+                    android:layout_marginTop="@dimen/y5"
+                    android:layout_below="@+id/def_manager"
                     android:includeFontPadding="false"
                     android:text="某某某 05"
                     android:textColor="@color/black_text_login"
-                    android:textSize="@dimen/x13" />
+                    android:textSize="@dimen/x18" />
 
 
             </RelativeLayout>

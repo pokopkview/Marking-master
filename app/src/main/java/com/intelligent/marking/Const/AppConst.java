@@ -39,6 +39,24 @@ public class AppConst {
 
     public static final String REMOVEDUCT = BASE_URL + "treat/duct_remove";
 
+    public static final String TREATINFO = BASE_URL + "treat/index";
 
+    public static final String MANAGER_ARE = BASE_URL + "area/index";
+
+    public static final String GETNURSEINFO = BASE_URL + "nurse/lists";
+
+    public static final String SAVENURSE = BASE_URL + "nurse/add";
+
+    public static final String REMOVENURSE = BASE_URL + "nurse/remove";
+
+    public static final String ICUDISPOSE = BASE_URL + "icu/dispose";
+
+    public static final String ICUONWAY = BASE_URL + "icu/onway";
+
+    public static final String ICUCOMPELETE = BASE_URL + "icu/complete";
+
+    public static final String REMOVESUBAREA = BASE_URL + "subarea/remove";
+
+    public static final String ADDTREAT = BASE_URL + "treat/add";
 
 }

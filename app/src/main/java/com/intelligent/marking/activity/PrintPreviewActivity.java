@@ -3,6 +3,7 @@ package com.intelligent.marking.activity;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -71,7 +72,7 @@ public class PrintPreviewActivity extends BaseActivity {
         back.setImageResource(R.mipmap.fanhui01);
         llLeftContainer.addView(back);
         tvHeaderTitle.setText("打印预览");
-        ivPrintq.setImageBitmap(MarkingApplication.createQRImage("testetstetstetst", 170, 170));
+        ivPrintq.setImageBitmap(MarkingApplication.createQRImage("testetstetstetst", 340, 340));
     }
 
     @OnClick(R.id.rl_print_btn)
@@ -84,7 +85,7 @@ public class PrintPreviewActivity extends BaseActivity {
         int width = bitmap.getWidth();
         int height = bitmap.getHeight();
         int newWidth = this.getResources().getDimensionPixelSize(R.dimen.x192);
-        int newHeight = this.getResources().getDimensionPixelSize(R.dimen.y80);
+        int newHeight = this.getResources().getDimensionPixelSize(R.dimen.y180);
 
         float scaleWidth = ((float) newWidth) / width;
         float scaleHeight = ((float) newHeight) / height;
@@ -92,8 +93,10 @@ public class PrintPreviewActivity extends BaseActivity {
         matrix.postScale(scaleWidth, scaleHeight);
 //        Bitmap newbm = Bitmap.createBitmap(bitmap, 0, 0, width, height, matrix,
 //                true);
+        int w = 31;//单位:mm
+        float widthcm = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_MM,w,getResources().getDisplayMetrics());
 
-        Bitmap newbm = Bitmap.createScaledBitmap(bitmap,newWidth,newHeight,true);
+        Bitmap newbm = Bitmap.createScaledBitmap(bitmap,newWidth,290,true);
         MarkingApplication.printBitmap(0, newbm);
     }
 

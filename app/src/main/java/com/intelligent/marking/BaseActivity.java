@@ -14,11 +14,13 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.intelligent.marking.Utils.PreferencesUtils;
 import com.intelligent.marking.Utils.ToastUtil;
-import com.intelligent.marking.common.utils.ClickUtils;
-import com.intelligent.marking.common.utils.StringUtil;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -48,11 +50,26 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected Map<String,Object> value = new HashMap<>();
 
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         hideStatusBar();
+        setStatic();
+    }
+
+    private void setStatic() {
+        hospitalName = PreferencesUtils.getString(this,PreferencesUtils.HOSPITALNAME);
+        areaName = PreferencesUtils.getString(this,PreferencesUtils.AREANAME);
+        departName = PreferencesUtils.getString(this,PreferencesUtils.DEPARTNAME);
+        subareaName = PreferencesUtils.getString(this,PreferencesUtils.SUBAREANAME);
+//        loginTvPosition.setText(PreferencesUtils.getString(this,PreferencesUtils.LOCATION);
+
+        hospitalNameid = PreferencesUtils.getInt(this,PreferencesUtils.HOSPITALNAMEID,-1);
+        areaNameid = PreferencesUtils.getInt(this,PreferencesUtils.AREANAMEID,-1);
+        departNameid = PreferencesUtils.getInt(this,PreferencesUtils.DEPARTNAMEID,-1);
+        subareaNameid = PreferencesUtils.getInt(this,PreferencesUtils.SUBAREANAMEID,-1);
+
+
     }
 
     @Override
@@ -81,6 +98,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected void HttpPost(String url, Map<String,Object> value, final int flag){
 //        showProgress();
+        System.out.println(new Gson().toJson(value));
         OkHttpUtils
                 .postString()
                 .url(url)
@@ -97,6 +115,16 @@ public abstract class BaseActivity extends AppCompatActivity {
                     public void onResponse(String response, int id) {
 //                        disMissPro();
                         System.out.println(response);
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            int i = (int) jsonObject.opt("status");
+                            if(i == 0){
+                                showToast((String) jsonObject.opt("info"));
+                                return;
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                         getCallBack(response,flag);
                     }
                 });

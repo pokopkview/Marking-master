@@ -56,6 +56,39 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
+
+
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/ll_add_nurse"
+        android:layout_marginTop="@dimen/y11"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/y49">
+
+        <EditText
+            android:layout_alignParentLeft="true"
+            android:textSize="@dimen/x15"
+            android:hint="请输入姓名"
+            android:id="@+id/et_add_name"
+            android:gravity="center"
+            android:background="@drawable/edit_blue_line_bg"
+            android:layout_width="@dimen/x204"
+            android:layout_height="match_parent" />
+        <EditText
+            android:layout_alignParentRight="true"
+            android:textColor="@color/black_text_login"
+            android:textSize="@dimen/x15"
+            android:hint="请输入工号"
+            android:id="@+id/et_add_no"
+            android:gravity="center"
+            android:background="@drawable/edit_blue_line_bg"
+            android:layout_width="@dimen/x157"
+            android:layout_height="match_parent" />
+
+
+    </RelativeLayout>
+
     <RelativeLayout
         android:id="@+id/rl_add_employee"
         android:layout_marginTop="@dimen/y23"
@@ -71,6 +104,7 @@
             android:layout_height="wrap_content" />
 
         <TextView
+            android:textSize="@dimen/x16"
             android:autoLink="all"
             android:layout_marginLeft="@dimen/x6"
             android:layout_toRightOf="@id/iv_add_employee"

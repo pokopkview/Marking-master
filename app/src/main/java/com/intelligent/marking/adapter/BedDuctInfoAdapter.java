@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.intelligent.marking.R;
+import com.intelligent.marking.net.model.BedInfoModel;
+import com.intelligent.marking.net.model.BedStatusModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,12 +20,13 @@ import java.util.List;
 public class BedDuctInfoAdapter extends RecyclerView.Adapter {
 
     Context mContext;
-    List<Object> data;
+    List<BedStatusModel> data;
 
 
-    public BedDuctInfoAdapter(Context context, List<Object> value) {
+    public BedDuctInfoAdapter(Context context, List<BedStatusModel> value) {
         mContext = context;
         data = value;
+        System.out.println("data:"+data.size());
     }
 
     @NonNull
@@ -35,17 +38,11 @@ public class BedDuctInfoAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-        ((bedDuctInfoViewHoler)viewHolder).tvBedName.setText(data.get(i).toString());
-        ((bedDuctInfoViewHoler) viewHolder).tvBedPatientInfo.setText("");
+        ((bedDuctInfoViewHoler)viewHolder).tvBedName.setText(data.get(i).getBed_name());
+        ((bedDuctInfoViewHoler) viewHolder).tvBedPatientInfo.setText(data.get(i).getName()+"\u3000"+mContext.getResources().getStringArray(R.array.sex)[data.get(i).getSex()]+"\u3000"+data.get(i).getAge()+"岁");
         ((bedDuctInfoViewHoler) viewHolder).rlBedPatientInfo.setLayoutManager(new LinearLayoutManager(mContext));
-        List<Object> value = new ArrayList<>();
-        value.add("1");
-        value.add("1");
-        value.add("1");
-        value.add("1");
-        DuctInfoSonItemAdapter adapter = new DuctInfoSonItemAdapter(mContext,value);
+        DuctInfoSonItemAdapter adapter = new DuctInfoSonItemAdapter(mContext,data.get(i).getData());
         ((bedDuctInfoViewHoler) viewHolder).rlBedPatientInfo.setAdapter(adapter);
-
     }
 
     @Override

@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.intelligent.marking.R;
 import com.intelligent.marking.net.model.BedInfoModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -25,6 +26,7 @@ public class RecyPagerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
 
     private List<BedInfoModel> date;
+    private List<BedInfoModel> datetemp = new ArrayList<>();
     private Context mContext;
     private LayoutInflater mLayoutInflate;
     private boolean isDetele = false;
@@ -37,6 +39,16 @@ public class RecyPagerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         notifyDataSetChanged();
     }
 
+    public void removeAllTempBed(int page){
+        datetemp.clear();
+        for(int j = page*20;j<((page+1)*20>date.size()?date.size():(page+1)*20);j++){
+            if(date.get(j).getLevel()==0){
+                datetemp.add(date.get(j));
+            }
+        }
+        date.removeAll(datetemp);
+        notifyDataSetChanged();
+    }
 
     public RecyPagerAdapter(Context context, List<BedInfoModel> date) {
         this.date = date;
@@ -63,34 +75,42 @@ public class RecyPagerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+        System.out.println("getIs_empty_bed:"+date.get(i).getIs_empty_bed());
         if (date.get(i).getIs_empty_bed() == 1) {
             ((BedInfoViewholer) viewHolder).bedNull.setVisibility(View.VISIBLE);
+            System.out.println(((BedInfoViewholer) viewHolder).bedNull.getVisibility());
             ((BedInfoViewholer) viewHolder).tvBedName.setVisibility(View.GONE);
             ((BedInfoViewholer) viewHolder).tvSexAge.setVisibility(View.GONE);
             ((BedInfoViewholer) viewHolder).bedBg.setBackgroundResource(R.drawable.bed_status_gray_selector);
             ((BedInfoViewholer) viewHolder).tvNumber.setText(date.get(i).getBed_name());
         } else {
             ((BedInfoViewholer) viewHolder).tvBedName.setText(date.get(i).getName());
-            ((BedInfoViewholer) viewHolder).tvSexAge.setText((date.get(i).getSex() == 0 ? "未知" : date.get(i).getSex() == 1 ? "男" : "女") + "-" + date.get(i).getAge() + "岁");
+            ((BedInfoViewholer) viewHolder).tvSexAge.setText((date.get(i).getSex() == 0 ? "未知-" : date.get(i).getSex() == 1 ? "男-" : "女-")+ date.get(i).getAge() + "岁");
             ((BedInfoViewholer) viewHolder).bedNull.setVisibility(View.GONE);
             ((BedInfoViewholer) viewHolder).tvNumber.setText(date.get(i).getBed_name());
             ((BedInfoViewholer) viewHolder).bedBg.setBackgroundResource(R.drawable.bed_status_selector);
         }
 
-        if(date.get(i).getLevel()==0){
+        if(date.get(i).getLevel()==0 && i<20){
             selectListener.hastempbed();
         }
 
         if(isoutMode){
             ((BedInfoViewholer) viewHolder).bedBg.setBackgroundResource(R.drawable.bed_status_yellow_selector);
         }else{
-            ((BedInfoViewholer) viewHolder).bedBg.setBackgroundResource(R.drawable.bed_status_selector);
+            if(date.get(i).getIs_empty_bed() == 1) {
+                ((BedInfoViewholer) viewHolder).bedBg.setBackgroundResource(R.drawable.bed_status_gray_selector);
+            }else{
+                ((BedInfoViewholer) viewHolder).bedBg.setBackgroundResource(R.drawable.bed_status_selector);
+            }
         }
 
         if(!isDetele){
             ((BedInfoViewholer) viewHolder).vDelete.setVisibility(View.GONE);
         }else{
-            ((BedInfoViewholer) viewHolder).vDelete.setVisibility(View.VISIBLE);
+            if(date.get(i).getLevel()==0) {//临时床位
+                ((BedInfoViewholer) viewHolder).vDelete.setVisibility(View.VISIBLE);
+            }
         }
         ((BedInfoViewholer) viewHolder).vDelete.setOnClickListener(new View.OnClickListener() {
             @Override

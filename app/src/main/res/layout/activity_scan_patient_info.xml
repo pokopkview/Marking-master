@@ -114,6 +114,26 @@
 
 
 
+    <RelativeLayout
+        android:id="@+id/rl_login"
+        android:layout_marginTop="@dimen/y262"
+        android:layout_marginLeft="@dimen/x17"
+        android:background="@drawable/yuan_lanse50"
+        android:layout_width="@dimen/x327"
+        android:layout_height="@dimen/y45">
 
+        <TextView
+            android:layout_centerInParent="true"
+            android:includeFontPadding="false"
+            android:layout_width="@dimen/x58"
+            android:layout_height="wrap_content"
+            android:id="@+id/login_tv01"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/y17"
+            android:gravity="center"
+            android:text="@string/confirm"
+            android:textColor="@color/white100"
+            android:textSize="@dimen/x18" />
+    </RelativeLayout>
 
 </LinearLayout>

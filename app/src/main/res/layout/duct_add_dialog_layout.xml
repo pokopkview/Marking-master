@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="@dimen/x310"
     android:background="@drawable/duct_add_bg_selector"
-    android:layout_height="@dimen/y260">
+    android:layout_height="wrap_content">
 
     <TextView
         android:includeFontPadding="false"
@@ -28,30 +28,39 @@
         android:layout_height="wrap_content" />
 
 
-
-    <TextView
-        android:id="@+id/tv_first"
-        android:layout_marginTop="@dimen/x111"
-        android:textSize="@dimen/x17"
-        android:textColor="@color/blue"
-        android:text="管"
-        android:gravity="center"
+    <ListView
+        android:scrollbars="none"
+        android:divider="@null"
+        android:id="@+id/lv_show_duct_type"
+        android:layout_marginTop="@dimen/y22"
+        android:layout_below="@id/tv_content"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/duct_add_text_selector"
-        android:layout_width="@dimen/x251"
-        android:layout_height="@dimen/y50" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
-    <TextView
-        android:id="@+id/tv_secend"
-        android:layout_marginTop="@dimen/x171"
-        android:textSize="@dimen/x17"
-        android:textColor="@color/blue"
-        android:text="膜"
-        android:gravity="center"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/duct_add_text_selector"
-        android:layout_width="@dimen/x251"
-        android:layout_height="@dimen/y50" />
+    <!--<TextView-->
+        <!--android:id="@+id/tv_first"-->
+        <!--android:layout_marginTop="@dimen/x111"-->
+        <!--android:textSize="@dimen/x17"-->
+        <!--android:textColor="@color/blue"-->
+        <!--android:text="管"-->
+        <!--android:gravity="center"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:background="@drawable/duct_add_text_selector"-->
+        <!--android:layout_width="@dimen/x251"-->
+        <!--android:layout_height="@dimen/y50" />-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/tv_secend"-->
+        <!--android:layout_marginTop="@dimen/x171"-->
+        <!--android:textSize="@dimen/x17"-->
+        <!--android:textColor="@color/blue"-->
+        <!--android:text="膜"-->
+        <!--android:gravity="center"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:background="@drawable/duct_add_text_selector"-->
+        <!--android:layout_width="@dimen/x251"-->
+        <!--android:layout_height="@dimen/y50" />-->
 
 
     <View

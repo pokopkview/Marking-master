@@ -171,7 +171,10 @@ public class PagingScrollHelper {
                     @Override
                     public void onAnimationEnd(Animator animation) {
                         //回调监听
+
+                        System.out.println("onPageChange:"+mOnPageChangeListener);
                         if (null != mOnPageChangeListener) {
+                            System.out.println("onPageChange:"+getPageIndex());
                             mOnPageChangeListener.onPageChange(getPageIndex());
                         }
                         //修复双击item bug

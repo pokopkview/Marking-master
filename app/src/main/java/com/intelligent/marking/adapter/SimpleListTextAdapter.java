@@ -15,23 +15,30 @@ import java.util.List;
 
 public class SimpleListTextAdapter extends BaseAdapter {
 
-    List<DepartModel> value ;
+    List<DepartModel> value = new ArrayList<>();
     Context mContext;
-    List<Boolean> selectstatus = new ArrayList<>();
-
-    public void setSelectItem(int position,int oldposition){
-        selectstatus.set(oldposition,false);
-        selectstatus.set(position,true);
-        notifyDataSetChanged();
-    }
+    int selecposition;
 
     public SimpleListTextAdapter(Context context,List<DepartModel> value){
         this.mContext = context;
-        this.value = value;
-        selectstatus.add(true);
-        for(int i = 1;i<value.size();i++){
-            selectstatus.add(false);
-        }
+        this.value.addAll(value);
+    }
+    public SimpleListTextAdapter(Context context){
+        this.mContext = context;
+    }
+
+    public void setData(List<DepartModel> value){
+        this.value.addAll(value);
+        notifyDataSetChanged();
+    }
+
+    public void setSelecposition(int selecposition){
+        this.selecposition = selecposition;
+        notifyDataSetChanged();
+    }
+
+    public List<DepartModel> getListDate(){
+        return value;
     }
 
     @Override
@@ -54,13 +61,13 @@ public class SimpleListTextAdapter extends BaseAdapter {
         View view = LayoutInflater.from(mContext).inflate(R.layout.simple_list_text_layout,parent,false);
         TextView departName = view.findViewById(R.id.tv_depart_name);
         View tab = view.findViewById(R.id.left_tab_view);
-        if(selectstatus.get(position)){
+        if(selecposition == position){
             departName.setTextColor(mContext.getResources().getColor(R.color.blue));
             tab.setVisibility(View.VISIBLE);
             view.setBackgroundColor(mContext.getResources().getColor(R.color.white));
         }else{
             departName.setTextColor(mContext.getResources().getColor(R.color.black_black));
-            tab.setVisibility(View.VISIBLE);
+            tab.setVisibility(View.INVISIBLE);
             view.setBackgroundColor(mContext.getResources().getColor(R.color.gray_listview));
         }
         departName.setText(value.get(position).getDepartment_name());
