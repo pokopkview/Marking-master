@@ -10,13 +10,23 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.intelligent.marking.BaseActivity;
+import com.intelligent.marking.Const.AppConst;
 import com.intelligent.marking.R;
 import com.intelligent.marking.application.MarkingApplication;
+import com.intelligent.marking.net.model.BaseModel;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
+
+import java.lang.reflect.Type;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Call;
 
 public class PrintPreviewActivity extends BaseActivity {
 
@@ -72,7 +82,14 @@ public class PrintPreviewActivity extends BaseActivity {
         back.setImageResource(R.mipmap.fanhui01);
         llLeftContainer.addView(back);
         tvHeaderTitle.setText("打印预览");
-        ivPrintq.setImageBitmap(MarkingApplication.createQRImage("testetstetstetst", 340, 340));
+        rlPrintBtn.setClickable(false);
+
+
+
+        value.clear();
+        value.put("treat_id",getIntent().getIntExtra("treatid",-1));
+        HttpPost(AppConst.GETSHARECODE,value,1);
+//        ivPrintq.setImageBitmap(MarkingApplication.createQRImage("testetstetstetst", 340, 340));
     }
 
     @OnClick(R.id.rl_print_btn)
@@ -103,6 +120,27 @@ public class PrintPreviewActivity extends BaseActivity {
 
     @Override
     public void getCallBack(String response, int flag) {
+        Type type;
+        switch (flag){
+            case 1:
+                type = new TypeToken<BaseModel<String>>(){}.getType();
+                BaseModel<String> stringBaseModel = new Gson().fromJson(response,type);
+                String codeurl = stringBaseModel.getData();
+                if(codeurl!=null&&!codeurl.isEmpty()){
+                    OkHttpUtils.get().url(codeurl).build().execute(new StringCallback() {
+                        @Override
+                        public void onError(Call call, Exception e, int id) {
+                            showToast(e.getMessage());
+                        }
 
+                        @Override
+                        public void onResponse(String response, int id) {
+                            System.out.println(response);
+                        }
+                    });
+                }
+                rlPrintBtn.setClickable(true);
+                break;
+        }
     }
 }

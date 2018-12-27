@@ -87,6 +87,7 @@ public class MarkingApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        Thread.setDefaultUncaughtExceptionHandler(new CrashHelper(this));
         HttpInterceptor interceptor = new HttpInterceptor();
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .connectTimeout(10000L, TimeUnit.MILLISECONDS)

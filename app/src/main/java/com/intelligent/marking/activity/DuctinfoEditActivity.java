@@ -268,7 +268,10 @@ public class DuctinfoEditActivity extends BaseActivity {
                 BaseModel<TreatInfoModel> msg = new Gson().fromJson(response,type);
                 showToast(msg.getInfo());
                 EventBus.getDefault().post(new MainActivityEvent(msg.getData()));
-                startActivity(new Intent(DuctinfoEditActivity.this, PrintPreviewActivity.class));
+                Intent printIntent = new Intent(DuctinfoEditActivity.this, PrintPreviewActivity.class);
+                printIntent.putExtra("treatid",ductid);
+
+                startActivity(printIntent);
                 break;
             case 2:
                 type = new TypeToken<BaseModel<List<NurseInfo>>>(){}.getType();

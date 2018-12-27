@@ -31,7 +31,7 @@ public class RecyPagerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private LayoutInflater mLayoutInflate;
     private boolean isDetele = false;
     private BedInfoViewholer.ItemSelectListener selectListener;
-    private boolean isLongclick = false;
+    public boolean isLongclick = false;
     private boolean isoutMode = false;
 
     public void removeItem(int pos){
@@ -122,7 +122,9 @@ public class RecyPagerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                selectListener.itemClick(i);
+                if(date.get(i).getIs_empty_bed()==0) {
+                    selectListener.itemClick(i);
+                }
             }
         });
 

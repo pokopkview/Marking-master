@@ -42,6 +42,8 @@ import com.intelligent.marking.widget.HorizontalPageLayoutManager;
 import com.intelligent.marking.widget.PagingItemDecoration;
 import com.intelligent.marking.widget.PagingScrollHelper;
 import com.intelligent.marking.widget.PopUpwindowUtil;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -56,6 +58,7 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Call;
 
 public class MainActivity extends BaseActivity implements PagingScrollHelper.onPageChangeListener, RecyPagerAdapter.BedInfoViewholer.ItemSelectListener {
 
@@ -118,6 +121,14 @@ public class MainActivity extends BaseActivity implements PagingScrollHelper.onP
             case 1:
                 String no = data.getStringExtra("bedno");
                 System.out.println("bedno:"+no);
+//                value.clear();
+//                value.put("subarea_id",subareaNameid);
+//                value.put("bed_sn",);
+//                value.put("bed_name",);
+//                value.put("name",);
+//                value.put("age",);
+//                value.put("sex",);
+//                HttpPost(AppConst.NULLBEDADDPAT,value,302);
                 for(BedInfoModel bedInfoModel : bedInfoModelList){
                     if(bedInfoModel.getBed_name().equals(no)){
 //                        bedInfoModel.setBed_name();
@@ -268,6 +279,19 @@ public class MainActivity extends BaseActivity implements PagingScrollHelper.onP
                     showToast(baseModel.getInfo());
                 }
                 PopUpwindowUtil.popupWindow.dismiss();
+                for (int i = currentpage * 20; i < (currentpage + 1) * 20; i++) {
+                    if (i >= bedInfoModelList.size()) {
+                        return;
+                    }
+                    if (bedInfoModelList.get(i).getLevel() == 0) {
+                        llOneKeyDelete.setVisibility(View.VISIBLE);
+                        llDeleteOne.setVisibility(View.VISIBLE);
+                        break;
+                    } else {
+                        llOneKeyDelete.setVisibility(View.GONE);
+                        llDeleteOne.setVisibility(View.GONE);
+                    }
+                }
                 break;
             case 4:
                 type = new TypeToken<BaseModel<List<TreatInfoModel>>>(){}.getType();
@@ -365,6 +389,39 @@ public class MainActivity extends BaseActivity implements PagingScrollHelper.onP
                     indicator.initIndicator(after+1);
                     indicator.setSelectedPage(currentpage);
                 }
+                for (int i = currentpage * 20; i < (currentpage + 1) * 20; i++) {
+                    if (i >= bedInfoModelList.size()) {
+                        return;
+                    }
+                    if (bedInfoModelList.get(i).getLevel() == 0) {
+                        llOneKeyDelete.setVisibility(View.VISIBLE);
+                        llDeleteOne.setVisibility(View.VISIBLE);
+                        break;
+                    } else {
+                        llOneKeyDelete.setVisibility(View.GONE);
+                        llDeleteOne.setVisibility(View.GONE);
+                    }
+                }
+                break;
+            case 302:
+                type = new TypeToken<BaseModel<String>>() {
+                }.getType();
+                BaseModel<String> addbed = new Gson().fromJson(response,type);
+                showToast(addbed.getInfo());
+
+//                for(BedInfoModel bedInfoModel : bedInfoModelList){
+//                    if(bedInfoModel.getBed_name().equals(no)){
+////                        bedInfoModel.setBed_name();
+//                        bedInfoModel.setIs_empty_bed(0);
+//                        bedInfoModel.setName("扫描");
+//                        bedInfoModel.setAge(20);
+//                        bedInfoModel.setCourse_id(addbed.getCourse_id());
+//                        bedInfoModel.setBed_name("测试");
+//                        bedInfoModel.setBed_name("bad");
+//                    }
+//                }
+//                adapter.notifyDataSetChanged();
+
                 break;
             case 22:
                 type = new TypeToken<BaseModel<List<String>>>() {
@@ -396,17 +453,34 @@ public class MainActivity extends BaseActivity implements PagingScrollHelper.onP
                 break;
             case R.id.ll_one_key_delete:
                 //TODO 一键删除 删除当前页面内的临时床位
+
                 List<String> deleteSn = new ArrayList<>();
                 for(int j = currentpage*20;j<(((currentpage+1)*20 > bedInfoModelList.size())? bedInfoModelList.size():(currentpage+1)*20);j++){
                     if(bedInfoModelList.get(j).getLevel()==0){
                         deleteSn.add(bedInfoModelList.get(j).getBed_sn());
                     }
                 }
-                value.clear();
-                value.put("subarea_id",subareaNameid);
-                value.put("bed_sn_list",deleteSn);
-                System.out.println(new Gson().toJson(value));
-                HttpPost(AppConst.REMOVEALLBED,value,301);
+
+                PopUpwindowUtil.createPopUpWindowDialogStyle(this, "删除本页所有临时床位", "本页包涵" + deleteSn.size() + "个床位", "删除", "取消", new PopUpwindowUtil.dialogClickListener() {
+                    @Override
+                    public void confirm() {
+                        value.clear();
+                        value.put("subarea_id",subareaNameid);
+                        value.put("bed_sn_list",deleteSn);
+                        System.out.println(new Gson().toJson(value));
+                        HttpPost(AppConst.REMOVEALLBED,value,301);
+                        PopUpwindowUtil.popupWindow.dismiss();
+                    }
+
+                    @Override
+                    public void cancle() {
+                        PopUpwindowUtil.popupWindow.dismiss();
+                    }
+                });
+                WindowManager.LayoutParams lp = MainActivity.this.getWindow().getAttributes();
+                lp.alpha = 0.4f;
+                MainActivity.this.getWindow().setAttributes(lp);
+                PopUpwindowUtil.popupWindow.showAtLocation(cusomSwipeView, Gravity.CENTER, 0, 0);
                 break;
         }
     }
@@ -435,6 +509,20 @@ public class MainActivity extends BaseActivity implements PagingScrollHelper.onP
 //        cusomSwipeView.addItemDecoration(pagingItemDecoration);
         cusomSwipeView.setAdapter(adapter);
         adapter.setListener(this);
+
+
+//        String str = "https://data.zusux.com/share/20_1";
+//        OkHttpUtils.get().url(str).build().execute(new StringCallback() {
+//                                                       @Override
+//                                                       public void onError(Call call, Exception e, int id) {
+//                                                           showToast(e.getMessage());
+//                                                       }
+//
+//                                                       @Override
+//                                                       public void onResponse(String response, int id) {
+//                                                           System.out.println(response);
+//                                                       }
+//                                                   });
         scrollHelper.setUpRecycleView(cusomSwipeView);
         scrollHelper.setOnPageChangeListener(this);
         cusomSwipeView.post(new Runnable() {
@@ -457,6 +545,7 @@ public class MainActivity extends BaseActivity implements PagingScrollHelper.onP
                     if (bedInfoModelList.get(i).getLevel() == 0) {
                         llOneKeyDelete.setVisibility(View.VISIBLE);
                         llDeleteOne.setVisibility(View.VISIBLE);
+                        break;
                     } else {
                         llOneKeyDelete.setVisibility(View.GONE);
                         llDeleteOne.setVisibility(View.GONE);
@@ -506,6 +595,7 @@ public class MainActivity extends BaseActivity implements PagingScrollHelper.onP
     @Override
     public void itemLongClick(int position) {
         dragPosition = position;
+        System.out.println("islongclick:"+islongclick);
         if (islongclick = true) {
             adapter.setOutHospital(true);
             vAddBed.setVisibility(View.GONE);
@@ -522,10 +612,15 @@ public class MainActivity extends BaseActivity implements PagingScrollHelper.onP
                                     , "出院", "取消", new PopUpwindowUtil.dialogClickListener() {
                                         @Override
                                         public void confirm() {
+                                            if(bedInfoModelList.get(position).getCourse_id()<1){
+                                                showToast("失败，床位为空");
+                                                PopUpwindowUtil.popupWindow.dismiss();
+                                            }
                                             value.clear();
                                             value.put("subarea_id", subareaNameid);
                                             value.put("bed_sn", bedInfoModelList.get(position).getBed_sn());
-                                            HttpPost(AppConst.REMOVEBED, value, 2);
+                                            value.put("course_id",bedInfoModelList.get(position).getCourse_id());
+                                            HttpPost(AppConst.OUTHOSPITAL, value, 2);
                                         }
 
                                         @Override
@@ -583,6 +678,7 @@ public class MainActivity extends BaseActivity implements PagingScrollHelper.onP
         if (islongclick) {
             vAddBed.setVisibility(View.VISIBLE);
             rlOutHospital.setVisibility(View.GONE);
+            adapter.isLongclick = false;
             islongclick = false;
             adapter.setOutHospital(false);
             return;

@@ -4,9 +4,6 @@ public class AppConst {
 
     private static final String BASE_URL = "https://data.zusux.com/api/";
 
-
-
-
     public static final String GETPROVINCE = BASE_URL+"region/index";
 
     public static final String GETHOSPITAL = BASE_URL+"linkage/hospital";
@@ -58,5 +55,9 @@ public class AppConst {
     public static final String REMOVESUBAREA = BASE_URL + "subarea/remove";
 
     public static final String ADDTREAT = BASE_URL + "treat/add";
+
+    public static final String GETSHARECODE = BASE_URL + "share/treat_code";
+
+    public static final String CHANGEPWD = BASE_URL + "asswd/index";
 
 }

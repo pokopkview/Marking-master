@@ -12,8 +12,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.intelligent.marking.BaseActivity;
+import com.intelligent.marking.Const.AppConst;
 import com.intelligent.marking.R;
+import com.intelligent.marking.net.model.BaseModel;
+
+import java.lang.reflect.Type;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -95,7 +101,11 @@ public class ResetPasswordActivity extends BaseActivity {
     public void confirmPwd(View view){
         //TODO 修改密码
         if(etNewPwd.getText().toString().equals(etConfirmPwd.getText().toString())){
-
+            value.clear();
+            value.put("oldpasswd",etOldPwd.getText().toString());
+            value.put("passwd",etNewPwd.getText().toString());
+            value.put("repasswd",etConfirmPwd.getText().toString());
+            HttpPost(AppConst.CHANGEPWD,value,1);
         }else{
             showToast("两次新密码填入不一致");
         }
@@ -103,6 +113,14 @@ public class ResetPasswordActivity extends BaseActivity {
 
     @Override
     public void getCallBack(String response, int flag) {
-
+        Type type;
+        switch (flag){
+            case 1:
+                type = new TypeToken<BaseModel<String>>(){}.getType();
+                BaseModel<String> changeModel = new Gson().fromJson(response,type);
+                showToast(changeModel.getInfo());
+                onBackPressed();
+                break;
+        }
     }
 }

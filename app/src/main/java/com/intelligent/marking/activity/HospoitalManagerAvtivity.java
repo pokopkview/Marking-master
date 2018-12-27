@@ -75,7 +75,8 @@ public class HospoitalManagerAvtivity extends BaseActivity {
     SimpleSubAreaAdapter simpleSubAreaAdapter;
     PopupWindow popupWindow;
     areaselectmanagerAdapter adapter;
-    int role =-1;
+    int role = -1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +86,9 @@ public class HospoitalManagerAvtivity extends BaseActivity {
         ImageView back = new ImageView(this);
         back.setImageResource(R.mipmap.fanhui01);
         llLeftContainer.addView(back);
+        ImageView changepwd = new ImageView(this);
+        changepwd.setImageResource(R.mipmap.change_pwd_icon);
+        llRightContainer.addView(changepwd);
         tvHeaderTitle.setText(hospitalName);
         setViewByRole();
 //        value.clear();
@@ -97,7 +101,7 @@ public class HospoitalManagerAvtivity extends BaseActivity {
         leftMenuLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(role>2){
+                if (role > 2) {
                     showToast("无权限!");
                     return;
                 }
@@ -117,8 +121,8 @@ public class HospoitalManagerAvtivity extends BaseActivity {
         });
 
 
-        role = PreferencesUtils.getInt(this,PreferencesUtils.ROLE,-1);
-        switch (role){
+        role = PreferencesUtils.getInt(this, PreferencesUtils.ROLE, -1);
+        switch (role) {
             case 1:
 //                value.clear();
 //                value.put("area_id", 1);
@@ -148,7 +152,6 @@ public class HospoitalManagerAvtivity extends BaseActivity {
         }
 
 
-
     }
 
 
@@ -159,7 +162,7 @@ public class HospoitalManagerAvtivity extends BaseActivity {
      */
     @OnClick(R.id.tv_edit_subarea)
     public void editSubArea(View view) {
-        if(leftMenuLv.getAdapter()== null){
+        if (leftMenuLv.getAdapter() == null) {
             showToast("请选择大区");
             return;
         }
@@ -171,7 +174,7 @@ public class HospoitalManagerAvtivity extends BaseActivity {
 
     @OnClick(R.id.tv_edit_employee)
     public void editSubareaEmployee(View view) {
-        if(leftMenuLv.getAdapter()== null){
+        if (leftMenuLv.getAdapter() == null) {
             showToast("请选择大区");
             return;
         }
@@ -189,9 +192,9 @@ public class HospoitalManagerAvtivity extends BaseActivity {
                 BaseModel<List<DepartModel>> model = new Gson().fromJson(response, type);
                 simpleListTextAdapter.setData(model.getData());
                 leftMenuLv.setAdapter(simpleListTextAdapter);
-                if(role > 1){
-                    for(int i = 0;i<model.getData().size();i++) {
-                        if(model.getData().get(i).getDepartment_name().equals(departName)) {
+                if (role > 1) {
+                    for (int i = 0; i < model.getData().size(); i++) {
+                        if (model.getData().get(i).getDepartment_name().equals(departName)) {
                             simpleListTextAdapter.setSelecposition(i);
                         }
                     }
@@ -246,7 +249,7 @@ public class HospoitalManagerAvtivity extends BaseActivity {
                         popupWindow.dismiss();
 
                         value.clear();
-                        value.put("area_id",listBaseModel.getData().get(position).getArea_id());
+                        value.put("area_id", listBaseModel.getData().get(position).getArea_id());
 //                        EventBus.getDefault().post(new ManagerLevelEvent(listBaseModel.getData().get(position).getArea_id(),-1));
                         HttpPost(AppConst.GETDEPARTMENT, value, 1);
                         tvSelectAre.setText(listBaseModel.getData().get(position).getArea_name());
@@ -270,7 +273,7 @@ public class HospoitalManagerAvtivity extends BaseActivity {
 
     @OnClick(R.id.rl_select_area)
     public void onViewClicked() {
-        if(rlSelectArea.getTag()!=null){
+        if (rlSelectArea.getTag() != null) {
             showToast("无权限!");
             return;
         }
@@ -281,5 +284,22 @@ public class HospoitalManagerAvtivity extends BaseActivity {
             adapter.setSelectItem(tvSelectAre.getText().toString());
             popupWindow.showAsDropDown(headerTitleRoot, 0, 0);
         }
+    }
+
+    @OnClick({R.id.ll_left_container, R.id.ll_right_container})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.ll_left_container:
+                onBackPressed();
+                break;
+            case R.id.ll_right_container:
+                startActivity(new Intent(HospoitalManagerAvtivity.this,ResetPasswordActivity.class));
+                break;
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
     }
 }

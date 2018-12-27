@@ -10,6 +10,15 @@ public class BaseModel<T> {
     private String uuid;
     private boolean flag;
     private InserDuctNurseInfo course_info;
+    private int course_id;
+
+    public int getCourse_id() {
+        return course_id;
+    }
+
+    public void setCourse_id(int course_id) {
+        this.course_id = course_id;
+    }
 
     public InserDuctNurseInfo getCourse_info() {
         return course_info;

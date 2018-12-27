@@ -4,9 +4,10 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
@@ -24,7 +25,6 @@ import com.intelligent.marking.R;
 import com.intelligent.marking.Utils.PreferencesUtils;
 import com.intelligent.marking.Utils.ToastUtil;
 import com.intelligent.marking.adapter.SelectMoreAdapter;
-import com.intelligent.marking.application.MarkingApplication;
 import com.intelligent.marking.net.model.AreaModel;
 import com.intelligent.marking.net.model.BaseModel;
 import com.intelligent.marking.net.model.DepartModel;
@@ -141,15 +141,13 @@ public class LoginActivity extends BaseActivity {
                 select_areaid = JsonData.options1Items.get(pid).getCity().get(cid).getArea().get(aid).getId();
 
 
-                PreferencesUtils.putInt(LoginActivity.this,PreferencesUtils.PROVINCE,pid);
-                PreferencesUtils.putInt(LoginActivity.this,PreferencesUtils.CITY,cid);
-                PreferencesUtils.putInt(LoginActivity.this,PreferencesUtils.ARE,aid);
+                PreferencesUtils.putInt(LoginActivity.this, PreferencesUtils.PROVINCE, pid);
+                PreferencesUtils.putInt(LoginActivity.this, PreferencesUtils.CITY, cid);
+                PreferencesUtils.putInt(LoginActivity.this, PreferencesUtils.ARE, aid);
 
-                PreferencesUtils.putInt(LoginActivity.this,PreferencesUtils.PROVINCEID,select_provinceid);
-                PreferencesUtils.putInt(LoginActivity.this,PreferencesUtils.CITYID,select_cityid);
-                PreferencesUtils.putInt(LoginActivity.this,PreferencesUtils.AREID,select_areaid);
-
-
+                PreferencesUtils.putInt(LoginActivity.this, PreferencesUtils.PROVINCEID, select_provinceid);
+                PreferencesUtils.putInt(LoginActivity.this, PreferencesUtils.CITYID, select_cityid);
+                PreferencesUtils.putInt(LoginActivity.this, PreferencesUtils.AREID, select_areaid);
 
 
                 Map<String, Object> value = new HashMap<>();
@@ -160,12 +158,12 @@ public class LoginActivity extends BaseActivity {
             }
         });
     }
+
     @OnClick(R.id.iv_left)
     public void clickLeft(View view) {
         //TODO 扫二维码
         startActivity(new Intent(this, PrintPreviewActivity.class));
     }
-
 
 
     @OnClick(R.id.rl_login)
@@ -177,25 +175,51 @@ public class LoginActivity extends BaseActivity {
         areaName = tvArea.getText().toString();
         departName = tvDepart.getText().toString();
         subareaName = tvSubarea.getText().toString();
+        if(tvHospital.getTag()!=null) {
+            hospitalNameid = (int) tvHospital.getTag();
+        }else{
+            showToast("请选择医院");
+            return;
+        }
 
-        hospitalNameid = (int)tvHospital.getTag();
-        areaNameid = (int)tvArea.getTag();
-        departNameid = (int)tvDepart.getTag();
-        subareaNameid = (int)tvSubarea.getTag();
+        if(tvArea.getTag()!=null) {
+            areaNameid = (int) tvArea.getTag();
+        }else{
+            showToast("请选择大区");
+            return;
+        }
+        if(tvDepart.getTag()!=null) {
+            departNameid = (int) tvDepart.getTag();
+        }else{
+            showToast("请选择科室");
+            return;
+        }
+        if(tvSubarea.getTag()!=null) {
+            subareaNameid = (int) tvSubarea.getTag();
+        }else{
+            showToast("请选择片区");
+            return;
+        }
 
-        Map<String,Object> value = new HashMap<>();
-        value.put("hospital_id",hospitalNameid);
-        value.put("area_id",areaNameid);
-        value.put("department_id",departNameid);
-        value.put("subarea_id",subareaNameid);
-        value.put("passwd",Integer.parseInt(etPwd.getText().toString()));
-        HttpPost(AppConst.LOGIN,value,5);
+        Map<String, Object> value = new HashMap<>();
+        value.put("hospital_id", hospitalNameid);
+        value.put("area_id", areaNameid);
+        value.put("department_id", departNameid);
+        value.put("subarea_id", subareaNameid);
+        if(!etPwd.getText().toString().isEmpty()) {
+            value.put("passwd", Integer.parseInt(etPwd.getText().toString()));
+        }else{
+            showToast("请输入密码");
+            return;
+        }
+
+        HttpPost(AppConst.LOGIN, value, 5);
     }
 
 
     @OnClick(R.id.login_tv_register)
     public void register(View view) {
-        startActivity(new Intent(this,RegisterActivity.class));
+        startActivity(new Intent(this, RegisterActivity.class));
 //        MarkingApplication.openScan();
     }
 
@@ -206,12 +230,12 @@ public class LoginActivity extends BaseActivity {
 //        if(depart!=null){
 //            setPopDate(tvDepart,departList,departListid,llSelectDepart);
 //        }else{
-        if(null == tvArea.getTag()){
+        if (null == tvArea.getTag()) {
             showToast("请先选择大区");
-        }else {
-            if(departList==null) {
+        } else {
+            if (departList == null) {
                 getDepart((int) tvArea.getTag());
-            }else{
+            } else {
                 setPopDate(tvDepart, departList, departListid, llSelectDepart);
             }
         }
@@ -225,12 +249,12 @@ public class LoginActivity extends BaseActivity {
 //        if(subArea!=null){
 //            setPopDate(tvSubarea,subList,subListid,llSelectMoreares);
 //        }else{
-        if(null == tvDepart.getTag()) {
+        if (null == tvDepart.getTag()) {
             showToast("请先选择科室");
-        }else {
-            if(subList==null) {
+        } else {
+            if (subList == null) {
                 getSubAre((int) tvDepart.getTag());
-            }else{
+            } else {
                 setPopDate(tvSubarea, subList, subListid, llSelectMoreares);
             }
         }
@@ -277,16 +301,31 @@ public class LoginActivity extends BaseActivity {
 
     @OnClick(R.id.ll_select_area)
     public void selectArea(View view) {
-        if(null == tvHospital.getTag()){
+        if (null == tvHospital.getTag()) {
             showToast("请先选择医院");
-        }else {
-            if(areList==null) {
+        } else {
+            if (areList == null) {
                 getAreaDate((int) tvHospital.getTag());
-            }else{
+            } else {
                 setPopDate(tvArea, areList, areListid, llSelectArea);
             }
         }
 //        }
+    }
+
+    @OnClick(R.id.iv_show_pwd)
+    public void onViewClicked() {
+        if((boolean)ivShowPwd.getTag()){
+            ivShowPwd.setImageResource(R.mipmap.mima02);
+            ivShowPwd.setTag(false);
+            etPwd.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+        }else{
+            ivShowPwd.setImageResource(R.mipmap.mima01);
+            ivShowPwd.setTag(true);
+            etPwd.setTransformationMethod(PasswordTransformationMethod.getInstance());
+        }
+
+
     }
 
     class ScanBroadcastReceiver extends BroadcastReceiver {
@@ -304,7 +343,8 @@ public class LoginActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_new);
         ButterKnife.bind(this);
-        etPwd.setText("123456");
+        ivShowPwd.setTag(true);
+//        etPwd.setText("123456");
         loginModel = new LoginModel();
         initView();
         scanBroadcastReceiver = new ScanBroadcastReceiver();
@@ -312,21 +352,21 @@ public class LoginActivity extends BaseActivity {
         intentFilter.addAction("com.qs.scancode");
         this.registerReceiver(scanBroadcastReceiver, intentFilter);
 //
-        if(PreferencesUtils.getInt(this,PreferencesUtils.SUBAREANAMEID,-1)!=-1){
-            tvHospital.setText(PreferencesUtils.getString(this,PreferencesUtils.HOSPITALNAME));
-            tvArea.setText(PreferencesUtils.getString(this,PreferencesUtils.AREANAME));
-            tvDepart.setText(PreferencesUtils.getString(this,PreferencesUtils.DEPARTNAME));
-            tvSubarea.setText(PreferencesUtils.getString(this,PreferencesUtils.SUBAREANAME));
-            loginTvPosition.setText(PreferencesUtils.getString(this,PreferencesUtils.LOCATION));
+        if (PreferencesUtils.getInt(this, PreferencesUtils.SUBAREANAMEID, -1) != -1) {
+            tvHospital.setText(PreferencesUtils.getString(this, PreferencesUtils.HOSPITALNAME));
+            tvArea.setText(PreferencesUtils.getString(this, PreferencesUtils.AREANAME));
+            tvDepart.setText(PreferencesUtils.getString(this, PreferencesUtils.DEPARTNAME));
+            tvSubarea.setText(PreferencesUtils.getString(this, PreferencesUtils.SUBAREANAME));
+            loginTvPosition.setText(PreferencesUtils.getString(this, PreferencesUtils.LOCATION));
 
-            tvHospital.setTag(PreferencesUtils.getInt(this,PreferencesUtils.HOSPITALNAMEID,-1));
-            tvArea.setTag(PreferencesUtils.getInt(this,PreferencesUtils.AREANAMEID,-1));
-            tvDepart.setTag(PreferencesUtils.getInt(this,PreferencesUtils.DEPARTNAMEID,-1));
-            tvSubarea.setTag(PreferencesUtils.getInt(this,PreferencesUtils.SUBAREANAMEID,-1));
+            tvHospital.setTag(PreferencesUtils.getInt(this, PreferencesUtils.HOSPITALNAMEID, -1));
+            tvArea.setTag(PreferencesUtils.getInt(this, PreferencesUtils.AREANAMEID, -1));
+            tvDepart.setTag(PreferencesUtils.getInt(this, PreferencesUtils.DEPARTNAMEID, -1));
+            tvSubarea.setTag(PreferencesUtils.getInt(this, PreferencesUtils.SUBAREANAMEID, -1));
             value.clear();
-            value.put("province_id", PreferencesUtils.getInt(this,PreferencesUtils.PROVINCEID,-1));
-            value.put("city_id", PreferencesUtils.getInt(this,PreferencesUtils.CITYID,-1));
-            value.put("district_id", PreferencesUtils.getInt(this,PreferencesUtils.AREID,-1));
+            value.put("province_id", PreferencesUtils.getInt(this, PreferencesUtils.PROVINCEID, -1));
+            value.put("city_id", PreferencesUtils.getInt(this, PreferencesUtils.CITYID, -1));
+            value.put("district_id", PreferencesUtils.getInt(this, PreferencesUtils.AREID, -1));
             HttpPost(AppConst.GETHOSPITAL, value, 11);
 
         }
@@ -436,32 +476,33 @@ public class LoginActivity extends BaseActivity {
                 setPopDate(tvDepart, departList, departListid, llSelectDepart);
                 break;
             case 5:
-                type = new TypeToken<BaseModel<List<String>>>(){}.getType();
-                BaseModel<List<String>> loginmodel = new Gson().fromJson(response,type);
-                if(loginmodel.getStatus()==0){
+                type = new TypeToken<BaseModel<List<String>>>() {
+                }.getType();
+                BaseModel<List<String>> loginmodel = new Gson().fromJson(response, type);
+                if (loginmodel.getStatus() == 0) {
                     showToast(loginmodel.getInfo());
-                }else {
-                    PreferencesUtils.putString(this,PreferencesUtils.LOCATION,loginTvPosition.getText().toString());
-                    PreferencesUtils.putString(this,PreferencesUtils.UUID,loginmodel.getUuid());
-                    PreferencesUtils.putString(this,PreferencesUtils.HOSPITALNAME,hospitalName);
-                    PreferencesUtils.putString(this,PreferencesUtils.AREANAME,areaName);
-                    PreferencesUtils.putString(this,PreferencesUtils.DEPARTNAME,departName);
-                    PreferencesUtils.putString(this,PreferencesUtils.SUBAREANAME,subareaName);
-                    PreferencesUtils.putInt(this,PreferencesUtils.HOSPITALNAMEID,hospitalNameid);
-                    PreferencesUtils.putInt(this,PreferencesUtils.AREANAMEID,areaNameid);
-                    PreferencesUtils.putInt(this,PreferencesUtils.DEPARTNAMEID,departNameid);
-                    PreferencesUtils.putInt(this,PreferencesUtils.SUBAREANAMEID,subareaNameid);
-                    if(areaNameid==0 && departNameid==0 && departNameid==0 && subareaNameid == 0){
-                        PreferencesUtils.putInt(this,PreferencesUtils.ROLE,1);//医院总账户
+                } else {
+                    PreferencesUtils.putString(this, PreferencesUtils.LOCATION, loginTvPosition.getText().toString());
+                    PreferencesUtils.putString(this, PreferencesUtils.UUID, loginmodel.getUuid());
+                    PreferencesUtils.putString(this, PreferencesUtils.HOSPITALNAME, hospitalName);
+                    PreferencesUtils.putString(this, PreferencesUtils.AREANAME, areaName);
+                    PreferencesUtils.putString(this, PreferencesUtils.DEPARTNAME, departName);
+                    PreferencesUtils.putString(this, PreferencesUtils.SUBAREANAME, subareaName);
+                    PreferencesUtils.putInt(this, PreferencesUtils.HOSPITALNAMEID, hospitalNameid);
+                    PreferencesUtils.putInt(this, PreferencesUtils.AREANAMEID, areaNameid);
+                    PreferencesUtils.putInt(this, PreferencesUtils.DEPARTNAMEID, departNameid);
+                    PreferencesUtils.putInt(this, PreferencesUtils.SUBAREANAMEID, subareaNameid);
+                    if (areaNameid == 0 && departNameid == 0 && departNameid == 0 && subareaNameid == 0) {
+                        PreferencesUtils.putInt(this, PreferencesUtils.ROLE, 1);//医院总账户
                         startActivity(new Intent(LoginActivity.this, HospoitalManagerAvtivity.class));
-                    }else if(areaNameid!=0 && departNameid==0 && subareaNameid == 0){
-                        PreferencesUtils.putInt(this,PreferencesUtils.ROLE,2);//大区总账户
+                    } else if (areaNameid != 0 && departNameid == 0 && subareaNameid == 0) {
+                        PreferencesUtils.putInt(this, PreferencesUtils.ROLE, 2);//大区总账户
                         startActivity(new Intent(LoginActivity.this, HospoitalManagerAvtivity.class));
-                    }else if(areaNameid!=0 && departNameid!=0 && subareaNameid == 0){
-                        PreferencesUtils.putInt(this,PreferencesUtils.ROLE,3);//科室总账户
+                    } else if (areaNameid != 0 && departNameid != 0 && subareaNameid == 0) {
+                        PreferencesUtils.putInt(this, PreferencesUtils.ROLE, 3);//科室总账户
                         startActivity(new Intent(LoginActivity.this, HospoitalManagerAvtivity.class));
-                    }else if(areaNameid!=0 && departNameid!=0 && subareaNameid != 0){
-                        PreferencesUtils.putInt(this,PreferencesUtils.ROLE,4);//区域总账户
+                    } else if (areaNameid != 0 && departNameid != 0 && subareaNameid != 0) {
+                        PreferencesUtils.putInt(this, PreferencesUtils.ROLE, 4);//区域总账户
                         startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     }
                     finish();
@@ -536,18 +577,18 @@ public class LoginActivity extends BaseActivity {
             public void itemclick(int pos, View view) {
                 textView.setText(date.get(pos));
                 textView.setTag(ids.get(pos));
-                if(rootView.equals(llSelectArea)){
+                if (rootView.equals(llSelectArea)) {
                     llSelectDepart.setClickable(true);
                     llSelectMoreares.setClickable(true);
                     Map<String, Object> value = new HashMap();
                     value.put("area_id", (int) tvArea.getTag());
                     HttpPost(AppConst.GETDEPARTMENT, value, 14);
-                }else if(rootView.equals(llSelectDepart)){
+                } else if (rootView.equals(llSelectDepart)) {
                     llSelectMoreares.setClickable(true);
                     Map<String, Object> value = new HashMap();
                     value.put("department_id", (int) tvDepart.getTag());
                     HttpPost(AppConst.GETSUBAREA, value, 13);
-                }else if(rootView.equals(llSelectHist)){
+                } else if (rootView.equals(llSelectHist)) {
                     Map<String, Object> value = new HashMap<>();
                     value.put("hospital_id", (int) tvHospital.getTag());
                     HttpPost(AppConst.GETAREA, value, 12);
@@ -565,14 +606,14 @@ public class LoginActivity extends BaseActivity {
                 } else {
                     textView.setText("全部");
                     textView.setTag(0);
-                    if(rootView.equals(llSelectArea)){
+                    if (rootView.equals(llSelectArea)) {
                         llSelectDepart.setClickable(false);
                         tvDepart.setText("全部");
                         tvDepart.setTag(0);
                         tvSubarea.setText("全部");
                         tvSubarea.setTag(0);
                         llSelectMoreares.setClickable(false);
-                    }else if(rootView.equals(llSelectDepart)){
+                    } else if (rootView.equals(llSelectDepart)) {
                         llSelectMoreares.setClickable(false);
                         tvSubarea.setText("全部");
                         tvSubarea.setTag(0);
