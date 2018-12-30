@@ -15,6 +15,7 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.DragEvent;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -31,12 +32,14 @@ import com.google.gson.reflect.TypeToken;
 import com.intelligent.marking.BaseActivity;
 import com.intelligent.marking.Const.AppConst;
 import com.intelligent.marking.R;
+import com.intelligent.marking.Utils.ToastUtil;
 import com.intelligent.marking.adapter.RecyPagerAdapter;
 import com.intelligent.marking.application.MarkingApplication;
 import com.intelligent.marking.common.view.PageIndicatorView;
 import com.intelligent.marking.eventbus.MainActivityEvent;
 import com.intelligent.marking.net.model.BaseModel;
 import com.intelligent.marking.net.model.BedInfoModel;
+import com.intelligent.marking.net.model.ScanPatientInfoModel;
 import com.intelligent.marking.net.model.TreatInfoModel;
 import com.intelligent.marking.widget.HorizontalPageLayoutManager;
 import com.intelligent.marking.widget.PagingItemDecoration;
@@ -49,6 +52,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.io.Serializable;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -58,6 +62,7 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import hugo.weaving.DebugLog;
 import okhttp3.Call;
 
 public class MainActivity extends BaseActivity implements PagingScrollHelper.onPageChangeListener, RecyPagerAdapter.BedInfoViewholer.ItemSelectListener {
@@ -109,6 +114,7 @@ public class MainActivity extends BaseActivity implements PagingScrollHelper.onP
             System.out.println("scan:" + scanmsg);
             Intent intents = new Intent(MainActivity.this,ScanPatientInfoActivity.class);
             intents.putExtra("patientinfo",scanmsg);
+            intents.putExtra("bedinfo",(Serializable) bedInfoModelList);
             startActivityForResult(intents,1);
 //            tv.setText(text1);
         }
@@ -121,6 +127,7 @@ public class MainActivity extends BaseActivity implements PagingScrollHelper.onP
             case 1:
                 String no = data.getStringExtra("bedno");
                 System.out.println("bedno:"+no);
+                ScanPatientInfoModel model = (ScanPatientInfoModel) data.getSerializableExtra("patientinfo");
 //                value.clear();
 //                value.put("subarea_id",subareaNameid);
 //                value.put("bed_sn",);
@@ -131,13 +138,12 @@ public class MainActivity extends BaseActivity implements PagingScrollHelper.onP
 //                HttpPost(AppConst.NULLBEDADDPAT,value,302);
                 for(BedInfoModel bedInfoModel : bedInfoModelList){
                     if(bedInfoModel.getBed_name().equals(no)){
-//                        bedInfoModel.setBed_name();
-                        bedInfoModel.setIs_empty_bed(0);
-                        bedInfoModel.setName("扫描");
-                        bedInfoModel.setAge(20);
-                        bedInfoModel.setCourse_id(1);
-                        bedInfoModel.setBed_name("测试");
-                        bedInfoModel.setBed_name("bad");
+                        bedInfoModel.setIs_empty_bed(0);//不是空床
+                        bedInfoModel.setSex(model.getSex());
+                        bedInfoModel.setName(model.getName());
+                        bedInfoModel.setAge(model.getAge());
+//                        bedInfoModel.setCourse_id(model.getCourse_id());
+                        bedInfoModel.setBed_name(model.getBed_name());
                     }
                 }
                 adapter.notifyDataSetChanged();
@@ -207,6 +213,7 @@ public class MainActivity extends BaseActivity implements PagingScrollHelper.onP
         addbacktreatInfoModel = messageEvent.getMessage();
     }
 
+    @DebugLog
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -496,6 +503,7 @@ public class MainActivity extends BaseActivity implements PagingScrollHelper.onP
     //是否已经长按
     boolean islongclick = false;
 
+    @DebugLog
     private void initRecyclerView(List<BedInfoModel> bedInfoModelList) {
 //        GridLayoutManager gridLayoutManager = new GridLayoutManager(this,5);
         //构造HorizontalPageLayoutManager,传入行数和列数
@@ -683,11 +691,24 @@ public class MainActivity extends BaseActivity implements PagingScrollHelper.onP
             adapter.setOutHospital(false);
             return;
         }
-        super.onBackPressed();
+        exitApp(2000);
     }
 
     @OnClick(R.id.rl_out_hospital)
     public void setRlOutHospital(View view) {
 //        adapter.removeItem(29);
     }
+
+    private void exitApp(long timeInterval) {
+        if(System.currentTimeMillis() - firstTime >= timeInterval){
+            showToast("再按一次退出程序");
+            firstTime = System.currentTimeMillis();
+        }else {
+            finish();// 销毁当前activity
+            System.exit(0);// 完全退出应用
+        }
+    }
+
+    private long firstTime;// 记录点击返回时第一次的时间毫秒值
+
 }

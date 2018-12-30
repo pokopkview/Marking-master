@@ -60,4 +60,6 @@ public class AppConst {
 
     public static final String CHANGEPWD = BASE_URL + "asswd/index";
 
+    public static final String ADDPATIENT = BASE_URL +"course/addbed";
+
 }

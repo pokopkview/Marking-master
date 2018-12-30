@@ -370,7 +370,7 @@ public class MarkingApplication extends Application {
         mComFd = mCommonApi.openCom("/dev/ttyMT1", 115200, 8, 'N', 1);
 
         if (mComFd > 0) {
-            Toast.makeText(instance, "init success", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(instance, "init success", Toast.LENGTH_SHORT).show();
         }
     }
 

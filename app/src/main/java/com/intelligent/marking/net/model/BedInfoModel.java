@@ -1,8 +1,9 @@
 package com.intelligent.marking.net.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class BedInfoModel {
+public class BedInfoModel implements Serializable {
 
     /**
      * bed_sn : 975ca8804565c1a569450d61090b2743

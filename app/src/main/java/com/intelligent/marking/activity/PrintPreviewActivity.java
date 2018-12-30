@@ -18,6 +18,7 @@ import com.intelligent.marking.Const.AppConst;
 import com.intelligent.marking.R;
 import com.intelligent.marking.application.MarkingApplication;
 import com.intelligent.marking.net.model.BaseModel;
+import com.intelligent.marking.net.model.BedStatusModel;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -89,7 +90,9 @@ public class PrintPreviewActivity extends BaseActivity {
         value.clear();
         value.put("treat_id",getIntent().getIntExtra("treatid",-1));
         HttpPost(AppConst.GETSHARECODE,value,1);
-//        ivPrintq.setImageBitmap(MarkingApplication.createQRImage("testetstetstetst", 340, 340));
+//        ivPrintq.setImageBitmap(MarkingApplication.createQRImage("https://data.zusux.com/share/20_1", 340, 340));
+//
+//        rlPrintBtn.setClickable(true);
     }
 
     @OnClick(R.id.rl_print_btn)
@@ -110,7 +113,7 @@ public class PrintPreviewActivity extends BaseActivity {
         matrix.postScale(scaleWidth, scaleHeight);
 //        Bitmap newbm = Bitmap.createBitmap(bitmap, 0, 0, width, height, matrix,
 //                true);
-        int w = 31;//单位:mm
+        int w = 29;//单位:mm
         float widthcm = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_MM,w,getResources().getDisplayMetrics());
 
         Bitmap newbm = Bitmap.createScaledBitmap(bitmap,newWidth,290,true);
@@ -126,19 +129,8 @@ public class PrintPreviewActivity extends BaseActivity {
                 type = new TypeToken<BaseModel<String>>(){}.getType();
                 BaseModel<String> stringBaseModel = new Gson().fromJson(response,type);
                 String codeurl = stringBaseModel.getData();
-                if(codeurl!=null&&!codeurl.isEmpty()){
-                    OkHttpUtils.get().url(codeurl).build().execute(new StringCallback() {
-                        @Override
-                        public void onError(Call call, Exception e, int id) {
-                            showToast(e.getMessage());
-                        }
-
-                        @Override
-                        public void onResponse(String response, int id) {
-                            System.out.println(response);
-                        }
-                    });
-                }
+                Bitmap qrbitmap = MarkingApplication.createQRImage(codeurl,340, 340);
+                ivPrintq.setImageBitmap(qrbitmap);
                 rlPrintBtn.setClickable(true);
                 break;
         }

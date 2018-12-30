@@ -1,29 +1,17 @@
 package com.intelligent.marking.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
-import android.support.constraint.ConstraintLayout;
-import android.text.TextUtils;
 import android.view.KeyEvent;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.intelligent.marking.BaseActivity;
 import com.intelligent.marking.Const.AppConst;
 import com.intelligent.marking.R;
 import com.intelligent.marking.common.utils.TargetActivityUtils;
-import com.intelligent.marking.net.model.AreaJsonModel;
-import com.intelligent.marking.net.model.BaseAreaModel;
-import com.intelligent.marking.net.model.BaseModel;
-import com.intelligent.marking.net.model.HospitalModel;
 import com.intelligent.marking.net.model.LocationInfoModel;
 
-import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,11 +19,11 @@ import java.util.Map;
 /**
  * 欢迎引导页面
  */
-public class WelcomeInterfaceActivity  extends BaseActivity implements Animation.AnimationListener{
-    private ImageView iv_wi_image;
-    private ConstraintLayout clBg;
-
-    private Animation atAlpha;//开端动画
+public class WelcomeInterfaceActivity  extends BaseActivity{
+//    private ImageView iv_wi_image;
+//    private ConstraintLayout clBg;
+//
+//    private Animation atAlpha;//开端动画
 
     private int count = 0;
     private int count1 = 0;
@@ -109,35 +97,30 @@ public class WelcomeInterfaceActivity  extends BaseActivity implements Animation
 //                break;
 //        }
     }
+    Handler countHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            skipActivity();
+        }
+    };
 
     private void initView() {
-        iv_wi_image = (ImageView)findViewById(R.id.iv_wi_image);
-        clBg = (ConstraintLayout)findViewById(R.id.cl_bg);
+        countHandler.sendEmptyMessageDelayed(1,2500);
+//        iv_wi_image = (ImageView)findViewById(R.id.iv_wi_image);
+//        clBg = (ConstraintLayout)findViewById(R.id.cl_bg);
+//
+//        atAlpha = AnimationUtils.loadAnimation(this, R.anim.zoom);//初始化动画
+//        atAlpha.setFillEnabled(true); // 启动Fill保持
+//        atAlpha.setFillAfter(true); // 设置动画的最后一帧是保持在View上面
+//        clBg.setAnimation(atAlpha);//给img设置动画
+//        atAlpha.setAnimationListener(this); // 为动画设置监听
 
-        atAlpha = AnimationUtils.loadAnimation(this, R.anim.zoom);//初始化动画
-        atAlpha.setFillEnabled(true); // 启动Fill保持
-        atAlpha.setFillAfter(true); // 设置动画的最后一帧是保持在View上面
-        clBg.setAnimation(atAlpha);//给img设置动画
-        atAlpha.setAnimationListener(this); // 为动画设置监听
-    }
-
-    @Override
-    public void onAnimationStart(Animation animation) {
 
     }
 
-    @Override
-    public void onAnimationEnd(Animation animation) {
-        skipActivity();
-    }
-
-    @Override
-    public void onAnimationRepeat(Animation animation) {
-
-    }
 
     private void skipActivity() {
-
         TargetActivityUtils.intent(WelcomeInterfaceActivity.this,LoginActivity.class,null,true);
 
 //        //判断是够有权限
@@ -182,8 +165,6 @@ public class WelcomeInterfaceActivity  extends BaseActivity implements Animation
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (atAlpha != null) {
-            atAlpha.cancel();
-        }
+        countHandler.removeMessages(1);
     }
 }
