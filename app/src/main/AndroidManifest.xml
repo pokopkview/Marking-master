@@ -8,8 +8,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.NFC" />
-    <!-- 存储权限                    SD卡读写权限 -->
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <uses-feature
         android:name="android.hardware.nfc"
@@ -48,11 +47,11 @@
         <!-- <activity android:name=".activity.testActivity"></activity> -->
         <activity android:name=".activity.ChangeBedInfoActivity" />
 
-        <!--<service android:name=".service.IMyAidlInterface">-->
-            <!--<intent-filter>-->
-                <!--<action android:name="COM.QS.DEMO.QSSERVICE" />-->
-            <!--</intent-filter>-->
-        <!--</service>-->
+        <!-- <service android:name=".service.IMyAidlInterface"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="COM.QS.DEMO.QSSERVICE" /> -->
+        <!-- </intent-filter> -->
+        <!-- </service> -->
 
         <activity android:name=".activity.ScanPatientInfoActivity" />
         <activity android:name=".activity.HospoitalManagerAvtivity" />
@@ -60,10 +59,25 @@
         <activity android:name=".activity.SubAreaEmployeeActivity" />
         <activity android:name=".activity.BedInfoActivity" />
         <activity android:name=".activity.SelectDuctActivity" />
-        <activity android:name=".activity.DuctinfoEditActivity"
-            android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <activity
+            android:name=".activity.DuctinfoEditActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity android:name=".activity.PrintPreviewActivity" />
-        <activity android:name=".activity.ResetPasswordActivity"></activity>
+        <activity android:name=".activity.ResetPasswordActivity" />
+
+        <receiver
+            android:name=".service.BootStartReceicer"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
+
+        <activity android:name=".activity.EmptyBedAddPatientActivity"></activity>
     </application>
 
 </manifest>

@@ -1,17 +1,24 @@
 package com.intelligent.marking.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.util.Base64;
 import android.view.KeyEvent;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.intelligent.marking.BaseActivity;
 import com.intelligent.marking.Const.AppConst;
 import com.intelligent.marking.R;
+import com.intelligent.marking.Utils.PreferencesUtils;
 import com.intelligent.marking.common.utils.TargetActivityUtils;
+import com.intelligent.marking.net.model.BaseModel;
 import com.intelligent.marking.net.model.LocationInfoModel;
 
+import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,13 +43,55 @@ public class WelcomeInterfaceActivity  extends BaseActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_interface);
         initView();
-        Map<String,Object> value = new HashMap<>();
-        value.put("id",0);
-        HttpPost(AppConst.GETPROVINCE,value,1);
+        long sl = PreferencesUtils.getLong(this,PreferencesUtils.TIME,1l);
+        System.out.println(PreferencesUtils.MOUNTH);
+        System.out.println(System.currentTimeMillis());
+        System.out.println("wel"+sl+(System.currentTimeMillis()-PreferencesUtils.getLong(this,PreferencesUtils.TIME,1l)<PreferencesUtils.MOUNTH));
+        System.out.println("wel"+PreferencesUtils.getString(this,PreferencesUtils.PWD));
+
+        if(PreferencesUtils.getLong(this,PreferencesUtils.TIME,1l)!=1l
+                &&System.currentTimeMillis()-PreferencesUtils.getLong(this,PreferencesUtils.TIME,1l)<PreferencesUtils.MOUNTH
+                &&PreferencesUtils.getString(this,PreferencesUtils.PWD)!=null){
+            value.clear();
+            value.put("hospital_id", PreferencesUtils.getInt(this,PreferencesUtils.HOSPITALNAMEID));
+            value.put("area_id", PreferencesUtils.getInt(this,PreferencesUtils.AREANAMEID));
+            value.put("department_id", PreferencesUtils.getInt(this,PreferencesUtils.DEPARTNAMEID));
+            value.put("subarea_id", PreferencesUtils.getInt(this,PreferencesUtils.SUBAREANAMEID));
+            String str = PreferencesUtils.getString(this,PreferencesUtils.PWD);
+            String pwd = new String(Base64.decode(str.getBytes(),Base64.DEFAULT));
+            value.put("passwd",Integer.parseInt(pwd));
+            HttpPost(AppConst.LOGIN,value,15);
+        }
+//        Map<String,Object> value = new HashMap<>();
+//        value.put("id",0);
+//        HttpPost(AppConst.GETPROVINCE,value,1);
     }
 
     @Override
     public void getCallBack(String response, int flag) {
+        Type type;
+        switch (flag){
+            case 15:
+                type = new TypeToken<BaseModel<List<String>>>() {
+                }.getType();
+                BaseModel<List<String>> loginmodels = new Gson().fromJson(response, type);
+                if (loginmodels.getStatus() == 0) {
+                    showToast(loginmodels.getInfo());
+                } else {
+                    switch (PreferencesUtils.getInt(this,PreferencesUtils.ROLE)){
+                        case 1:
+                        case 2:
+                        case 3:
+                            startActivity(new Intent(WelcomeInterfaceActivity.this, HospoitalManagerAvtivity.class));
+                            break;
+                        case 4:
+                            startActivity(new Intent(WelcomeInterfaceActivity.this, MainActivity.class));
+                            break;
+                    }
+                    finish();
+                }
+                break;
+        }
 //        Type type = new TypeToken<BaseModel<List<LocationInfoModel>>>() {
 //        }.getType();
 //        switch (flag){

@@ -46,8 +46,6 @@ public class ChangeBedInfoActivity extends BaseActivity {
         ImageView imageView = new ImageView(this);
         imageView.setImageResource(R.mipmap.fanhui01);
         llLeftContainer.addView(imageView);
-
-
     }
 
     @Override

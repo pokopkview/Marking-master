@@ -123,6 +123,9 @@ public class MainActivity extends BaseActivity implements PagingScrollHelper.onP
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if(data == null){
+            return;
+        }
         switch (requestCode){
             case 1:
                 String no = data.getStringExtra("bedno");
@@ -148,6 +151,9 @@ public class MainActivity extends BaseActivity implements PagingScrollHelper.onP
                 }
                 adapter.notifyDataSetChanged();
 
+                break;
+            case 2:
+                getDate();
                 break;
         }
 
@@ -665,6 +671,13 @@ public class MainActivity extends BaseActivity implements PagingScrollHelper.onP
     public void hastempbed() {
         llOneKeyDelete.setVisibility(View.VISIBLE);
         llDeleteOne.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void emptyBedClick(int pos) {
+        Intent intent = new Intent(this,EmptyBedAddPatientActivity.class);
+        intent.putExtra("bedinfo",bedInfoModelList.get(pos));
+        startActivityForResult(intent,2);
     }
 
     @Override

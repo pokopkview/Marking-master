@@ -84,6 +84,11 @@ public class ScanPatientInfoActivity extends BaseActivity {
     }
 
     @Override
+    public void onBackPressed() {
+        finish();
+    }
+
+    @Override
     public void getCallBack(String response, int flag) {
         Type type;
         switch (flag){

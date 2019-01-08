@@ -6,8 +6,11 @@ import android.content.SharedPreferences;
 public class PreferencesUtils {
 
     public static String PREFERENCE_NAME = "account";
-
+    public static long MOUNTH = 1000l*60l*60l*24l*30l;//自动登陆一个月
+//public static long MOUNTH = 1000*10;
     /**用户名的key值*/
+    public static String PWD = "pwds";
+    public static String TIME = "time";
     public static String UUID = "uuid";
     public static String HOSPITALNAME = "hospitalName";
     public static String AREANAME = "areaName";

@@ -1,9 +1,11 @@
 package com.intelligent.marking.activity;
 
+import android.annotation.TargetApi;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.method.HideReturnsTransformationMethod;
@@ -35,7 +37,10 @@ import com.intelligent.marking.set.JsonDataActivity01;
 import com.intelligent.marking.widget.PopUpwindowUtil;
 
 import java.lang.reflect.Type;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import android.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -368,7 +373,6 @@ public class LoginActivity extends BaseActivity {
             value.put("city_id", PreferencesUtils.getInt(this, PreferencesUtils.CITYID, -1));
             value.put("district_id", PreferencesUtils.getInt(this, PreferencesUtils.AREID, -1));
             HttpPost(AppConst.GETHOSPITAL, value, 11);
-
         }
 //        Intent intent = new Intent("COM.QS.DEMO.QSSERVICE");
 //        Intent eintent = new Intent(getExplicitIntent(this, intent));
@@ -409,7 +413,7 @@ public class LoginActivity extends BaseActivity {
         value.put("district_id", disid);
         HttpPost(AppConst.GETHOSPITAL, value, 1);
     }
-
+    @TargetApi(Build.VERSION_CODES.O)
     @Override
     public void getCallBack(String response, int flag) {
         Type type;
@@ -492,6 +496,10 @@ public class LoginActivity extends BaseActivity {
                     PreferencesUtils.putInt(this, PreferencesUtils.AREANAMEID, areaNameid);
                     PreferencesUtils.putInt(this, PreferencesUtils.DEPARTNAMEID, departNameid);
                     PreferencesUtils.putInt(this, PreferencesUtils.SUBAREANAMEID, subareaNameid);
+                    String pwd = etPwd.getText().toString();
+//                    String strpwd = new String(Base64.encode(pwd.getBytes(),1));
+                    String strpwd = Base64.encodeToString(pwd.getBytes(),Base64.DEFAULT);
+                    PreferencesUtils.putString(this,PreferencesUtils.PWD,strpwd);
                     if (areaNameid == 0 && departNameid == 0 && departNameid == 0 && subareaNameid == 0) {
                         PreferencesUtils.putInt(this, PreferencesUtils.ROLE, 1);//医院总账户
                         startActivity(new Intent(LoginActivity.this, HospoitalManagerAvtivity.class));
@@ -505,6 +513,7 @@ public class LoginActivity extends BaseActivity {
                         PreferencesUtils.putInt(this, PreferencesUtils.ROLE, 4);//区域总账户
                         startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     }
+                    PreferencesUtils.putLong(this,PreferencesUtils.TIME,System.currentTimeMillis());
                     finish();
                 }
                 break;
@@ -566,6 +575,27 @@ public class LoginActivity extends BaseActivity {
                     departList.add("全部");
                 }
 //                setPopDate(tvDepart, departList, departListid, llSelectDepart);
+                break;
+            case 15:
+                type = new TypeToken<BaseModel<List<String>>>() {
+                }.getType();
+                BaseModel<List<String>> loginmodels = new Gson().fromJson(response, type);
+                if (loginmodels.getStatus() == 0) {
+                    showToast(loginmodels.getInfo());
+                } else {
+                    switch (PreferencesUtils.getInt(this,PreferencesUtils.ROLE)){
+                        case 1:
+                        case 2:
+                        case 3:
+                            startActivity(new Intent(LoginActivity.this, HospoitalManagerAvtivity.class));
+                            break;
+                        case 4:
+                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                            break;
+                    }
+                    finish();
+                }
+
                 break;
         }
     }

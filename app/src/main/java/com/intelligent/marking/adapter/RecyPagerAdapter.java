@@ -124,6 +124,8 @@ public class RecyPagerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             public void onClick(View view) {
                 if(date.get(i).getIs_empty_bed()==0) {
                     selectListener.itemClick(i);
+                }else{
+                    selectListener.emptyBedClick(i);
                 }
             }
         });
@@ -206,6 +208,7 @@ public class RecyPagerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             void itemLongClick(int position);
             void itemClick(int position);
             void hastempbed();
+            void emptyBedClick(int pos);
         }
     }
 
