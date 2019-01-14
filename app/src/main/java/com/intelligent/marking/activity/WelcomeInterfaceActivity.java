@@ -43,12 +43,6 @@ public class WelcomeInterfaceActivity  extends BaseActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_interface);
         initView();
-        long sl = PreferencesUtils.getLong(this,PreferencesUtils.TIME,1l);
-        System.out.println(PreferencesUtils.MOUNTH);
-        System.out.println(System.currentTimeMillis());
-        System.out.println("wel"+sl+(System.currentTimeMillis()-PreferencesUtils.getLong(this,PreferencesUtils.TIME,1l)<PreferencesUtils.MOUNTH));
-        System.out.println("wel"+PreferencesUtils.getString(this,PreferencesUtils.PWD));
-
         if(PreferencesUtils.getLong(this,PreferencesUtils.TIME,1l)!=1l
                 &&System.currentTimeMillis()-PreferencesUtils.getLong(this,PreferencesUtils.TIME,1l)<PreferencesUtils.MOUNTH
                 &&PreferencesUtils.getString(this,PreferencesUtils.PWD)!=null){

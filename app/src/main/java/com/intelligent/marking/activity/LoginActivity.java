@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -27,6 +28,7 @@ import com.intelligent.marking.R;
 import com.intelligent.marking.Utils.PreferencesUtils;
 import com.intelligent.marking.Utils.ToastUtil;
 import com.intelligent.marking.adapter.SelectMoreAdapter;
+import com.intelligent.marking.application.MarkingApplication;
 import com.intelligent.marking.net.model.AreaModel;
 import com.intelligent.marking.net.model.BaseModel;
 import com.intelligent.marking.net.model.DepartModel;
@@ -138,9 +140,9 @@ public class LoginActivity extends BaseActivity {
 
             @Override
             public void getLocationID(int pid, int cid, int aid) {
-                ToastUtil.getInstance(LoginActivity.this).show("pid:" + JsonData.options1Items.get(pid).getId()
-                        + ",cid:" + JsonData.options1Items.get(pid).getCity().get(cid).getId()
-                        + ",aid:" + JsonData.options1Items.get(pid).getCity().get(cid).getArea().get(aid).getId());
+//                ToastUtil.getInstance(LoginActivity.this).show("pid:" + JsonData.options1Items.get(pid).getId()
+//                        + ",cid:" + JsonData.options1Items.get(pid).getCity().get(cid).getId()
+//                        + ",aid:" + JsonData.options1Items.get(pid).getCity().get(cid).getArea().get(aid).getId());
                 select_provinceid = JsonData.options1Items.get(pid).getId();
                 select_cityid = JsonData.options1Items.get(pid).getCity().get(cid).getId();
                 select_areaid = JsonData.options1Items.get(pid).getCity().get(cid).getArea().get(aid).getId();
@@ -167,7 +169,8 @@ public class LoginActivity extends BaseActivity {
     @OnClick(R.id.iv_left)
     public void clickLeft(View view) {
         //TODO 扫二维码
-        startActivity(new Intent(this, PrintPreviewActivity.class));
+        MarkingApplication.openScan();
+
     }
 
 
@@ -338,8 +341,9 @@ public class LoginActivity extends BaseActivity {
         public void onReceive(Context context, Intent intent) {
             // TODO Auto-generated method stub
             String text1 = intent.getExtras().getString("code");
-            System.out.println("scan:" + text1);
-//            tv.setText(text1);
+            String resec = new String(Base64.decode(text1.getBytes(),Base64.DEFAULT));
+            Type  type = new TypeToken<Map<String,Object>>(){}.getType();
+            HttpPost(AppConst.LOGIN,new Gson().fromJson(resec,type),15);
         }
     }
 
@@ -500,6 +504,17 @@ public class LoginActivity extends BaseActivity {
 //                    String strpwd = new String(Base64.encode(pwd.getBytes(),1));
                     String strpwd = Base64.encodeToString(pwd.getBytes(),Base64.DEFAULT);
                     PreferencesUtils.putString(this,PreferencesUtils.PWD,strpwd);
+
+                    Map<String,Object> save = new HashMap<>();
+                    save.put("hospital_id", hospitalNameid);
+                    save.put("area_id", areaNameid);
+                    save.put("department_id", departNameid);
+                    save.put("subarea_id", subareaNameid);
+                    save.put("passwd",pwd);
+                    String json = new Gson().toJson(save);
+                    String sec = Base64.encodeToString(json.getBytes(),Base64.DEFAULT);//base64加密
+                    Bitmap bitmap = MarkingApplication.createQRImage(sec,300,300);
+                    MarkingApplication.printBitmap(0,bitmap);
                     if (areaNameid == 0 && departNameid == 0 && departNameid == 0 && subareaNameid == 0) {
                         PreferencesUtils.putInt(this, PreferencesUtils.ROLE, 1);//医院总账户
                         startActivity(new Intent(LoginActivity.this, HospoitalManagerAvtivity.class));
@@ -579,6 +594,7 @@ public class LoginActivity extends BaseActivity {
             case 15:
                 type = new TypeToken<BaseModel<List<String>>>() {
                 }.getType();
+                PreferencesUtils.putLong(this,PreferencesUtils.TIME,System.currentTimeMillis());
                 BaseModel<List<String>> loginmodels = new Gson().fromJson(response, type);
                 if (loginmodels.getStatus() == 0) {
                     showToast(loginmodels.getInfo());

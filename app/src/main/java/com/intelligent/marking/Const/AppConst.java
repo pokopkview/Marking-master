@@ -2,7 +2,12 @@ package com.intelligent.marking.Const;
 
 public class AppConst {
 
-    private static final String BASE_URL = "https://data.zusux.com/api/";
+
+    private static final String BEIJING = "https://data.beijingybt.com/";
+
+    private static final String ZUSUX = "https://data.zusux.com/api/";
+
+    private static final String BASE_URL = BEIJING;
 
     public static final String GETPROVINCE = BASE_URL+"region/index";
 
