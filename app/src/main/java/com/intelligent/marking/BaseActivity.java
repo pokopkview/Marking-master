@@ -98,7 +98,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected void HttpPost(String url, Map<String,Object> value, final int flag){
 //        showProgress();
-        System.out.println(new Gson().toJson(value));
+        System.out.println("HTTP--request:"+new Gson().toJson(value));
         OkHttpUtils
                 .postString()
                 .url(url)
@@ -114,7 +114,7 @@ public abstract class BaseActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response, int id) {
 //                        disMissPro();
-                        System.out.println(response);
+                        System.out.println("HTTP--response:"+response);
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             int i = (int) jsonObject.opt("status");

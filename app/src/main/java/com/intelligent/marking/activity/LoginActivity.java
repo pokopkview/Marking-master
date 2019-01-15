@@ -220,7 +220,8 @@ public class LoginActivity extends BaseActivity {
             showToast("请输入密码");
             return;
         }
-
+        rlLogin.setClickable(false);
+        showProgress();
         HttpPost(AppConst.LOGIN, value, 5);
     }
 
@@ -484,6 +485,8 @@ public class LoginActivity extends BaseActivity {
                 setPopDate(tvDepart, departList, departListid, llSelectDepart);
                 break;
             case 5:
+                disMissPro();
+                rlLogin.setClickable(true);
                 type = new TypeToken<BaseModel<List<String>>>() {
                 }.getType();
                 BaseModel<List<String>> loginmodel = new Gson().fromJson(response, type);

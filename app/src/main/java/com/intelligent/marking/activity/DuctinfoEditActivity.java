@@ -220,7 +220,7 @@ public class DuctinfoEditActivity extends BaseActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 System.out.println("afterTextChanged");
-                hidenkeyboard();
+//                hidenkeyboard();
 
             }
         });
@@ -298,10 +298,13 @@ public class DuctinfoEditActivity extends BaseActivity {
 //                            popupWindow.dismiss();
 //                        }
 //                    });
-                    popupWindow.setContentView(view);
-                    popupWindow.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
-
-                    popupWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+                    if(!baseModel.getData().isEmpty()) {
+                        hidenkeyboard();
+                    }
+                        popupWindow.setContentView(view);
+                        popupWindow.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
+                        popupWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+//                    }
                 }else{
                     searchListAdapter.setData(baseModel.getData());
                 }

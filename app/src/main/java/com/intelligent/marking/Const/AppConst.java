@@ -3,7 +3,7 @@ package com.intelligent.marking.Const;
 public class AppConst {
 
 
-    private static final String BEIJING = "https://data.beijingybt.com/";
+    private static final String BEIJING = "https://data.beijingybt.com/api/";
 
     private static final String ZUSUX = "https://data.zusux.com/api/";
 
