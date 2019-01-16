@@ -16,17 +16,22 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.intelligent.marking.Utils.PreferencesUtils;
 import com.intelligent.marking.Utils.ToastUtil;
+import com.intelligent.marking.net.CacheUtils;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import okhttp3.Cache;
 import okhttp3.Call;
 import okhttp3.MediaType;
+import okhttp3.Request;
 
 
 /**
@@ -48,6 +53,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected int subareaNameid = -1;
 
     protected Map<String,Object> value = new HashMap<>();
+
+    private boolean canCache = false;
 
 
     @Override
@@ -99,6 +106,15 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void HttpPost(String url, Map<String,Object> value, final int flag){
 //        showProgress();
         System.out.println("HTTP--request:"+new Gson().toJson(value));
+        if(CacheUtils.getInstance().containKey(url)){
+            getCallBack(CacheUtils.getInstance().getKey(url),flag);
+            return;
+        }
+
+        if(CacheUtils.getInstance().containURL(url)){
+            canCache = true;
+        }
+
         OkHttpUtils
                 .postString()
                 .url(url)
@@ -115,6 +131,10 @@ public abstract class BaseActivity extends AppCompatActivity {
                     public void onResponse(String response, int id) {
 //                        disMissPro();
                         System.out.println("HTTP--response:"+response);
+                        if(canCache){
+                            CacheUtils.getInstance().put(url,response);
+                            canCache = false;
+                        }
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             int i = (int) jsonObject.opt("status");

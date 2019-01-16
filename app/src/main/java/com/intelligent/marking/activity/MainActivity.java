@@ -241,6 +241,7 @@ public class MainActivity extends BaseActivity implements PagingScrollHelper.onP
 
 
     private void getDate() {
+        showProgress();
         value.clear();
         value.put("subarea_id", subareaNameid);
         HttpPost(AppConst.GETBEDINFO, value, 1);
@@ -248,6 +249,7 @@ public class MainActivity extends BaseActivity implements PagingScrollHelper.onP
 
     @Override
     public void getCallBack(String response, int flag) {
+        disMissPro();
         Type type;
         switch (flag) {
             case 1:

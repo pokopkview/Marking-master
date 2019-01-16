@@ -54,12 +54,14 @@ public class SelectDuctActivity extends BaseActivity {
         bedmainid = getIntent().getIntExtra("bedmainid",-1);
         value.clear();
         value.put("subarea_id",subareaNameid);
+        showProgress();
         HttpPost(AppConst.DUCTINDEX,value,1);
 
     }
 
     @Override
     public void getCallBack(String response, int flag) {
+        disMissPro();
         Type type;
         switch (flag){
             case 1:

@@ -38,10 +38,13 @@ import com.intelligent.marking.net.model.BaseModel;
 import com.intelligent.marking.net.model.InsertDuctBackModel;
 import com.intelligent.marking.net.model.NurseInfo;
 import com.intelligent.marking.net.model.TreatInfoModel;
+import com.intelligent.marking.widget.PopUpwindowUtil;
 
 import org.greenrobot.eventbus.EventBus;
 
 import java.lang.reflect.Type;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -194,6 +197,11 @@ public class DuctinfoEditActivity extends BaseActivity {
         llLeftContainer.addView(back);
         tvHeaderTitle.setText(ductName);
 
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        String date = sdf.format(new Date(System.currentTimeMillis()));
+        tvShowDay.setText(date.split(" ")[0]);
+        tvShowTime.setText(date.split(" ")[1]);
+
         etSearchNurse.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -236,6 +244,9 @@ public class DuctinfoEditActivity extends BaseActivity {
     @OnClick(R.id.ll_select_day)
     public void getDate(View view) {
         hidenkeyboard();
+        if(PopUpwindowUtil.popupWindow!=null){
+            PopUpwindowUtil.popupWindow.dismiss();
+        }
         TimePickerUtils.showTimePicker(this, new TimePickerUtils.timeBack() {
             @Override
             public void getTime(String str) {
@@ -250,6 +261,9 @@ public class DuctinfoEditActivity extends BaseActivity {
     @OnClick(R.id.ll_select_time)
     public void getTimeDaate(View view) {
         hidenkeyboard();
+        if(PopUpwindowUtil.popupWindow!=null){
+            PopUpwindowUtil.popupWindow.dismiss();
+        }
         TimePickerUtils.showTimePicker(this, new TimePickerUtils.timeBack() {
             @Override
             public void getTime(String str) {
@@ -298,6 +312,7 @@ public class DuctinfoEditActivity extends BaseActivity {
 //                            popupWindow.dismiss();
 //                        }
 //                    });
+                    System.out.println(baseModel.getData().isEmpty());
                     if(!baseModel.getData().isEmpty()) {
                         hidenkeyboard();
                     }
@@ -306,6 +321,9 @@ public class DuctinfoEditActivity extends BaseActivity {
                         popupWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 //                    }
                 }else{
+                    if(!baseModel.getData().isEmpty()) {
+                        hidenkeyboard();
+                    }
                     searchListAdapter.setData(baseModel.getData());
                 }
 //                popupWindow.showAtLocation(etSearchNurse,Gravity.NO_GRAVITY,getResources().getDimensionPixelSize(R.dimen.x120),(int)etSearchNurse.getX());

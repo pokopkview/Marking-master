@@ -80,7 +80,8 @@ public class SubAreaEmployeeActivity extends BaseActivity implements SubAreaEmpl
     @OnClick(R.id.ll_right_container)
     public void save(View view){
         showProgress();
-        if(!etAddName.getText().toString().isEmpty() && !etAddNo.getText().toString().isEmpty()){
+        System.out.println(etAddName.getText().toString()+"__"+etAddNo.getText().toString());
+        if(etAddName.getText().toString().isEmpty() || etAddNo.getText().toString().isEmpty()){
             showToast("请填入正确数据");
             return;
         }
