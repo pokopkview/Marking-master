@@ -154,10 +154,14 @@ public abstract class BaseActivity extends AppCompatActivity {
 
 
     protected void showProgress(){
+        showProgress("数据加载中...");
+    }
+
+    protected void showProgress(String tips){
         if(progressDialog == null){
             progressDialog = new ProgressDialog(this);
         }
-        progressDialog.setMessage("数据加载中...");
+        progressDialog.setMessage(tips);
         progressDialog.show();
     }
     protected void disMissPro(){

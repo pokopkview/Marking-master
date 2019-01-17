@@ -1,6 +1,7 @@
 package com.intelligent.marking.service;
 
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 
@@ -13,6 +14,12 @@ public class BootStartReceicer extends BroadcastReceiver {
             Intent intents = new Intent(context,WelcomeInterfaceActivity.class);
             intents.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intents);
+
+//            Intent intents = new Intent(Intent.ACTION_MAIN);
+//         intents.addCategory(Intent.CATEGORY_LAUNCHER);
+//         ComponentName cn = new ComponentName("com.intelligent.marking", WelcomeInterfaceActivity.class.getName());
+//         intents.setComponent(cn);
+//         context.startActivity(intents);
         }
     }
 }
