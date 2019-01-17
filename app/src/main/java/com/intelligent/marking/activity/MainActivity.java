@@ -104,6 +104,7 @@ public class MainActivity extends BaseActivity implements PagingScrollHelper.onP
     private String scanmsg;
     int deletePos = -1;
     int bedmainid = -1;
+    int clickItem = -1;
     TreatInfoModel addbacktreatInfoModel;
 
     class ScanBroadcastReceiver extends BroadcastReceiver {
@@ -311,7 +312,7 @@ public class MainActivity extends BaseActivity implements PagingScrollHelper.onP
             case 4:
                 type = new TypeToken<BaseModel<List<TreatInfoModel>>>(){}.getType();
                 BaseModel<List<TreatInfoModel>> baseModel1 = new Gson().fromJson(response,type);
-                popupWindow = PopUpwindowUtil.createDuctToUserDialog(this,baseModel1.getData(), new PopUpwindowUtil.dialogClickPatient() {
+                popupWindow = PopUpwindowUtil.createDuctToUserDialog(this,bedInfoModelList.get(clickItem),baseModel1.getData(), new PopUpwindowUtil.dialogClickPatient() {
                     @Override
                     public void closeClick() {
                         //关闭
@@ -662,10 +663,12 @@ public class MainActivity extends BaseActivity implements PagingScrollHelper.onP
 
     @Override
     public void itemClick(int position) {
+        clickItem = position;
         value.clear();
         value.put("subarea_id",subareaNameid);
         value.put("course_id",bedInfoModelList.get(position).getCourse_id());
         bedmainid = bedInfoModelList.get(position).getCourse_id();
+        showProgress();
         HttpPost(AppConst.TREATINFO,value,4);
     }
 

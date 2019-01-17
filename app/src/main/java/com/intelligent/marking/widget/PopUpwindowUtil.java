@@ -22,6 +22,7 @@ import com.intelligent.marking.adapter.RegisterPagePopAdapter;
 import com.intelligent.marking.adapter.SelectMoreAdapter;
 import com.intelligent.marking.adapter.SimpleDuctInfoBeanAdapter;
 import com.intelligent.marking.common.utils.StringUtil;
+import com.intelligent.marking.net.model.BedInfoModel;
 import com.intelligent.marking.net.model.DuctListInfo;
 import com.intelligent.marking.net.model.TreatInfoModel;
 
@@ -254,10 +255,14 @@ public class PopUpwindowUtil {
      * @param clickPatient
      * @return
      */
-    public static PopupWindow createDuctToUserDialog(Context context, List<TreatInfoModel> value,dialogClickPatient clickPatient){
+    public static PopupWindow createDuctToUserDialog(Context context, BedInfoModel bedInfoModel, List<TreatInfoModel> value, dialogClickPatient clickPatient){
         View contentView = LayoutInflater.from(context).inflate(R.layout.duct_to_user_dialog_layout,null,false);
         int width = context.getResources().getDimensionPixelSize(R.dimen.x340);
         int height = context.getResources().getDimensionPixelSize(R.dimen.y422);
+        TextView tvbedno = contentView.findViewById(R.id.bed_info_name);
+        tvbedno.setText(bedInfoModel.getBed_name()+"号床");
+        TextView tvpatientinfo = contentView.findViewById(R.id.tv_name_sex_age);
+        tvpatientinfo.setText(bedInfoModel.getName()+" "+context.getResources().getStringArray(R.array.sex)[bedInfoModel.getSex()]+" "+bedInfoModel.getAge()+"岁");
         popupWindow = new PopupWindow(width,height);
         popupWindow.setContentView(contentView);
         popupWindow.setOutsideTouchable(true);

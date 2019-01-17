@@ -219,7 +219,7 @@ public class DuctinfoEditActivity extends BaseActivity {
                     return;
                 }
                 value.clear();
-                value.put("department_id",1);
+                value.put("department_id",departNameid);
                 value.put("nurse_name",s.toString());
                 System.out.println(new Gson().toJson(value));
                 HttpPost(AppConst.SERCHMANAGER,value,2);
