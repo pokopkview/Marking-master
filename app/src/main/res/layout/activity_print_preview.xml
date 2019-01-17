@@ -166,24 +166,29 @@
 
                 <TextView
                     android:id="@+id/tv_duct_type_name"
-                    android:layout_width="wrap_content"
+                    android:layout_width="@dimen/x140"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/x11"
                     android:layout_marginTop="@dimen/y23"
                     android:includeFontPadding="false"
-                    android:text="PICC 管"
+                    android:text="胸腔闭式引流管"
+                    android:singleLine="true"
+                    android:ellipsize="end"
                     android:textColor="@color/black_black"
-                    android:textSize="@dimen/x28" />
+                    android:textSize="@dimen/x20" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/tv_duct_name_two"
+                    android:layout_width="@dimen/x120"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/x190"
+                    android:layout_marginLeft="@dimen/x180"
                     android:layout_marginTop="@dimen/y15"
                     android:includeFontPadding="false"
-                    android:text="PICC 管"
+                    android:text="胸腔闭式引流管"
+                    android:singleLine="true"
+                    android:ellipsize="end"
                     android:textColor="@color/black_black"
-                    android:textSize="@dimen/x26" />
+                    android:textSize="@dimen/x16" />
 
                 <RelativeLayout
                     android:id="@+id/rl_bitmap_container"

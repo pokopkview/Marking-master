@@ -158,18 +158,8 @@ public class DuctinfoEditActivity extends BaseActivity {
             showToast("请选择时间");
             return;
         }
-        if(!TextUtils.isEmpty(etOutside.getText().toString())) {
-            value.put("outside", Integer.parseInt(etOutside.getText().toString()));
-        }else{
-            showToast("请填入外置长度");
-            return;
-        }
-        if(!TextUtils.isEmpty(etInside.getText().toString())) {
-            value.put("inside", Integer.parseInt(etInside.getText().toString()));
-        }else{
-            showToast("请填入内置长度");
-            return;
-        }
+        value.put("outside", Integer.parseInt(TextUtils.isEmpty(etOutside.getText().toString())?"0":etOutside.getText().toString()));
+        value.put("inside", Integer.parseInt(TextUtils.isEmpty(etInside.getText().toString())?"0":etInside.getText().toString()));
         if(etSearchNurse.getTag()!=null) {
             value.put("nurse_id", (int) etSearchNurse.getTag());
         }else{
@@ -283,8 +273,9 @@ public class DuctinfoEditActivity extends BaseActivity {
                 showToast(msg.getInfo());
                 EventBus.getDefault().post(new MainActivityEvent(msg.getData()));
                 Intent printIntent = new Intent(DuctinfoEditActivity.this, PrintPreviewActivity.class);
-                printIntent.putExtra("treatid",ductid);
-
+                printIntent.putExtra("ductname",ductName);
+                printIntent.putExtra("treatid",msg.getData());
+                printIntent.putExtra("nursename",etSearchNurse.getText().toString());
                 startActivity(printIntent);
                 break;
             case 2:

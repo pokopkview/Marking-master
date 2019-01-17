@@ -37,6 +37,7 @@ import com.intelligent.marking.adapter.RecyPagerAdapter;
 import com.intelligent.marking.application.MarkingApplication;
 import com.intelligent.marking.common.view.PageIndicatorView;
 import com.intelligent.marking.eventbus.MainActivityEvent;
+import com.intelligent.marking.eventbus.MainBedClickEvent;
 import com.intelligent.marking.net.model.BaseModel;
 import com.intelligent.marking.net.model.BedInfoModel;
 import com.intelligent.marking.net.model.ScanPatientInfoModel;
@@ -323,6 +324,7 @@ public class MainActivity extends BaseActivity implements PagingScrollHelper.onP
                     public void setToPatient() {
                         //置入
 //                TimerPicer.showTimePic(MainActivity.this,cusomSwipeView);
+                        EventBus.getDefault().postSticky(new MainBedClickEvent(bedInfoModelList.get(clickItem)));
                         Intent intoBedintent = new Intent(MainActivity.this, SelectDuctActivity.class);
                         intoBedintent.putExtra("bedmainid",bedmainid);
                         startActivity(intoBedintent);

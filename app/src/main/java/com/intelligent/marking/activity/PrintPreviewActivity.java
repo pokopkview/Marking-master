@@ -10,24 +10,25 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.intelligent.marking.BaseActivity;
 import com.intelligent.marking.Const.AppConst;
 import com.intelligent.marking.R;
 import com.intelligent.marking.application.MarkingApplication;
+import com.intelligent.marking.eventbus.MainBedClickEvent;
 import com.intelligent.marking.net.model.BaseModel;
-import com.intelligent.marking.net.model.BedStatusModel;
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.StringCallback;
+import com.intelligent.marking.net.model.BedInfoModel;
+import com.intelligent.marking.net.model.TreatInfoModel;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.lang.reflect.Type;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import okhttp3.Call;
 
 public class PrintPreviewActivity extends BaseActivity {
 
@@ -74,6 +75,14 @@ public class PrintPreviewActivity extends BaseActivity {
     @BindView(R.id.rl_print_pruview)
     RelativeLayout rlPrintPruview;
 
+    BedInfoModel clickbendinfo;
+    @BindView(R.id.header_title_root)
+    RelativeLayout headerTitleRoot;
+    @BindView(R.id.tv_duct_name_two)
+    TextView tvDuctNameTwo;
+    @BindView(R.id.def_manager_time)
+    TextView defManagerTime;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,15 +93,28 @@ public class PrintPreviewActivity extends BaseActivity {
         llLeftContainer.addView(back);
         tvHeaderTitle.setText("打印预览");
         rlPrintBtn.setClickable(false);
-
-
-
+        TreatInfoModel info = (TreatInfoModel) getIntent().getSerializableExtra("treatid");
+        if (clickbendinfo != null) {
+            tvTextBedNo.setText(clickbendinfo.getBed_no());
+            tvTextBedName.setText(clickbendinfo.getName());
+            tvTextBedSex.setText(this.getResources().getStringArray(R.array.sex)[clickbendinfo.getSex()]);
+            tvTextBedAge.setText(clickbendinfo.getAge());
+        }
+        tvDuctTypeName.setText(getIntent().getStringExtra("ductname"));
+        tvDuctNameTwo.setText(getIntent().getStringExtra("ductname"));
+        tvTimeCreate.setText(info.getInsert_date()+" "+info.getInsert_time());
+        tvManagerName.setText(getIntent().getStringExtra("nursename"));
         value.clear();
-        value.put("treat_id",getIntent().getIntExtra("treatid",-1));
-        HttpPost(AppConst.GETSHARECODE,value,1);
+        value.put("treat_id", info.getTreat_id());
+        HttpPost(AppConst.GETSHARECODE, value, 1);
 //        ivPrintq.setImageBitmap(MarkingApplication.createQRImage("https://data.zusux.com/share/20_1", 340, 340));
 //
 //        rlPrintBtn.setClickable(true);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void Event(MainBedClickEvent messageEvent) {
+        clickbendinfo = messageEvent.getMessage();
     }
 
     @OnClick(R.id.rl_print_btn)
@@ -114,9 +136,9 @@ public class PrintPreviewActivity extends BaseActivity {
 //        Bitmap newbm = Bitmap.createBitmap(bitmap, 0, 0, width, height, matrix,
 //                true);
         int w = 29;//单位:mm
-        float widthcm = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_MM,w,getResources().getDisplayMetrics());
+        float widthcm = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_MM, w, getResources().getDisplayMetrics());
 
-        Bitmap newbm = Bitmap.createScaledBitmap(bitmap,newWidth,290,true);
+        Bitmap newbm = Bitmap.createScaledBitmap(bitmap, newWidth, 290, true);
         MarkingApplication.printBitmap(0, newbm);
     }
 
@@ -124,12 +146,13 @@ public class PrintPreviewActivity extends BaseActivity {
     @Override
     public void getCallBack(String response, int flag) {
         Type type;
-        switch (flag){
+        switch (flag) {
             case 1:
-                type = new TypeToken<BaseModel<String>>(){}.getType();
-                BaseModel<String> stringBaseModel = new Gson().fromJson(response,type);
+                type = new TypeToken<BaseModel<String>>() {
+                }.getType();
+                BaseModel<String> stringBaseModel = new Gson().fromJson(response, type);
                 String codeurl = stringBaseModel.getData();
-                Bitmap qrbitmap = MarkingApplication.createQRImage(codeurl,340, 340);
+                Bitmap qrbitmap = MarkingApplication.createQRImage(codeurl, 340, 340);
                 ivPrintq.setImageBitmap(qrbitmap);
                 rlPrintBtn.setClickable(true);
                 break;
