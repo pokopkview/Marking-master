@@ -288,4 +288,14 @@ public class WelcomeInterfaceActivity  extends BaseActivity{
     public void onBackPressed() {
         super.onBackPressed();
     }
+
+    @Override
+    protected void getErrorInfo(String str, int flag) {
+        super.getErrorInfo(str, flag);
+        switch (flag){
+            case 15:
+                initView();
+                break;
+        }
+    }
 }

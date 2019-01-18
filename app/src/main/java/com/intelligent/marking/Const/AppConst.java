@@ -63,7 +63,7 @@ public class AppConst {
 
     public static final String GETSHARECODE = BASE_URL + "share/treat_code";
 
-    public static final String CHANGEPWD = BASE_URL + "asswd/index";
+    public static final String CHANGEPWD = BASE_URL + "passwd/index";
 
     public static final String ADDPATIENT = BASE_URL +"course/addbed";
 

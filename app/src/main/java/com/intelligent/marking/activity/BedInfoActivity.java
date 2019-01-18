@@ -65,7 +65,7 @@ public class BedInfoActivity extends BaseActivity {
 //        tabLayout.addTab(tabLayout.newTab().setText("需处理"));
 //        tabLayout.addTab(tabLayout.newTab().setText("进行中"));
 //        tabLayout.addTab(tabLayout.newTab().setText("已完成"));
-        int subareaid = getIntent().getIntExtra("subareaid",-1);
+        int subareaid = getIntent().getIntExtra("subarea_id",-1);
         value.clear();
         value.put("subarea_id",subareaid);
         value.put("course_id",1);

@@ -139,7 +139,7 @@ public abstract class BaseActivity extends AppCompatActivity {
                             JSONObject jsonObject = new JSONObject(response);
                             int i = (int) jsonObject.opt("status");
                             if(i == 0){
-                                showToast((String) jsonObject.opt("info"));
+                                getErrorInfo((String) jsonObject.opt("info"),flag);
                                 return;
                             }
                         } catch (JSONException e) {
@@ -151,6 +151,11 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     public abstract void getCallBack(String response,int flag);
+
+    protected void getErrorInfo(String str,int flag){
+        showToast(str);
+
+    }
 
 
     protected void showProgress(){

@@ -6,6 +6,7 @@ import android.text.InputType;
 import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Base64;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -17,6 +18,7 @@ import com.google.gson.reflect.TypeToken;
 import com.intelligent.marking.BaseActivity;
 import com.intelligent.marking.Const.AppConst;
 import com.intelligent.marking.R;
+import com.intelligent.marking.Utils.PreferencesUtils;
 import com.intelligent.marking.net.model.BaseModel;
 
 import java.lang.reflect.Type;
@@ -111,6 +113,7 @@ public class ResetPasswordActivity extends BaseActivity {
         }
     }
 
+
     @Override
     public void getCallBack(String response, int flag) {
         Type type;
@@ -119,6 +122,10 @@ public class ResetPasswordActivity extends BaseActivity {
                 type = new TypeToken<BaseModel<String>>(){}.getType();
                 BaseModel<String> changeModel = new Gson().fromJson(response,type);
                 showToast(changeModel.getInfo());
+                String pwd = etNewPwd.getText().toString();
+//                    String strpwd = new String(Base64.encode(pwd.getBytes(),1));
+                String strpwd = Base64.encodeToString(pwd.getBytes(),Base64.DEFAULT);
+                PreferencesUtils.putString(this,PreferencesUtils.PWD,strpwd);
                 onBackPressed();
                 break;
         }
