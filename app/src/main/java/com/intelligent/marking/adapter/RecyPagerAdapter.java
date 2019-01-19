@@ -155,12 +155,12 @@ public class RecyPagerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 break;
             case "orange":
                 ((BedInfoViewholer) viewHolder).tvMsgCount.setBackgroundResource(R.mipmap.orange);
-                ((BedInfoViewholer) viewHolder).tvMsgCount.setText(date.get(i).getShow_number());
+                ((BedInfoViewholer) viewHolder).tvMsgCount.setText(String.valueOf(date.get(i).getShow_number()));
                 ((BedInfoViewholer) viewHolder).tvMsgCount.setVisibility(View.VISIBLE);
                 break;
             case "yellow":
                 ((BedInfoViewholer) viewHolder).tvMsgCount.setBackgroundResource(R.mipmap.yellow);
-                ((BedInfoViewholer) viewHolder).tvMsgCount.setText(date.get(i).getShow_number());
+                ((BedInfoViewholer) viewHolder).tvMsgCount.setText(String.valueOf(date.get(i).getShow_number()));
                 ((BedInfoViewholer) viewHolder).tvMsgCount.setVisibility(View.VISIBLE);
                 break;
             case "":
