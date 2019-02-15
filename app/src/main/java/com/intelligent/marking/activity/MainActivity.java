@@ -113,7 +113,6 @@ public class MainActivity extends BaseActivity implements PagingScrollHelper.onP
         public void onReceive(Context context, Intent intent) {
             // TODO Auto-generated method stub
             scanmsg = intent.getExtras().getString("code");
-            System.out.println("scan:" + scanmsg);
             Intent intents = new Intent(MainActivity.this,ScanPatientInfoActivity.class);
             intents.putExtra("patientinfo",scanmsg);
             intents.putExtra("bedinfo",(Serializable) bedInfoModelList);

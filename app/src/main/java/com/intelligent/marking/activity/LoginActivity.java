@@ -516,7 +516,7 @@ public class LoginActivity extends BaseActivity {
                     save.put("passwd",pwd);
                     String json = new Gson().toJson(save);
                     String sec = Base64.encodeToString(json.getBytes(),Base64.DEFAULT);//base64加密
-                    Bitmap bitmap = MarkingApplication.createQRImage(sec,300,300);
+                    Bitmap bitmap = MarkingApplication.createQRImage(sec,200,200);
                     MarkingApplication.printBitmap(0,bitmap);
                     if (areaNameid == 0 && departNameid == 0 && departNameid == 0 && subareaNameid == 0) {
                         PreferencesUtils.putInt(this, PreferencesUtils.ROLE, 1);//医院总账户

@@ -192,7 +192,7 @@
             android:layout_marginTop="@dimen/y31"
             android:textColor="@color/black_text_login"
             android:textSize="@dimen/x15"
-            android:text="外置"
+            android:text="外露"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -238,7 +238,7 @@
             android:layout_marginTop="@dimen/y31"
             android:textColor="@color/black_text_login"
             android:textSize="@dimen/x15"
-            android:text="外置"
+            android:text="内置"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
