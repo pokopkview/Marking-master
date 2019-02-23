@@ -310,7 +310,7 @@ public class TreatInfoModel implements Serializable {
         this.duct_cat = duct_cat;
     }
 
-    public static class DuctCatBean {
+    public static class DuctCatBean  implements Serializable {
         /**
          * duct_attr_id : 1
          * duct_cat_id : 1
