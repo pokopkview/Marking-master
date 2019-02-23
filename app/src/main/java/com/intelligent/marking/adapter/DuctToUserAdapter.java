@@ -53,6 +53,7 @@ public class DuctToUserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         ((DuctViewHolder)viewHolder).tvDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                System.out.println(i+":click_delete");
                 ductItemClick.slideDelete(i);
             }
         });

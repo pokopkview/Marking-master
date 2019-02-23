@@ -379,7 +379,7 @@ public class MainActivity extends BaseActivity implements PagingScrollHelper.onP
                 PopUpwindowUtil.getDuctToUserDialogAdapter().getDataList().remove(deletePos);
                 PopUpwindowUtil.getDuctToUserDialogAdapter().notifyItemRangeRemoved(deletePos,1);
                 PopUpwindowUtil.getDuctToUserDialogAdapter().notifyItemRangeChanged(deletePos+1,PopUpwindowUtil.getDuctToUserDialogAdapter().getDataList().size());
-
+                PopUpwindowUtil.getDuctToUserDialogAdapter().notifyDataSetChanged();
                 break;
             case 202:
                 type = new TypeToken<BaseModel<List<Object>>>(){}.getType();
@@ -390,6 +390,7 @@ public class MainActivity extends BaseActivity implements PagingScrollHelper.onP
                 PopUpwindowUtil.getDuctToUserDialogAdapter().getDataList().remove(deletePos);
                 PopUpwindowUtil.getDuctToUserDialogAdapter().notifyItemRangeRemoved(deletePos,1);
                 PopUpwindowUtil.getDuctToUserDialogAdapter().notifyItemRangeChanged(deletePos+1,PopUpwindowUtil.getDuctToUserDialogAdapter().getDataList().size());
+                PopUpwindowUtil.getDuctToUserDialogAdapter().notifyDataSetChanged();
                 Intent intoBedintent = new Intent(MainActivity.this, SelectDuctActivity.class);
                 intoBedintent.putExtra("bedmainid",bedmainid);
                 startActivity(intoBedintent);

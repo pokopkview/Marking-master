@@ -143,8 +143,7 @@ public class DuctinfoEditActivity extends BaseActivity {
         if(!TextUtils.isEmpty(etHour.getText().toString())) {
             value.put("keep_hour", Integer.parseInt(etHour.getText().toString()));
         }else{
-            showToast("请填入保留小时");
-            return;
+            value.put("keep_hour", 0);
         }
         if(!TextUtils.isEmpty(tvShowDay.getText().toString())) {
             value.put("insert_date", tvShowDay.getText());

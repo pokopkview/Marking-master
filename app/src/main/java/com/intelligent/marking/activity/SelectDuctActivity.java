@@ -90,7 +90,7 @@ public class SelectDuctActivity extends BaseActivity {
                                     itemIntent.putExtra("ducttypeid",id);
                                     itemIntent.putExtra("bedmainid",bedmainid);
                                     itemIntent.putExtra("ductid",baseModel.getData().get(position).getDuct_id());
-                                    itemIntent.putExtra("ductname",baseModel.getData().get(position).getDuct_name());
+                                    itemIntent.putExtra("ductname",baseModel.getData().get(position).getDuct_name()+"-"+baseModel.getData().get(position).getDuct_cat().get(pos).getDuct_cat_name());
                                     startActivity(itemIntent);
                                 }
 
