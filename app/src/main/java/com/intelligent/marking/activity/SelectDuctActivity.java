@@ -79,6 +79,12 @@ public class SelectDuctActivity extends BaseActivity {
                             itemIntent.putExtra("bedmainid",bedmainid);
                             itemIntent.putExtra("ductid",baseModel.getData().get(position).getDuct_id());
                             itemIntent.putExtra("ductname",baseModel.getData().get(position).getDuct_name());
+
+                            itemIntent.putExtra("outside",baseModel.getData().get(position).getOutside());
+                            itemIntent.putExtra("inside",baseModel.getData().get(position).getInside());
+                            itemIntent.putExtra("keep_day",baseModel.getData().get(position).getKeep_day());
+                            itemIntent.putExtra("keep_hour",baseModel.getData().get(position).getKeep_hour());
+
                             startActivity(itemIntent);
                         }else {
                             PopUpwindowUtil.createPopUpWindowDuctInfo(SelectDuctActivity.this, baseModel.getData().get(position).getDuct_name() + "", null,baseModel.getData().get(position).getDuct_cat(),new PopUpwindowUtil.dialogClickDuctListener() {
@@ -89,6 +95,7 @@ public class SelectDuctActivity extends BaseActivity {
                                     Intent itemIntent = new Intent(SelectDuctActivity.this, DuctinfoEditActivity.class);
                                     itemIntent.putExtra("ducttypeid",id);
                                     itemIntent.putExtra("bedmainid",bedmainid);
+                                    itemIntent.putExtra("duct_info",baseModel.getData().get(position).getDuct_cat().get(pos));
                                     itemIntent.putExtra("ductid",baseModel.getData().get(position).getDuct_id());
                                     itemIntent.putExtra("ductname",baseModel.getData().get(position).getDuct_name()+"-"+baseModel.getData().get(position).getDuct_cat().get(pos).getDuct_cat_name());
                                     startActivity(itemIntent);

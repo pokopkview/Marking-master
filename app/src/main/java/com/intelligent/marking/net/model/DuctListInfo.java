@@ -8,11 +8,11 @@ public class DuctListInfo implements Serializable{
 
     /**
      * duct_id : 1
-     * duct_name : 胃管
-     * duct_img : https://data.zusux.com/upload/images/c0afa30689f7c8955b2cc6547cb02a5b.jpg
+     * duct_name : CVC
+     * duct_img : https://data.zusux.com/upload/images/82de726c07bfab9dd9d3471ca6a1b3c9.jpg
      * intro :
      * number : 1
-     * duct_cat : [{"duct_attr_id":1,"duct_cat_id":1,"duct_cat_name":"管"},{"duct_attr_id":2,"duct_cat_id":2,"duct_cat_name":"膜"}]
+     * duct_cat : [{"duct_attr_id":1,"duct_cat_name":"敷贴","outside":0,"inside":0,"keep_day":0,"keep_hour":0},{"duct_attr_id":2,"duct_cat_name":"引流袋或引流瓶","outside":0,"inside":0,"keep_day":0,"keep_hour":0}]
      * operate_place : 湘雅二医院-骨一科
      */
 
@@ -22,7 +22,43 @@ public class DuctListInfo implements Serializable{
     private String intro;
     private int number;
     private String operate_place;
+    private int outside;
+    private int inside;
+    private int keep_day;
+    private int keep_hour;
     private List<DuctCatBean> duct_cat;
+
+    public int getOutside() {
+        return outside;
+    }
+
+    public void setOutside(int outside) {
+        this.outside = outside;
+    }
+
+    public int getInside() {
+        return inside;
+    }
+
+    public void setInside(int inside) {
+        this.inside = inside;
+    }
+
+    public int getKeep_day() {
+        return keep_day;
+    }
+
+    public void setKeep_day(int keep_day) {
+        this.keep_day = keep_day;
+    }
+
+    public int getKeep_hour() {
+        return keep_hour;
+    }
+
+    public void setKeep_hour(int keep_hour) {
+        this.keep_hour = keep_hour;
+    }
 
     public int getDuct_id() {
         return duct_id;
@@ -83,13 +119,19 @@ public class DuctListInfo implements Serializable{
     public static class DuctCatBean implements Serializable {
         /**
          * duct_attr_id : 1
-         * duct_cat_id : 1
-         * duct_cat_name : 管
+         * duct_cat_name : 敷贴
+         * outside : 0
+         * inside : 0
+         * keep_day : 0
+         * keep_hour : 0
          */
 
         private int duct_attr_id;
-        private int duct_cat_id;
         private String duct_cat_name;
+        private int outside;
+        private int inside;
+        private int keep_day;
+        private int keep_hour;
 
         public int getDuct_attr_id() {
             return duct_attr_id;
@@ -99,20 +141,44 @@ public class DuctListInfo implements Serializable{
             this.duct_attr_id = duct_attr_id;
         }
 
-        public int getDuct_cat_id() {
-            return duct_cat_id;
-        }
-
-        public void setDuct_cat_id(int duct_cat_id) {
-            this.duct_cat_id = duct_cat_id;
-        }
-
         public String getDuct_cat_name() {
             return duct_cat_name;
         }
 
         public void setDuct_cat_name(String duct_cat_name) {
             this.duct_cat_name = duct_cat_name;
+        }
+
+        public int getOutside() {
+            return outside;
+        }
+
+        public void setOutside(int outside) {
+            this.outside = outside;
+        }
+
+        public int getInside() {
+            return inside;
+        }
+
+        public void setInside(int inside) {
+            this.inside = inside;
+        }
+
+        public int getKeep_day() {
+            return keep_day;
+        }
+
+        public void setKeep_day(int keep_day) {
+            this.keep_day = keep_day;
+        }
+
+        public int getKeep_hour() {
+            return keep_hour;
+        }
+
+        public void setKeep_hour(int keep_hour) {
+            this.keep_hour = keep_hour;
         }
     }
 }

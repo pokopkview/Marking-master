@@ -35,6 +35,7 @@ import com.intelligent.marking.Utils.UtilsChange;
 import com.intelligent.marking.common.okgo.App;
 import com.intelligent.marking.eventbus.MainActivityEvent;
 import com.intelligent.marking.net.model.BaseModel;
+import com.intelligent.marking.net.model.DuctListInfo;
 import com.intelligent.marking.net.model.InsertDuctBackModel;
 import com.intelligent.marking.net.model.NurseInfo;
 import com.intelligent.marking.net.model.TreatInfoModel;
@@ -100,6 +101,7 @@ public class DuctinfoEditActivity extends BaseActivity {
     int ductid;
     String ductName;
     int bedmainid;
+    DuctListInfo.DuctCatBean ductListInfo;
     @BindView(R.id.header_title_root)
     RelativeLayout headerTitleRoot;
     @BindView(R.id.et_search_nurse)
@@ -127,7 +129,6 @@ public class DuctinfoEditActivity extends BaseActivity {
 
     @OnClick(R.id.ll_bottom_comfirm_btn)
     public void confirm(View view) {
-        //TODO
         value.clear();
         value.put("subarea_id", subareaNameid);
         value.put("course_id", bedmainid);
@@ -142,25 +143,6 @@ public class DuctinfoEditActivity extends BaseActivity {
             value.put("keep_hour", etHour.getText().toString().isEmpty()?0:Integer.parseInt(etHour.getText().toString()));
             value.put("keep_day", etDay.getText().toString().isEmpty()?0:Integer.parseInt(etDay.getText().toString()));
         }
-
-//        if(!TextUtils.isEmpty(etDay.getText().toString())) {
-//            value.put("keep_day", Integer.parseInt(etDay.getText().toString()));
-//        }else{
-//            showToast("请填入保留天数");
-//            return;
-//        }
-//        if() {
-//            value.put("keep_hour", Integer.parseInt(etHour.getText().toString()));
-//        }else{
-//            if(!TextUtils.isEmpty(etDay.getText().toString())) {
-//                value.put("keep_hour", 0);
-//            }else{
-//                showToast("保留时间不能为零");
-//            }
-//        }
-
-
-
 
         if(!TextUtils.isEmpty(tvShowDay.getText().toString())) {
             value.put("insert_date", tvShowDay.getText());
@@ -200,6 +182,7 @@ public class DuctinfoEditActivity extends BaseActivity {
         ductid = getIntent().getIntExtra("ductid", -1);
         ductName = getIntent().getStringExtra("ductname");
         bedmainid = getIntent().getIntExtra("bedmainid", -1);
+        ductListInfo = (DuctListInfo.DuctCatBean) getIntent().getSerializableExtra("duct_info");
         llLeftContainer.addView(back);
         tvHeaderTitle.setText(ductName);
 
@@ -207,6 +190,18 @@ public class DuctinfoEditActivity extends BaseActivity {
         String date = sdf.format(new Date(System.currentTimeMillis()));
         tvShowDay.setText(date.split(" ")[0]);
         tvShowTime.setText(date.split(" ")[1]);
+        if(ductListInfo != null) {
+            System.out.println("keep:"+ductListInfo.getKeep_day());
+            etDay.setText(String.valueOf(ductListInfo.getKeep_day()));
+            etHour.setText(String.valueOf(ductListInfo.getKeep_hour()));
+            etOutside.setText(String.valueOf(ductListInfo.getOutside()));
+            etInside.setText(String.valueOf(ductListInfo.getInside()));
+        }else{
+            etDay.setText(String.valueOf(getIntent().getIntExtra("keep_day",-1)));
+            etHour.setText(String.valueOf(getIntent().getIntExtra("keep_hour",-1)));
+            etOutside.setText(String.valueOf(getIntent().getIntExtra("outside",-1)));
+            etInside.setText(String.valueOf(getIntent().getIntExtra("inside",-1)));
+        }
 
         etSearchNurse.addTextChangedListener(new TextWatcher() {
             @Override
