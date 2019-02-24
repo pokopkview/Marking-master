@@ -134,17 +134,34 @@ public class DuctinfoEditActivity extends BaseActivity {
         value.put("duct_id", ductid);
         value.put("duct_attr_id", ducttypeid);
 
-        if(!TextUtils.isEmpty(etDay.getText().toString())) {
-            value.put("keep_day", Integer.parseInt(etDay.getText().toString()));
-        }else{
-            showToast("请填入保留天数");
+
+        if(TextUtils.isEmpty(etHour.getText().toString()) && TextUtils.isEmpty(etDay.getText().toString())){
+            showToast("保留时间不能为零");
             return;
-        }
-        if(!TextUtils.isEmpty(etHour.getText().toString())) {
-            value.put("keep_hour", Integer.parseInt(etHour.getText().toString()));
         }else{
-            value.put("keep_hour", 0);
+            value.put("keep_hour", etHour.getText().toString().isEmpty()?0:Integer.parseInt(etHour.getText().toString()));
+            value.put("keep_day", etDay.getText().toString().isEmpty()?0:Integer.parseInt(etDay.getText().toString()));
         }
+
+//        if(!TextUtils.isEmpty(etDay.getText().toString())) {
+//            value.put("keep_day", Integer.parseInt(etDay.getText().toString()));
+//        }else{
+//            showToast("请填入保留天数");
+//            return;
+//        }
+//        if() {
+//            value.put("keep_hour", Integer.parseInt(etHour.getText().toString()));
+//        }else{
+//            if(!TextUtils.isEmpty(etDay.getText().toString())) {
+//                value.put("keep_hour", 0);
+//            }else{
+//                showToast("保留时间不能为零");
+//            }
+//        }
+
+
+
+
         if(!TextUtils.isEmpty(tvShowDay.getText().toString())) {
             value.put("insert_date", tvShowDay.getText());
         }else{
